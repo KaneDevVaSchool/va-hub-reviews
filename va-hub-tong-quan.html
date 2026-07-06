@@ -27,10 +27,10 @@
     --gray:#4A5878;
     --gray-dim:rgba(74,88,120,.15);
     --radius:16px;
-    --maxw:1120px;
+    --maxw:1320px;
   }
   *{box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
+  html{scroll-behavior:smooth;scroll-padding-top:76px;}
   body{
     margin:0;
     background:var(--bg);
@@ -122,12 +122,25 @@
   .legend .dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
   .legend .dot.dashed{border:2px dashed var(--gray);background:transparent;}
 
-  .diagram-hint{display:none;font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--text-faint);margin:4px 0 0;}
-  @media (max-width:900px){.diagram-hint{display:block;}}
-
-  .arch-scroll{overflow-x:auto;margin:18px -24px 0;padding:6px 24px 24px;}
-  .arch-diagram{position:relative;width:1240px;height:650px;}
+  .arch-fullbleed{
+    width:100%;
+    max-width:100vw;
+    margin:24px 0 0;
+    padding:0 clamp(12px,2.5vw,40px);
+    box-sizing:border-box;
+  }
+  .arch-diagram{
+    position:relative;
+    width:100%;
+    aspect-ratio:1240/650;
+    min-height:320px;
+  }
   .arch-diagram svg.lines{position:absolute;inset:0;width:100%;height:100%;overflow:visible;}
+  @media (max-width:720px){
+    .arch-diagram .node{padding:10px 12px;}
+    .arch-diagram .node .sub{font-size:11px;}
+    .arch-diagram .node .badge{font-size:10px;}
+  }
   .flow-real{stroke:var(--cyan);stroke-width:2.4;fill:none;stroke-dasharray:7 6;animation:flowmove 1s linear infinite;}
   .flow-amber{stroke:var(--amber);stroke-width:1.6;fill:none;stroke-dasharray:3 5;opacity:.5;animation:pulseop 2.6s ease-in-out infinite;}
   .flow-planned{stroke:var(--gray);stroke-width:1.8;fill:none;stroke-dasharray:5 6;}
@@ -238,6 +251,62 @@
   .pilot-note{margin-top:20px;background:var(--panel);border:1px solid var(--border);border-left:3px solid var(--amber);border-radius:10px;padding:16px 18px;font-size:14.5px;color:var(--text-dim);}
   .pilot-note b{color:var(--text);}
 
+  /* ===== shared site header (responsive) ===== */
+  .site-header{position:sticky;top:0;z-index:95;background:rgba(10,14,26,.86);backdrop-filter:blur(12px);border-bottom:1px solid var(--border-soft);}
+  .sh-inner{max-width:var(--maxw);margin:0 auto;padding:11px 24px;display:flex;align-items:center;gap:18px;}
+  .sh-brand{display:flex;align-items:center;gap:11px;text-decoration:none;flex-shrink:0;}
+  .sh-logo{width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,var(--cyan),var(--amber));box-shadow:0 0 16px rgba(79,216,236,.35);flex-shrink:0;}
+  .sh-name{display:flex;flex-direction:column;line-height:1.15;}
+  .sh-name b{font-family:'Be Vietnam Pro',sans-serif;font-weight:800;font-size:15.5px;color:var(--text);}
+  .sh-name small{font-family:'JetBrains Mono',monospace;font-weight:500;font-size:10px;color:var(--text-faint);margin-top:2px;}
+  .sh-nav{display:flex;align-items:center;gap:16px;margin-left:auto;min-width:0;}
+  .sh-links{display:flex;align-items:center;gap:2px;overflow-x:auto;scrollbar-width:none;}
+  .sh-links::-webkit-scrollbar{display:none;}
+  .sh-links a{font-size:13px;color:var(--text-dim);text-decoration:none;padding:7px 10px;border-radius:8px;white-space:nowrap;transition:.15s;}
+  .sh-links a:hover{color:var(--text);background:var(--panel);}
+  .sh-right{display:flex;align-items:center;gap:10px;flex-shrink:0;}
+  .sh-chapters{display:flex;gap:4px;background:var(--panel-2);border:1px solid var(--border);border-radius:999px;padding:4px;}
+  .sh-chap{display:flex;align-items:center;gap:7px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--text-dim);text-decoration:none;padding:6px 11px;border-radius:999px;white-space:nowrap;transition:.15s;}
+  .sh-chap b{font-size:11px;opacity:.7;font-weight:700;}
+  .sh-chap.active{background:var(--cyan);color:#04121a;}
+  .sh-chap.active b{opacity:1;}
+  .sh-chap:not(.active):hover{color:var(--text);}
+  .sh-burger{display:none;flex-direction:column;gap:4px;width:42px;height:38px;border:1px solid var(--border);border-radius:9px;background:var(--panel);cursor:pointer;align-items:center;justify-content:center;flex-shrink:0;margin-left:auto;}
+  .sh-burger span{width:18px;height:2px;background:var(--text);border-radius:2px;transition:.25s;}
+  .site-header.open .sh-burger span:nth-child(1){transform:translateY(6px) rotate(45deg);}
+  .site-header.open .sh-burger span:nth-child(2){opacity:0;}
+  .site-header.open .sh-burger span:nth-child(3){transform:translateY(-6px) rotate(-45deg);}
+  @media (max-width:1040px){
+    .sh-burger{display:flex;}
+    .sh-nav{position:absolute;left:0;right:0;top:100%;background:var(--bg-soft);border-bottom:1px solid var(--border);flex-direction:column;align-items:stretch;gap:14px;padding:16px 24px 20px;margin:0;display:none;max-height:76vh;overflow:auto;}
+    .site-header.open .sh-nav{display:flex;}
+    .sh-links{flex-direction:column;align-items:stretch;overflow:visible;gap:2px;}
+    .sh-links a{padding:11px 12px;font-size:15px;border:1px solid transparent;}
+    .sh-links a:hover{border-color:var(--border);}
+    .sh-right{flex-direction:column;align-items:stretch;gap:10px;}
+    .sh-chapters{justify-content:center;}
+    .sh-chap{flex:1;justify-content:center;padding:9px;}
+  }
+
+  /* ===== shared story footer ===== */
+  .site-footer{border-top:1px solid var(--border-soft);background:var(--panel-2);text-align:left;padding:0;}
+  .sf-inner{max-width:var(--maxw);margin:0 auto;padding:46px 24px 74px;}
+  .sf-eyebrow{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-faint);margin-bottom:16px;display:flex;align-items:center;gap:8px;}
+  .sf-eyebrow::before{content:"";width:16px;height:1px;background:var(--text-faint);display:inline-block;}
+  .sf-story{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  @media (max-width:760px){.sf-story{grid-template-columns:1fr;}}
+  .sf-card{display:flex;flex-direction:column;gap:5px;border:1px solid var(--border);border-radius:14px;background:var(--panel);padding:20px 22px;text-decoration:none;transition:.2s;}
+  .sf-card:hover{transform:translateY(-3px);border-color:var(--cyan);}
+  .sf-card .k{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--text-faint);letter-spacing:.03em;}
+  .sf-card b{font-family:'Be Vietnam Pro',sans-serif;font-size:18px;font-weight:700;color:var(--text);}
+  .sf-card p{margin:3px 0 0;font-size:13.5px;color:var(--text-dim);line-height:1.5;}
+  .sf-card.next{border-color:var(--amber);text-align:right;}
+  .sf-card.next:hover{border-color:var(--amber);}
+  .sf-card.next .k{color:var(--amber);}
+  .sf-meta{margin-top:34px;text-align:center;}
+  .sf-meta .sig{font-family:'JetBrains Mono',monospace;color:var(--text-dim);font-size:13px;margin-bottom:12px;}
+  .sf-meta p{color:var(--text-faint);font-size:12.5px;max-width:620px;margin:5px auto;line-height:1.6;}
+
   /* footer */
   footer{padding:60px 0 90px;text-align:center;}
   footer p{color:var(--text-faint);font-size:13px;max-width:560px;margin:6px auto;line-height:1.6;}
@@ -245,6 +314,34 @@
 </style>
 </head>
 <body>
+
+<!-- SITE HEADER -->
+<header class="site-header" id="siteHeader">
+  <div class="sh-inner">
+    <a class="sh-brand" href="va-hub-tong-quan.html">
+      <span class="sh-logo"></span>
+      <span class="sh-name"><b>VA Hub</b><small>Câu chuyện dữ liệu · Phần 1</small></span>
+    </a>
+    <button class="sh-burger" id="shBurger" aria-label="Mở menu"><span></span><span></span><span></span></button>
+    <nav class="sh-nav" id="shNav">
+      <div class="sh-links">
+        <a href="#van-de">Vấn đề</a>
+        <a href="#kien-truc">Kiến trúc</a>
+        <a href="#luong">Luồng</a>
+        <a href="#vi-du">Ví dụ</a>
+        <a href="#tien-do">Tiến độ</a>
+        <a href="#rui-ro">Rủi ro</a>
+        <a href="#lo-trinh">Sắp tới</a>
+      </div>
+      <div class="sh-right">
+        <div class="sh-chapters">
+          <a class="sh-chap active" href="va-hub-tong-quan.html"><b>01</b> Tổng quan</a>
+          <a class="sh-chap" href="va-hub-vi-du-luong.html"><b>02</b> Ví dụ luồng</a>
+        </div>
+      </div>
+    </nav>
+  </div>
+</header>
 
 <div id="progressbar"></div>
 <div id="ruler"></div>
@@ -353,9 +450,9 @@
       <span><i class="dot" style="background:var(--amber)"></i>Có khung, còn rỗng / chỉ kiểm tra định kỳ</span>
       <span><i class="dot dashed"></i>Mới là kế hoạch, chưa xây</span>
     </div>
-    <p class="diagram-hint">→ Vuốt ngang để xem toàn bộ sơ đồ</p>
+  </div>
 
-    <div class="arch-scroll">
+  <div class="arch-fullbleed reveal">
       <div class="arch-diagram">
         <svg class="lines" viewBox="0 0 1240 650" preserveAspectRatio="xMinYMin meet">
           <defs>
@@ -392,70 +489,71 @@
         </svg>
 
         <!-- WEB -->
-        <div class="node st-real" style="left:40px;top:40px;width:220px;">
+        <div class="node st-real" style="left:3.23%;top:6.15%;width:17.74%;">
           <div class="node-top"><div class="node-icon"><svg><use href="#i-monitor"/></svg></div><div class="title">Trình duyệt</div></div>
           <div class="sub">Bạn và đội kỹ thuật ngồi ở đây để đăng nhập, xem trạng thái.</div>
           <div class="badge"><i class="dot"></i>Thật, đang chạy</div>
         </div>
 
         <!-- COPILOT -->
-        <div class="node st-planned" style="left:980px;top:40px;width:220px;">
+        <div class="node st-planned" style="left:79.03%;top:6.15%;width:17.74%;">
           <div class="node-top"><div class="node-icon"><svg><use href="#i-robot"/></svg></div><div class="title">Trợ lý AI</div></div>
           <div class="sub">Sau này sẽ trả lời câu hỏi vận hành thay đội kỹ thuật.</div>
           <div class="badge"><i class="dot"></i>Tạm hoãn</div>
         </div>
 
         <!-- BFF -->
-        <div class="node st-real" style="left:510px;top:190px;width:220px;">
+        <div class="node st-real" style="left:41.13%;top:29.23%;width:17.74%;">
           <div class="node-top"><div class="node-icon"><svg><use href="#i-gate"/></svg></div><div class="title">Cổng trung tâm</div></div>
           <div class="sub">Mọi yêu cầu từ trình duyệt đều đi qua đây trước.</div>
           <div class="badge"><i class="dot"></i>Chạy — nhưng mới làm 1 việc: kiểm tra sức khỏe</div>
         </div>
 
         <!-- SOURCE DB -->
-        <div class="node st-planned" style="left:40px;top:350px;width:190px;">
+        <div class="node st-planned" style="left:3.23%;top:53.85%;width:15.32%;">
           <div class="node-top"><div class="node-icon"><svg><use href="#i-db"/></svg></div><div class="title">Kho dữ liệu nguồn</div></div>
           <div class="sub">Nơi dữ liệu gốc nằm (vd: hệ quản lý học sinh).</div>
           <div class="badge"><i class="dot"></i>Đã tạo, còn trống — 0 bảng</div>
         </div>
 
         <!-- ADAPTERS -->
-        <div class="node st-scaffold" style="left:282px;top:350px;width:190px;">
+        <div class="node st-scaffold" style="left:22.74%;top:53.85%;width:15.32%;">
           <div class="node-top"><div class="node-icon"><svg><use href="#i-dish"/></svg></div><div class="title">Đội thu thập</div></div>
           <div class="sub">Sẽ đi lấy dữ liệu mới từ các nguồn theo lịch.</div>
           <div class="badge"><i class="dot"></i>Có khung, chưa biết lấy dữ liệu</div>
         </div>
 
         <!-- KAFKA -->
-        <div class="node st-scaffold" style="left:524px;top:350px;width:190px;">
+        <div class="node st-scaffold" style="left:42.26%;top:53.85%;width:15.32%;">
           <div class="node-top"><div class="node-icon"><svg><use href="#i-truck"/></svg></div><div class="title">Băng chuyền</div></div>
           <div class="sub">Mang dữ liệu đi giữa các trạm, tránh thất lạc.</div>
           <div class="badge"><i class="dot"></i>Đang chạy, chưa chuyển gì</div>
         </div>
 
         <!-- ETL -->
-        <div class="node st-scaffold" style="left:766px;top:350px;width:190px;">
+        <div class="node st-scaffold" style="left:61.77%;top:53.85%;width:15.32%;">
           <div class="node-top"><div class="node-icon"><svg><use href="#i-funnel"/></svg></div><div class="title">Trạm lọc &amp; đóng gói</div></div>
           <div class="sub">Làm sạch, che thông tin nhạy cảm, chuẩn hoá dữ liệu.</div>
           <div class="badge"><i class="dot"></i>Có khung, chưa xử lý gì</div>
         </div>
 
         <!-- SINK DB -->
-        <div class="node st-planned" style="left:1008px;top:350px;width:190px;">
+        <div class="node st-planned" style="left:81.29%;top:53.85%;width:15.32%;">
           <div class="node-top"><div class="node-icon"><svg><use href="#i-db"/></svg></div><div class="title">Kho lưu trữ đích</div></div>
           <div class="sub">Nơi dữ liệu sạch được gửi tới cuối cùng.</div>
           <div class="badge"><i class="dot"></i>Đã tạo, còn trống — 0 bảng</div>
         </div>
 
         <!-- OBSERVABILITY -->
-        <div class="node st-real" style="left:40px;top:560px;width:1160px;">
+        <div class="node st-real" style="left:3.23%;top:86.15%;width:93.55%;">
           <div class="node-top"><div class="node-icon"><svg><use href="#i-radar"/></svg></div><div class="title">Phòng giám sát</div></div>
           <div class="sub">Theo dõi sức khoẻ, nhật ký và cảnh báo của toàn hệ thống — công cụ đang chạy: OTel, Jaeger, Prometheus, Loki, Grafana.</div>
           <div class="badge"><i class="dot"></i>Thật, đang chạy tốt</div>
         </div>
       </div>
-    </div>
+  </div>
 
+  <div class="wrap reveal">
     <div class="diagram-note">Tóm lại: hôm nay dữ liệu <b>chưa thực sự "chảy"</b> qua băng chuyền. Phần chạy thật duy nhất là đăng nhập + xem trạng thái sức khỏe. Việc vận chuyển dữ liệu thật là trọng tâm của giai đoạn tiếp theo.</div>
   </div>
 </section>
@@ -655,11 +753,26 @@
   </div>
 </section>
 
-<footer>
-  <div class="wrap">
-    <div class="sig">VA HUB · ĐỌC TRỰC TIẾP MÃ NGUỒN, KHÔNG SUY ĐOÁN</div>
-    <p>Khi tài liệu và mã nguồn lệch nhau, bản tóm tắt này luôn ưu tiên mã nguồn thật. Mọi con số hoàn thành đều dựa trên bằng chứng cụ thể trong repo, không phải ước lượng cảm tính.</p>
-    <p>Cập nhật lần cuối: 06/07/2026 · Trạng thái: Phase 0 đóng (v0.1.0), Phase 1 đang mở.</p>
+<footer class="site-footer">
+  <div class="sf-inner">
+    <div class="sf-eyebrow">Hết Phần 1 · đọc tiếp câu chuyện</div>
+    <div class="sf-story">
+      <a class="sf-card" href="#hero">
+        <span class="k">↑ Phần 1 / 2 · bạn đang xem</span>
+        <b>Bức tranh toàn cảnh</b>
+        <p>VA Hub là gì, vì sao cần, kiến trúc và tiến độ thật của dự án.</p>
+      </a>
+      <a class="sf-card next" href="va-hub-vi-du-luong.html">
+        <span class="k">Phần 2 / 2 →</span>
+        <b>Ví dụ luồng dữ liệu</b>
+        <p>Xem một mẩu dữ liệu đi qua CRM · SIS · VA Hub · E‑Commerce · POS · MISA theo 11 bước, có số liệu mẫu.</p>
+      </a>
+    </div>
+    <div class="sf-meta">
+      <div class="sig">VA HUB · ĐỌC TRỰC TIẾP MÃ NGUỒN, KHÔNG SUY ĐOÁN</div>
+      <p>Khi tài liệu và mã nguồn lệch nhau, bản tóm tắt này luôn ưu tiên mã nguồn thật. Mọi con số hoàn thành đều dựa trên bằng chứng cụ thể trong repo, không phải ước lượng cảm tính.</p>
+      <p>Cập nhật lần cuối: 06/07/2026 · Trạng thái: Phase 0 đóng (v0.1.0), Phase 1 đang mở.</p>
+    </div>
   </div>
 </footer>
 
@@ -674,6 +787,13 @@
   }
   document.addEventListener('scroll', onScroll, {passive:true});
   onScroll();
+
+  // responsive header menu
+  var hdr = document.getElementById('siteHeader'), burger = document.getElementById('shBurger');
+  if(hdr && burger){
+    burger.addEventListener('click', function(){ hdr.classList.toggle('open'); });
+    hdr.querySelectorAll('.sh-nav a').forEach(function(a){ a.addEventListener('click', function(){ hdr.classList.remove('open'); }); });
+  }
 
   // reveal on scroll
   var reveals = document.querySelectorAll('.reveal');

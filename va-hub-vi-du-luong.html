@@ -21,10 +21,12 @@
     --lms:#A78BFA;  --lms-dim:rgba(167,139,250,.13);
     --hrm:#56D9A3;  --hrm-dim:rgba(86,217,163,.13);
     --pos:#F5A742;  --pos-dim:rgba(245,167,66,.13);
-    --radius:16px; --maxw:1140px;
+    --crm:#F472B6;  --crm-dim:rgba(244,114,182,.13);
+    --ecom:#60A5FA; --ecom-dim:rgba(96,165,250,.13);
+    --radius:16px; --maxw:1320px;
   }
   *{box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
+  html{scroll-behavior:smooth;scroll-padding-top:76px;}
   body{
     margin:0; background:var(--bg); color:var(--text);
     font-family:'Inter',system-ui,sans-serif; font-size:16px; line-height:1.5;
@@ -38,7 +40,7 @@
   .mono{font-family:'JetBrains Mono',monospace;}
   .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px;}
 
-  #progressbar{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--sis),var(--lms),var(--hrm),var(--pos));width:0%;z-index:100;transition:width .08s linear;}
+  #progressbar{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--crm),var(--sis),var(--ecom),var(--lms),var(--hrm));width:0%;z-index:100;transition:width .08s linear;}
 
   /* top bar */
   .topbar{position:sticky;top:0;z-index:80;background:rgba(10,14,26,.82);backdrop-filter:blur(10px);border-bottom:1px solid var(--border-soft);}
@@ -71,17 +73,18 @@
   .banner b{color:var(--text);}
 
   /* system tabs quick nav */
-  .sys-quick{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:34px;}
-  @media (max-width:820px){.sys-quick{grid-template-columns:repeat(2,1fr);}}
+  .sys-quick{display:grid;grid-template-columns:repeat(auto-fit,minmax(178px,1fr));gap:14px;margin-top:34px;}
+  @media (max-width:560px){.sys-quick{grid-template-columns:repeat(2,1fr);}}
   .sysq{border:1px solid var(--border);border-radius:14px;padding:16px;background:var(--panel);transition:.2s;display:block;}
   .sysq:hover{transform:translateY(-3px);}
   .sysq .k{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.06em;font-weight:600;}
   .sysq h3{font-family:'Be Vietnam Pro',sans-serif;font-size:16px;margin:8px 0 4px;color:var(--text);}
   .sysq p{margin:0;font-size:13px;color:var(--text-dim);line-height:1.5;}
+  .sysq.crm{border-color:var(--crm);} .sysq.crm .k{color:var(--crm);}
   .sysq.sis{border-color:var(--sis);} .sysq.sis .k{color:var(--sis);}
-  .sysq.lms{border-color:var(--lms);} .sysq.lms .k{color:var(--lms);}
-  .sysq.hrm{border-color:var(--hrm);} .sysq.hrm .k{color:var(--hrm);}
-  .sysq.pos{border-color:var(--pos);} .sysq.pos .k{color:var(--pos);}
+  .sysq.ecom{border-color:var(--ecom);} .sysq.ecom .k{color:var(--ecom);}
+  .sysq.pos{border-color:var(--lms);} .sysq.pos .k{color:var(--lms);}
+  .sysq.misa{border-color:var(--hrm);} .sysq.misa .k{color:var(--hrm);}
 
   /* combined SVG picture */
   .picture-wrap{margin-top:26px;border:1px solid var(--border);border-radius:var(--radius);background:linear-gradient(180deg,var(--panel),var(--panel-2));padding:14px;overflow-x:auto;}
@@ -111,17 +114,17 @@
   .btn-run svg{width:14px;height:14px;fill:#fff;}
   .pipe-hint{font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--text-faint);}
 
-  .pipe-scroll{overflow-x:auto;margin:0 -24px;padding:20px 24px 8px;}
-  .pipe{position:relative;min-width:940px;}
-  .stage-row{display:flex;align-items:stretch;gap:0;}
-  .stage{width:150px;flex-shrink:0;border:1.5px solid var(--border);border-radius:14px;padding:13px;background:linear-gradient(180deg,var(--panel),var(--panel-2));position:relative;transition:.3s;}
+  .pipe-scroll{overflow:visible;margin:0;padding:20px 0 8px;}
+  .pipe{position:relative;width:100%;}
+  .stage-row{display:flex;align-items:stretch;gap:0;width:100%;}
+  .stage{flex:1;min-width:0;border:1.5px solid var(--border);border-radius:14px;padding:clamp(10px,1.2vw,13px);background:linear-gradient(180deg,var(--panel),var(--panel-2));position:relative;transition:.3s;}
   .stage .st-ic{width:24px;height:24px;color:var(--text-dim);}
   .stage .st-ic svg{width:100%;height:100%;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;}
   .stage .st-name{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.04em;text-transform:uppercase;font-weight:600;margin:10px 0 5px;color:var(--text);}
   .stage .st-sub{font-size:11.5px;color:var(--text-dim);line-height:1.45;}
   .stage.lit{border-color:var(--acc);box-shadow:0 0 0 3px var(--acc-dim),0 8px 30px rgba(0,0,0,.35);transform:translateY(-4px);}
   .stage.lit .st-ic{color:var(--acc);}
-  .stage-arrow{align-self:center;flex-shrink:0;width:34px;display:flex;align-items:center;justify-content:center;color:var(--text-faint);}
+  .stage-arrow{align-self:center;flex-shrink:0;width:clamp(16px,2.2vw,28px);display:flex;align-items:center;justify-content:center;color:var(--text-faint);}
   .stage-arrow svg{width:20px;height:12px;stroke:currentColor;fill:none;stroke-width:1.6;}
   .packet{position:absolute;top:0;left:0;width:26px;height:26px;border-radius:50%;background:var(--acc);box-shadow:0 0 16px var(--acc);opacity:0;transition:transform .55s cubic-bezier(.5,0,.2,1),opacity .3s;z-index:5;display:flex;align-items:center;justify-content:center;pointer-events:none;}
   .packet::after{content:"";width:9px;height:9px;border-radius:50%;background:var(--bg);}
@@ -176,6 +179,167 @@
   .outcome{margin-top:16px;border:1px solid var(--border);border-left:3px solid var(--acc);border-radius:10px;background:var(--acc-dim);padding:15px 18px;font-size:14px;color:var(--text-dim);}
   .outcome b{color:var(--text);}
 
+  /* ==== full project flow player ==== */
+  .flow-controls{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:26px;}
+  .flow-btn{font-family:'JetBrains Mono',monospace;font-size:13.5px;font-weight:600;color:#fff;border:1px solid rgba(255,255,255,.34);background:transparent;padding:11px 18px;border-radius:999px;cursor:pointer;display:inline-flex;align-items:center;gap:9px;transition:.16s;}
+  .flow-btn:hover{background:rgba(255,255,255,.09);border-color:rgba(255,255,255,.6);}
+  .flow-btn.primary{background:var(--cyan);color:#04121a;border-color:var(--cyan);}
+  .flow-btn.primary:hover{filter:brightness(1.08);}
+  .flow-btn svg{width:15px;height:15px;fill:currentColor;}
+  .flow-counter{font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--text);background:var(--panel);border:1px solid var(--border);padding:9px 15px;border-radius:999px;}
+  .flow-counter b{color:var(--cyan);}
+
+  .flow-timeline{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px;}
+  .ft-step{flex:1;min-width:82px;border:1px solid var(--border);border-radius:10px;background:var(--panel);padding:9px 8px 10px;cursor:pointer;transition:.18s;text-align:left;}
+  .ft-step:hover{border-color:var(--text-faint);}
+  .ft-step .ft-n{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:var(--text-faint);display:flex;align-items:center;gap:6px;}
+  .ft-step .ft-n i{width:7px;height:7px;border-radius:50%;background:var(--ft);}
+  .ft-step .ft-l{font-size:11px;color:var(--text-dim);line-height:1.3;margin-top:5px;}
+  .ft-step.active{border-color:var(--ft);background:linear-gradient(180deg,var(--panel),color-mix(in srgb,var(--ft) 12%,transparent));box-shadow:0 0 0 1px var(--ft) inset;}
+  .ft-step.active .ft-n{color:var(--ft);}
+  .ft-step.done .ft-n i{opacity:1;} .ft-step .ft-n i{opacity:.5;}
+
+  .flow-canvas{width:100%;margin-top:20px;padding:0 clamp(12px,2.5vw,28px);box-sizing:border-box;}
+  .flow-stagewrap{border:1px solid var(--border);border-radius:var(--radius);background:radial-gradient(ellipse 70% 60% at 50% 42%,#0f1a2e,var(--panel-2));padding:clamp(16px,2vw,24px);overflow:hidden;}
+  .flow-stage{position:relative;width:100%;max-width:1680px;margin:0 auto;aspect-ratio:1120/640;min-height:clamp(400px,48vw,820px);}
+  .flow-stage svg.flow-wires{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none;}
+
+  .fnode{position:absolute;width:clamp(168px,17.5%,228px);transform:translate(-50%,-50%);border:1.5px solid var(--border);border-radius:15px;background:linear-gradient(180deg,var(--panel),var(--panel-2));padding:clamp(12px,1.2vw,16px) clamp(13px,1.3vw,17px);transition:box-shadow .3s,opacity .3s,border-color .3s,transform .3s;z-index:2;}
+  .fnode .fn-badge{position:absolute;top:-13px;left:14px;width:26px;height:26px;border-radius:8px;background:var(--nc);color:#04121a;font-family:'JetBrains Mono',monospace;font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,.4);}
+  .fnode .fn-head{display:flex;align-items:center;gap:10px;}
+  .fnode .fn-ic{width:30px;height:30px;flex-shrink:0;color:var(--nc);}
+  .fnode .fn-ic svg{width:100%;height:100%;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;}
+  .fnode .fn-k{font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:800;letter-spacing:.03em;color:var(--nc);}
+  .fnode .fn-role{font-size:11.5px;color:var(--text-dim);margin-top:1px;}
+  .fnode .fn-list{margin:11px 0 0;padding:0;list-style:none;}
+  .fnode .fn-list li{font-size:11.5px;color:var(--text-dim);line-height:1.5;padding-left:13px;position:relative;}
+  .fnode .fn-list li::before{content:"";position:absolute;left:0;top:8px;width:5px;height:5px;border-radius:50%;background:var(--nc);opacity:.7;}
+  .fnode .fn-tag{position:absolute;top:-13px;right:12px;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.05em;padding:3px 9px;border-radius:999px;opacity:0;transition:.25s;transform:translateY(-2px);}
+  .fnode.act-src .fn-tag{opacity:1;background:var(--nc);color:#04121a;}
+  .fnode.act-dst .fn-tag{opacity:1;background:var(--nc);color:#04121a;}
+  .fnode.act-src,.fnode.act-dst{border-color:var(--nc);box-shadow:0 0 0 3px var(--nc-dim),0 14px 40px rgba(0,0,0,.5);transform:translate(-50%,-50%) scale(1.04);}
+  .fnode.faded{opacity:.32;}
+
+  .fnode.mid{width:clamp(200px,22%,280px);border-color:var(--amber);background:linear-gradient(180deg,#1a2338,#0f1626);box-shadow:0 0 0 1px var(--amber-dim),0 14px 44px rgba(0,0,0,.5);z-index:3;}
+  .fnode.mid .fn-k{color:var(--amber);font-size:15px;}
+  .fnode.mid .fn-ic{color:var(--amber);}
+  .fnode.mid .fn-list li::before{background:var(--amber);}
+  .fnode.mid .fn-badge{background:var(--amber);}
+  .fnode.mid.busy{border-color:var(--cyan);box-shadow:0 0 0 3px var(--cyan-dim),0 0 60px rgba(79,216,236,.28),0 14px 44px rgba(0,0,0,.55);}
+  .fnode.mid .mid-status{margin-top:11px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-dim);border:1px dashed var(--border);border-radius:8px;padding:7px 9px;min-height:32px;display:flex;align-items:center;gap:7px;transition:.2s;}
+  .fnode.mid.busy .mid-status{border-color:var(--cyan);color:var(--text);}
+  .mid-status .spin{width:11px;height:11px;border:2px solid var(--cyan);border-top-color:transparent;border-radius:50%;flex-shrink:0;animation:spin .7s linear infinite;opacity:0;}
+  .fnode.mid.busy .mid-status .spin{opacity:1;}
+  @keyframes spin{to{transform:rotate(360deg);}}
+
+  .fpacket{position:absolute;left:0;top:0;width:clamp(26px,2.4vw,34px);height:clamp(26px,2.4vw,34px);border-radius:8px;background:var(--cyan);box-shadow:0 0 22px var(--cyan);opacity:0;z-index:6;display:flex;align-items:center;justify-content:center;pointer-events:none;transition:opacity .25s,background .3s,box-shadow .3s;transform:translate(-50%,-50%);}
+  .fpacket svg{width:15px;height:15px;stroke:#04121a;fill:none;stroke-width:2;}
+  .fpacket .plabel{position:absolute;top:-22px;left:50%;transform:translateX(-50%);font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:700;white-space:nowrap;background:var(--bg);border:1px solid var(--border);color:var(--text);padding:2px 8px;border-radius:6px;}
+
+  /* current step detail */
+  .flow-step-title{margin-top:22px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+  .flow-step-title .fst-n{font-family:'JetBrains Mono',monospace;font-weight:800;font-size:15px;color:#04121a;background:var(--cyan);width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .flow-step-title h3{margin:0;font-family:'Be Vietnam Pro',sans-serif;font-size:clamp(18px,2.6vw,23px);font-weight:800;}
+
+  .flow-detail{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-top:16px;}
+  @media (max-width:900px){.flow-detail{grid-template-columns:1fr;}}
+  .fd-card{border:1px solid var(--border);border-radius:14px;background:var(--panel);padding:17px;}
+  .fd-card .fd-h{display:flex;align-items:center;gap:9px;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.04em;text-transform:uppercase;margin-bottom:13px;font-weight:700;}
+  .fd-card .fd-h i{width:11px;height:11px;border-radius:50%;flex-shrink:0;}
+  .fd-card.from{border-color:var(--from);}
+  .fd-card.to{border-color:var(--to);}
+  .fd-card.mid{border-color:var(--amber);background:linear-gradient(180deg,var(--panel),color-mix(in srgb,var(--amber) 7%,transparent));}
+  .fd-rec{font-family:'JetBrains Mono',monospace;font-size:13.5px;line-height:1.95;}
+  .fd-rec div{white-space:nowrap;overflow-x:auto;}
+  .fd-rec .key{color:var(--text-dim);}
+  .fd-rec .val{color:var(--text);}
+  .fd-rec .mask{color:var(--amber);}
+  .fd-rec .new{color:var(--hrm);font-weight:600;}
+  .fd-rec .pk{color:var(--cyan);font-weight:600;}
+  .fd-mid-list{margin:0;padding:0;list-style:none;counter-reset:m;}
+  .fd-mid-list li{font-size:13px;color:var(--text-dim);line-height:1.5;padding:6px 0 6px 26px;position:relative;border-bottom:1px dashed var(--border-soft);}
+  .fd-mid-list li:last-child{border-bottom:none;}
+  .fd-mid-list li::before{counter-increment:m;content:counter(m);position:absolute;left:0;top:6px;width:18px;height:18px;border-radius:5px;background:var(--amber-dim);color:var(--amber);font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:700;display:flex;align-items:center;justify-content:center;}
+  .fd-note{margin-top:16px;border:1px solid var(--border);border-left:3px solid var(--cyan);border-radius:10px;background:var(--cyan-dim);padding:15px 18px;font-size:14.5px;color:var(--text-dim);line-height:1.6;}
+  .fd-note b{color:var(--text);}
+  .flow-hint{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--text-faint);margin:12px auto 0;max-width:1680px;padding:0 clamp(12px,2.5vw,28px);}
+
+  /* mapping table */
+  .map-scroll{overflow-x:auto;margin-top:16px;border:1px solid var(--border);border-radius:14px;}
+  table.map-table{border-collapse:collapse;width:100%;min-width:720px;font-size:13.5px;}
+  table.map-table th,table.map-table td{padding:12px 14px;text-align:left;border-bottom:1px solid var(--border-soft);white-space:nowrap;}
+  table.map-table thead th{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.03em;font-weight:700;background:var(--panel-2);position:sticky;top:0;}
+  table.map-table tbody td:first-child{font-family:'JetBrains Mono',monospace;color:var(--text-dim);}
+  table.map-table td.mono,table.map-table th.mono{font-family:'JetBrains Mono',monospace;}
+  table.map-table tbody tr:hover{background:rgba(255,255,255,.02);}
+  table.map-table td.na{color:var(--text-faint);}
+
+  /* principles + tech */
+  .prin-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-top:18px;}
+  .prin{border:1px solid var(--border);border-left:3px solid var(--cyan);border-radius:12px;background:var(--panel);padding:15px 17px;}
+  .prin .pn{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;color:var(--cyan);}
+  .prin p{margin:7px 0 0;font-size:13.5px;color:var(--text-dim);line-height:1.55;}
+  .prin p b{color:var(--text);}
+  .tech-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px;}
+  .tech{font-family:'JetBrains Mono',monospace;font-size:12.5px;border:1px solid var(--border);background:var(--panel);padding:9px 13px;border-radius:10px;color:var(--text-dim);}
+  .tech b{color:var(--text);}
+
+  /* ===== shared site header (responsive) ===== */
+  .site-header{position:sticky;top:0;z-index:95;background:rgba(10,14,26,.86);backdrop-filter:blur(12px);border-bottom:1px solid var(--border-soft);}
+  .sh-inner{max-width:var(--maxw);margin:0 auto;padding:11px 24px;display:flex;align-items:center;gap:18px;}
+  .sh-brand{display:flex;align-items:center;gap:11px;text-decoration:none;flex-shrink:0;}
+  .sh-logo{width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,var(--cyan),var(--amber));box-shadow:0 0 16px rgba(79,216,236,.35);flex-shrink:0;}
+  .sh-name{display:flex;flex-direction:column;line-height:1.15;}
+  .sh-name b{font-family:'Be Vietnam Pro',sans-serif;font-weight:800;font-size:15.5px;color:var(--text);}
+  .sh-name small{font-family:'JetBrains Mono',monospace;font-weight:500;font-size:10px;color:var(--text-faint);margin-top:2px;}
+  .sh-nav{display:flex;align-items:center;gap:16px;margin-left:auto;min-width:0;}
+  .sh-links{display:flex;align-items:center;gap:2px;overflow-x:auto;scrollbar-width:none;}
+  .sh-links::-webkit-scrollbar{display:none;}
+  .sh-links a{font-size:13px;color:var(--text-dim);text-decoration:none;padding:7px 10px;border-radius:8px;white-space:nowrap;transition:.15s;}
+  .sh-links a:hover{color:var(--text);background:var(--panel);}
+  .sh-right{display:flex;align-items:center;gap:10px;flex-shrink:0;}
+  .sh-chapters{display:flex;gap:4px;background:var(--panel-2);border:1px solid var(--border);border-radius:999px;padding:4px;}
+  .sh-chap{display:flex;align-items:center;gap:7px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--text-dim);text-decoration:none;padding:6px 11px;border-radius:999px;white-space:nowrap;transition:.15s;}
+  .sh-chap b{font-size:11px;opacity:.7;font-weight:700;}
+  .sh-chap.active{background:var(--cyan);color:#04121a;}
+  .sh-chap.active b{opacity:1;}
+  .sh-chap:not(.active):hover{color:var(--text);}
+  .sh-burger{display:none;flex-direction:column;gap:4px;width:42px;height:38px;border:1px solid var(--border);border-radius:9px;background:var(--panel);cursor:pointer;align-items:center;justify-content:center;flex-shrink:0;margin-left:auto;}
+  .sh-burger span{width:18px;height:2px;background:var(--text);border-radius:2px;transition:.25s;}
+  .site-header.open .sh-burger span:nth-child(1){transform:translateY(6px) rotate(45deg);}
+  .site-header.open .sh-burger span:nth-child(2){opacity:0;}
+  .site-header.open .sh-burger span:nth-child(3){transform:translateY(-6px) rotate(-45deg);}
+  @media (max-width:1040px){
+    .sh-burger{display:flex;}
+    .sh-nav{position:absolute;left:0;right:0;top:100%;background:var(--bg-soft);border-bottom:1px solid var(--border);flex-direction:column;align-items:stretch;gap:14px;padding:16px 24px 20px;margin:0;display:none;max-height:76vh;overflow:auto;}
+    .site-header.open .sh-nav{display:flex;}
+    .sh-links{flex-direction:column;align-items:stretch;overflow:visible;gap:2px;}
+    .sh-links a{padding:11px 12px;font-size:15px;border:1px solid transparent;}
+    .sh-links a:hover{border-color:var(--border);}
+    .sh-right{flex-direction:column;align-items:stretch;gap:10px;}
+    .sh-chapters{justify-content:center;}
+    .sh-chap{flex:1;justify-content:center;padding:9px;}
+  }
+
+  /* ===== shared story footer ===== */
+  .site-footer{border-top:1px solid var(--border-soft);background:var(--panel-2);text-align:left;padding:0;}
+  .sf-inner{max-width:var(--maxw);margin:0 auto;padding:46px 24px 74px;}
+  .sf-eyebrow{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-faint);margin-bottom:16px;display:flex;align-items:center;gap:8px;}
+  .sf-eyebrow::before{content:"";width:16px;height:1px;background:var(--text-faint);display:inline-block;}
+  .sf-story{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  @media (max-width:760px){.sf-story{grid-template-columns:1fr;}}
+  .sf-card{display:flex;flex-direction:column;gap:5px;border:1px solid var(--border);border-radius:14px;background:var(--panel);padding:20px 22px;text-decoration:none;transition:.2s;}
+  .sf-card:hover{transform:translateY(-3px);border-color:var(--cyan);}
+  .sf-card .k{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--text-faint);letter-spacing:.03em;}
+  .sf-card b{font-family:'Be Vietnam Pro',sans-serif;font-size:18px;font-weight:700;color:var(--text);}
+  .sf-card p{margin:3px 0 0;font-size:13.5px;color:var(--text-dim);line-height:1.5;}
+  .sf-card.next{border-color:var(--amber);text-align:right;}
+  .sf-card.next:hover{border-color:var(--amber);}
+  .sf-card.next .k{color:var(--amber);}
+  .sf-meta{margin-top:34px;text-align:center;}
+  .sf-meta .sig{font-family:'JetBrains Mono',monospace;color:var(--text-dim);font-size:13px;margin-bottom:12px;}
+  .sf-meta p{color:var(--text-faint);font-size:12.5px;max-width:620px;margin:5px auto;line-height:1.6;}
+
   /* unified dashboard mock */
   .kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:26px;}
   @media (max-width:820px){.kpi-grid{grid-template-columns:repeat(2,1fr);}}
@@ -222,42 +386,67 @@
   <symbol id="i-chart" viewBox="0 0 24 24"><line x1="4" y1="20" x2="20" y2="20"/><rect x="6" y="11" width="3" height="7"/><rect x="11" y="6" width="3" height="12"/><rect x="16" y="14" width="3" height="4"/></symbol>
   <symbol id="i-play" viewBox="0 0 24 24"><path d="M7 5v14l12-7z"/></symbol>
   <symbol id="i-arrow" viewBox="0 0 24 12"><path d="M1 6h20M17 2l5 4-5 4"/></symbol>
+  <symbol id="i-crm" viewBox="0 0 24 24"><path d="M20.5 5.5a4 4 0 0 0-5.7 0L12 8.3 9.2 5.5a4 4 0 1 0-5.7 5.7l8.5 8.5 8.5-8.5a4 4 0 0 0 0-5.7z"/></symbol>
+  <symbol id="i-ecom" viewBox="0 0 24 24"><path d="M4 8h16l-1.2 11a1.5 1.5 0 0 1-1.5 1.4H6.7A1.5 1.5 0 0 1 5.2 19z"/><path d="M8.5 8V6a3.5 3.5 0 0 1 7 0v2"/></symbol>
+  <symbol id="i-box" viewBox="0 0 24 24"><path d="M3 8l9-5 9 5v8l-9 5-9-5z"/><path d="M3 8l9 5 9-5M12 13v8"/></symbol>
+  <symbol id="i-hub" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M19.1 4.9l-2.8 2.8M7.7 16.3l-2.8 2.8"/></symbol>
+  <symbol id="i-ware" viewBox="0 0 24 24"><path d="M3 21V9l9-5 9 5v12"/><path d="M7 21v-7h10v7"/><path d="M7 14h10"/></symbol>
+  <symbol id="i-calc" viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2"/><rect x="8" y="5.5" width="8" height="3.5" rx="1"/><path d="M8.5 13h.01M12 13h.01M15.5 13h.01M8.5 16.5h.01M12 16.5h.01M15.5 16.5v2.5"/></symbol>
+  <symbol id="i-prev" viewBox="0 0 24 24"><path d="M18 5v14L8 12zM6 5v14" stroke="currentColor" stroke-width="2" fill="none" stroke-linejoin="round"/></symbol>
+  <symbol id="i-next" viewBox="0 0 24 24"><path d="M6 5v14l10-7zM18 5v14" stroke="currentColor" stroke-width="2" fill="none" stroke-linejoin="round"/></symbol>
+  <symbol id="i-pause" viewBox="0 0 24 24"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></symbol>
+  <symbol id="i-restart" viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-2.6-6.4M21 3v5h-5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></symbol>
   <symbol id="i-warn" viewBox="0 0 24 24"><path d="M12 3.5l9.5 16.5H2.5z"/><line x1="12" y1="10" x2="12" y2="14.5"/><circle cx="12" cy="17.3" r=".9" fill="currentColor" stroke="none"/></symbol>
 </defs></svg>
 
-<!-- TOP BAR -->
-<div class="topbar">
-  <div class="wrap">
-    <div class="brand"><span class="sq"></span> VA Hub · Ví dụ luồng dữ liệu</div>
-    <nav class="topnav">
-      <a href="va-hub-tong-quan.html" class="back">← Tổng quan</a>
-      <a href="#sis">SIS</a>
-      <a href="#lms">LMS</a>
-      <a href="#hrm">HRM</a>
-      <a href="#pos">POS</a>
-      <a href="#dashboard">Dashboard</a>
+<!-- SITE HEADER -->
+<header class="site-header" id="siteHeader">
+  <div class="sh-inner">
+    <a class="sh-brand" href="va-hub-tong-quan.html">
+      <span class="sh-logo"></span>
+      <span class="sh-name"><b>VA Hub</b><small>Câu chuyện dữ liệu · Phần 2</small></span>
+    </a>
+    <button class="sh-burger" id="shBurger" aria-label="Mở menu"><span></span><span></span><span></span></button>
+    <nav class="sh-nav" id="shNav">
+      <div class="sh-links">
+        <a href="#picture">Bức tranh</a>
+        <a href="#crm">CRM</a>
+        <a href="#sis">SIS</a>
+        <a href="#ecom">E‑Com</a>
+        <a href="#pos">POS</a>
+        <a href="#misa">MISA</a>
+        <a href="#giao-thoa">Sơ đồ tổng thể</a>
+        <a href="#dashboard">Dashboard</a>
+      </div>
+      <div class="sh-right">
+        <div class="sh-chapters">
+          <a class="sh-chap" href="va-hub-tong-quan.html"><b>01</b> Tổng quan</a>
+          <a class="sh-chap active" href="va-hub-vi-du-luong.html"><b>02</b> Ví dụ luồng</a>
+        </div>
+      </div>
     </nav>
   </div>
-</div>
+</header>
 
 <!-- HERO -->
 <header class="hero">
   <div class="wrap">
     <div class="eyebrow">Kể chuyện bằng ví dụ · phần bổ sung cho báo cáo tổng quan</div>
-    <h1 class="h1">Bốn hệ thống của trường<br>sẽ "chảy" thế nào?</h1>
-    <div class="tagline">// SIS · LMS · HRM · POS → VA Hub → màn hình &amp; báo cáo</div>
-    <p class="lead">Trang tổng quan giải thích VA Hub <em>là gì</em>. Trang này trả lời câu hỏi thực tế hơn: <b style="color:var(--text)">một mẩu dữ liệu đi từ phần mềm của trường tới màn hình quản lý ra sao?</b> Chúng ta lấy 4 hệ thống trường học hay gặp nhất, và đi theo chân từng mẩu dữ liệu — bằng hình ảnh, ví dụ số liệu thật dễ hình dung, và luồng demo bấm-để-chạy.</p>
+    <h1 class="h1">Các hệ thống lõi<br>sẽ "chảy" qua VA Hub thế nào?</h1>
+    <div class="tagline">// CRM · SIS · E‑Commerce · POS · MISA → VA Hub → màn hình &amp; báo cáo</div>
+    <p class="lead">Trang tổng quan giải thích VA Hub <em>là gì</em>. Trang này trả lời câu hỏi thực tế hơn: <b style="color:var(--text)">một mẩu dữ liệu đi từ hệ thống này sang hệ thống khác ra sao?</b> Chúng ta đi theo <b style="color:var(--text)">5 hệ thống lõi</b> của dự án — CRM, SIS, E‑Commerce, POS/Kho và MISA — theo chân từng mẩu dữ liệu bằng hình ảnh, ví dụ số liệu dễ hình dung, và luồng demo bấm‑để‑chạy.</p>
 
     <div class="banner">
       <svg><use href="#i-warn"/></svg>
-      <p><b>Lưu ý trung thực:</b> tất cả luồng dưới đây là <b>thiết kế minh hoạ</b> cho các giai đoạn sắp tới (P1–P5). Hôm nay hệ thống mới chạy phần đăng nhập + xem sức khoẻ. Số liệu trong biểu đồ là <b>ví dụ để hình dung</b>, chưa phải dữ liệu vận hành thật.</p>
+      <p><b>Lưu ý trung thực:</b> tất cả luồng dưới đây là <b>thiết kế minh hoạ</b> cho các giai đoạn sắp tới (P1–P5). Hôm nay hệ thống mới chạy phần đăng nhập + xem sức khoẻ; số liệu trong biểu đồ là <b>ví dụ để hình dung</b>. <b>LMS (học tập)</b> và <b>HRM (nhân sự)</b> sẽ được bổ sung ở giai đoạn sau, cùng chảy qua VA Hub theo đúng mô hình này.</p>
     </div>
 
     <div class="sys-quick">
-      <a href="#sis" class="sysq sis"><div class="k">SIS</div><h3>Thông tin học sinh</h3><p>Hồ sơ, lớp, điểm danh, phụ huynh.</p></a>
-      <a href="#lms" class="sysq lms"><div class="k">LMS</div><h3>Học tập trực tuyến</h3><p>Bài giảng, bài tập, điểm, tiến độ.</p></a>
-      <a href="#hrm" class="sysq hrm"><div class="k">HRM</div><h3>Nhân sự</h3><p>Giáo viên, chấm công, hợp đồng.</p></a>
-      <a href="#pos" class="sysq pos"><div class="k">POS</div><h3>Thu ngân &amp; căng tin</h3><p>Học phí, căng tin, đồng phục.</p></a>
+      <a href="#crm" class="sysq crm"><div class="k">CRM</div><h3>Quản lý phụ huynh</h3><p>Lead → khách hàng, cấp mã gốc phụ huynh.</p></a>
+      <a href="#sis" class="sysq sis"><div class="k">SIS</div><h3>Thông tin học sinh</h3><p>Hồ sơ, lớp, sinh Student ID gốc.</p></a>
+      <a href="#ecom" class="sysq ecom"><div class="k">E‑COM</div><h3>Cửa hàng online</h3><p>Học phí, đồng phục, tạo đơn hàng.</p></a>
+      <a href="#pos" class="sysq pos"><div class="k">POS</div><h3>Bán hàng &amp; kho</h3><p>Tồn kho, xuất kho, doanh thu.</p></a>
+      <a href="#misa" class="sysq misa"><div class="k">MISA</div><h3>Kế toán</h3><p>Hạch toán, chứng từ, báo cáo.</p></a>
     </div>
   </div>
 </header>
@@ -266,8 +455,8 @@
 <section id="picture">
   <div class="wrap reveal">
     <div class="eyebrow">Bức tranh hoàn thiện</div>
-    <h2 class="h2">Bốn nguồn vào — một trạm trung chuyển — nhiều màn hình ra</h2>
-    <p class="lead">Thay vì mỗi phần mềm nói một ngôn ngữ riêng và không ai ghép được, tất cả cùng đổ về VA Hub. Tại đây dữ liệu được <b style="color:var(--text)">làm sạch, che thông tin nhạy cảm, ghép chung một "ngôn ngữ"</b>, rồi mới toả ra các màn hình và báo cáo.</p>
+    <h2 class="h2">Nhiều nguồn vào — một trạm trung chuyển — nhiều màn hình ra</h2>
+    <p class="lead">Thay vì mỗi phần mềm nói một ngôn ngữ riêng và không ai ghép được, tất cả cùng đổ về VA Hub. Bốn <b style="color:var(--text)">nguồn sự thật</b> (CRM · SIS · POS/Kho · MISA) gửi dữ liệu qua Hub — nơi nó được <b style="color:var(--text)">làm sạch, che thông tin nhạy cảm, ánh xạ mã chung</b> — rồi mới toả ra các màn hình và báo cáo. E‑Commerce là kênh bán online, đứng giữa như trong sơ đồ tổng thể phía dưới.</p>
 
     <div class="picture-wrap">
       <svg viewBox="0 0 1000 540" role="img" aria-label="Sơ đồ 4 nguồn hội tụ về VA Hub rồi toả ra các màn hình">
@@ -277,10 +466,10 @@
         </defs>
 
         <!-- flow lines sources -> hub -->
-        <path d="M215,95 C300,95 320,235 372,255" fill="none" stroke="var(--sis)" stroke-width="2.2" marker-end="url(#ar)" opacity=".8"/>
-        <path d="M215,185 C300,185 320,255 372,268" fill="none" stroke="var(--lms)" stroke-width="2.2" marker-end="url(#ar)" opacity=".8"/>
-        <path d="M215,355 C300,355 320,285 372,282" fill="none" stroke="var(--hrm)" stroke-width="2.2" marker-end="url(#ar)" opacity=".8"/>
-        <path d="M215,445 C300,445 320,305 372,295" fill="none" stroke="var(--pos)" stroke-width="2.2" marker-end="url(#ar)" opacity=".8"/>
+        <path d="M215,95 C300,95 320,235 372,255" fill="none" stroke="var(--crm)" stroke-width="2.2" marker-end="url(#ar)" opacity=".8"/>
+        <path d="M215,185 C300,185 320,255 372,268" fill="none" stroke="var(--sis)" stroke-width="2.2" marker-end="url(#ar)" opacity=".8"/>
+        <path d="M215,355 C300,355 320,285 372,282" fill="none" stroke="var(--lms)" stroke-width="2.2" marker-end="url(#ar)" opacity=".8"/>
+        <path d="M215,445 C300,445 320,305 372,295" fill="none" stroke="var(--hrm)" stroke-width="2.2" marker-end="url(#ar)" opacity=".8"/>
 
         <!-- hub -> consumers -->
         <path d="M628,255 C690,235 700,95 785,95" fill="none" stroke="var(--text-faint)" stroke-width="1.8" marker-end="url(#ar)"/>
@@ -290,10 +479,10 @@
 
         <!-- source boxes -->
         <g font-family="Inter" font-size="13" fill="var(--text)">
-          <g><rect x="30" y="70" width="185" height="50" rx="10" fill="var(--panel)" stroke="var(--sis)" stroke-width="1.5"/><text x="46" y="92" font-family="JetBrains Mono" font-size="12" font-weight="600" fill="var(--sis)">SIS</text><text x="46" y="109" fill="var(--text-dim)" font-size="11.5">Thông tin học sinh</text></g>
-          <g><rect x="30" y="160" width="185" height="50" rx="10" fill="var(--panel)" stroke="var(--lms)" stroke-width="1.5"/><text x="46" y="182" font-family="JetBrains Mono" font-size="12" font-weight="600" fill="var(--lms)">LMS</text><text x="46" y="199" fill="var(--text-dim)" font-size="11.5">Học tập trực tuyến</text></g>
-          <g><rect x="30" y="330" width="185" height="50" rx="10" fill="var(--panel)" stroke="var(--hrm)" stroke-width="1.5"/><text x="46" y="352" font-family="JetBrains Mono" font-size="12" font-weight="600" fill="var(--hrm)">HRM</text><text x="46" y="369" fill="var(--text-dim)" font-size="11.5">Nhân sự</text></g>
-          <g><rect x="30" y="420" width="185" height="50" rx="10" fill="var(--panel)" stroke="var(--pos)" stroke-width="1.5"/><text x="46" y="442" font-family="JetBrains Mono" font-size="12" font-weight="600" fill="var(--pos)">POS</text><text x="46" y="459" fill="var(--text-dim)" font-size="11.5">Thu ngân &amp; căng tin</text></g>
+          <g><rect x="30" y="70" width="185" height="50" rx="10" fill="var(--panel)" stroke="var(--crm)" stroke-width="1.5"/><text x="46" y="92" font-family="JetBrains Mono" font-size="12" font-weight="600" fill="var(--crm)">CRM</text><text x="46" y="109" fill="var(--text-dim)" font-size="11.5">Quản lý phụ huynh</text></g>
+          <g><rect x="30" y="160" width="185" height="50" rx="10" fill="var(--panel)" stroke="var(--sis)" stroke-width="1.5"/><text x="46" y="182" font-family="JetBrains Mono" font-size="12" font-weight="600" fill="var(--sis)">SIS</text><text x="46" y="199" fill="var(--text-dim)" font-size="11.5">Thông tin học sinh</text></g>
+          <g><rect x="30" y="330" width="185" height="50" rx="10" fill="var(--panel)" stroke="var(--lms)" stroke-width="1.5"/><text x="46" y="352" font-family="JetBrains Mono" font-size="12" font-weight="600" fill="var(--lms)">POS</text><text x="46" y="369" fill="var(--text-dim)" font-size="11.5">Bán hàng &amp; kho</text></g>
+          <g><rect x="30" y="420" width="185" height="50" rx="10" fill="var(--panel)" stroke="var(--hrm)" stroke-width="1.5"/><text x="46" y="442" font-family="JetBrains Mono" font-size="12" font-weight="600" fill="var(--hrm)">MISA</text><text x="46" y="459" fill="var(--text-dim)" font-size="11.5">Kế toán</text></g>
         </g>
 
         <!-- hub -->
@@ -309,20 +498,110 @@
 
         <!-- consumers -->
         <g font-family="Inter" font-size="13" fill="var(--text)">
-          <g><rect x="785" y="70" width="185" height="50" rx="10" fill="var(--panel)" stroke="var(--border)" stroke-width="1.3"/><text x="801" y="92" font-size="12.5" font-weight="600">Chuyên cần &amp; sĩ số</text><text x="801" y="109" fill="var(--text-dim)" font-size="11">Dashboard theo lớp</text></g>
-          <g><rect x="785" y="160" width="185" height="50" rx="10" fill="var(--panel)" stroke="var(--border)" stroke-width="1.3"/><text x="801" y="182" font-size="12.5" font-weight="600">Tiến độ học tập</text><text x="801" y="199" fill="var(--text-dim)" font-size="11">Cảnh báo tụt lại</text></g>
-          <g><rect x="785" y="330" width="185" height="50" rx="10" fill="var(--panel)" stroke="var(--border)" stroke-width="1.3"/><text x="801" y="352" font-size="12.5" font-weight="600">Nhân sự &amp; lương</text><text x="801" y="369" fill="var(--text-dim)" font-size="11">Hợp đồng, chấm công</text></g>
-          <g><rect x="785" y="420" width="185" height="50" rx="10" fill="var(--panel)" stroke="var(--border)" stroke-width="1.3"/><text x="801" y="442" font-size="12.5" font-weight="600">Tài chính &amp; đối soát</text><text x="801" y="459" fill="var(--text-dim)" font-size="11">Học phí, căng tin</text></g>
+          <g><rect x="785" y="70" width="185" height="50" rx="10" fill="var(--panel)" stroke="var(--border)" stroke-width="1.3"/><text x="801" y="92" font-size="12.5" font-weight="600">Tuyển sinh &amp; phụ huynh</text><text x="801" y="109" fill="var(--text-dim)" font-size="11">Phễu CRM, chăm sóc</text></g>
+          <g><rect x="785" y="160" width="185" height="50" rx="10" fill="var(--panel)" stroke="var(--border)" stroke-width="1.3"/><text x="801" y="182" font-size="12.5" font-weight="600">Hồ sơ học sinh</text><text x="801" y="199" fill="var(--text-dim)" font-size="11">SIS · lớp, khối</text></g>
+          <g><rect x="785" y="330" width="185" height="50" rx="10" fill="var(--panel)" stroke="var(--border)" stroke-width="1.3"/><text x="801" y="352" font-size="12.5" font-weight="600">Bán hàng &amp; tồn kho</text><text x="801" y="369" fill="var(--text-dim)" font-size="11">E‑Com + POS/Kho</text></g>
+          <g><rect x="785" y="420" width="185" height="50" rx="10" fill="var(--panel)" stroke="var(--border)" stroke-width="1.3"/><text x="801" y="442" font-size="12.5" font-weight="600">Tài chính &amp; đối soát</text><text x="801" y="459" fill="var(--text-dim)" font-size="11">MISA · hạch toán</text></g>
         </g>
       </svg>
     </div>
 
     <div class="legend">
-      <span><i style="background:var(--sis)"></i>SIS — Student Information System</span>
-      <span><i style="background:var(--lms)"></i>LMS — Learning Management System</span>
-      <span><i style="background:var(--hrm)"></i>HRM — Human Resource Management</span>
-      <span><i style="background:var(--pos)"></i>POS — Point of Sale (thu ngân)</span>
+      <span><i style="background:var(--crm)"></i>CRM — Quản lý phụ huynh (nguồn gốc)</span>
+      <span><i style="background:var(--sis)"></i>SIS — Thông tin học sinh</span>
+      <span><i style="background:var(--lms)"></i>POS — Bán hàng &amp; kho (Inventory)</span>
+      <span><i style="background:var(--hrm)"></i>MISA — Kế toán</span>
+      <span><i style="background:var(--ecom)"></i>E‑Commerce — kênh bán online</span>
     </div>
+  </div>
+</section>
+
+
+<!-- ============ CRM ============ -->
+<section class="sys" id="crm" style="--acc:var(--crm);--acc-dim:var(--crm-dim);">
+  <div class="wrap reveal">
+    <div class="sys-head">
+      <div class="sys-badge" style="background:var(--crm-dim);color:var(--crm);"><svg><use href="#i-crm"/></svg></div>
+      <div class="sys-meta"><div class="k" style="color:var(--crm)">Hệ thống 1 / 5 · điểm bắt đầu</div><h2>CRM — Quản lý phụ huynh</h2></div>
+    </div>
+    <p class="lead" style="margin-top:16px;">Đây là nơi hành trình bắt đầu: phụ huynh để lại thông tin, được chăm sóc rồi duyệt thành khách hàng chính thức. Ví dụ: <b style="color:var(--text)">một phụ huynh đăng ký tư vấn tuyển sinh</b>. CRM cấp <b style="color:var(--text)">ParentID_CRM</b> — mã gốc của phụ huynh — rồi VA Hub mang mã này đi khắp các hệ khác.</p>
+    <div class="chips">
+      <span class="chip">Nguồn: <b>CRM (Laravel)</b></span>
+      <span class="chip">Cách lấy: <b>webhook + API</b></span>
+      <span class="chip">Nhạy cảm: <b>SĐT, email phụ huynh</b></span>
+      <span class="chip">Đích: <b>bảng phụ huynh sạch</b></span>
+    </div>
+
+    <div class="sub-title">Luồng demo — bấm để xem dữ liệu chạy</div>
+    <div class="pipe-tools" style="color:var(--crm);">
+      <button class="btn-run" data-pipe="pipe-crm"><svg><use href="#i-play"/></svg> Chạy luồng CRM</button>
+      <span class="pipe-hint">→ một "phụ huynh mới được duyệt" đi qua 6 trạm</span>
+    </div>
+    <div class="pipe-scroll">
+      <div class="pipe" id="pipe-crm" data-log="#log-crm">
+        <div class="packet"></div>
+        <div class="stage-row">
+          <div class="stage" data-log="Bắt: phụ huynh 'Nguyễn Thị Lan' để lại thông tin ở landing tuyển sinh (Lead mới)."><div class="st-ic"><svg><use href="#i-crm"/></svg></div><div class="st-name">CRM nguồn</div><div class="st-sub">Lead phụ huynh mới</div></div>
+          <div class="stage-arrow"><svg><use href="#i-arrow"/></svg></div>
+          <div class="stage" data-log="Thu thập: CRM bắn webhook khi Lead được duyệt thành Customer, kèm ParentID_CRM."><div class="st-ic"><svg><use href="#i-dish"/></svg></div><div class="st-name">Thu thập</div><div class="st-sub">Nhận webhook duyệt</div></div>
+          <div class="stage-arrow"><svg><use href="#i-arrow"/></svg></div>
+          <div class="stage" data-log="Băng chuyền: gắn tem thời gian + mã truy vết rồi đưa lên hàng đợi."><div class="st-ic"><svg><use href="#i-truck"/></svg></div><div class="st-name">Băng chuyền</div><div class="st-sub">Gắn tem, xếp hàng</div></div>
+          <div class="stage-arrow"><svg><use href="#i-arrow"/></svg></div>
+          <div class="stage" data-log="Lọc: che SĐT & email phụ huynh, chuẩn hoá tên, chuẩn bị map ParentID_CRM → ParentID_SIS."><div class="st-ic"><svg><use href="#i-funnel"/></svg></div><div class="st-name">Lọc &amp; che PII</div><div class="st-sub">Ẩn SĐT, chuẩn hoá</div></div>
+          <div class="stage-arrow"><svg><use href="#i-arrow"/></svg></div>
+          <div class="stage" data-log="Ghi đích: lưu hồ sơ phụ huynh sạch, gắn ParentID để các hệ khác dùng chung."><div class="st-ic"><svg><use href="#i-db"/></svg></div><div class="st-name">Kho đích</div><div class="st-sub">Lưu ParentID gốc</div></div>
+          <div class="stage-arrow"><svg><use href="#i-arrow"/></svg></div>
+          <div class="stage" data-log="Xong: dashboard tuyển sinh +1 khách hàng mới, sẵn sàng tạo hồ sơ học sinh ở SIS."><div class="st-ic"><svg><use href="#i-chart"/></svg></div><div class="st-name">Màn hình</div><div class="st-sub">Phễu tuyển sinh</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="log" id="log-crm"><div class="log-empty">▶ Bấm "Chạy luồng CRM" để xem từng trạm xử lý gì…</div></div>
+
+    <div class="grid2">
+      <div class="rec-card">
+        <h4>Từ "Lead" thành "khách hàng có mã gốc"</h4>
+        <div class="rec-flip">
+          <div class="rec-box before">
+            <span class="tag">Ở CRM (thô)</span>
+            <div><span class="key">nguon:</span> <span class="val">"Landing tuyển sinh"</span></div>
+            <div><span class="key">parent:</span> <span class="val">"Nguyễn Thị Lan"</span></div>
+            <div><span class="key">phone:</span> <span class="val">"0912345678"</span></div>
+            <div><span class="key">email:</span> <span class="val">"lan.nguyen@…"</span></div>
+            <div><span class="key">child:</span> <span class="val">"Nguyễn An"</span></div>
+          </div>
+          <div class="flip-ar"><svg><use href="#i-arrow"/></svg></div>
+          <div class="rec-box after">
+            <span class="tag">Vào kho sạch</span>
+            <div><span class="key">ParentID_CRM:</span> <span class="val">"PA-3391"</span></div>
+            <div><span class="key">type:</span> <span class="val">"CUSTOMER"</span></div>
+            <div><span class="key">phone:</span> <span class="mask">"091•••••78"</span></div>
+            <div><span class="key">email:</span> <span class="mask">"lan•••@…"</span></div>
+            <div><span class="key">status:</span> <span class="val" style="color:var(--hrm)">"ACTIVE ✓"</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="viz-card">
+        <h4>Phễu tuyển sinh tuần này</h4>
+        <p class="cap">Lead → chăm sóc → Customer · ví dụ minh hoạ</p>
+        <div class="donut-wrap">
+          <div class="donut" data-segments="46|var(--crm),32|var(--amber),22|var(--hrm)" data-center="22%" data-size="128"></div>
+          <div class="donut-legend">
+            <span><i style="background:var(--crm)"></i>Lead mới · 46%</span>
+            <span><i style="background:var(--amber)"></i>Đang chăm sóc · 32%</span>
+            <span><i style="background:var(--hrm)"></i>Đã thành Customer · 22%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sub-title">Các bước demo</div>
+    <div class="steps">
+      <div class="demo-step"><div class="n">01</div><h5>Phụ huynh để lại thông tin</h5><p>Từ hội thảo, landing page hay giới thiệu — CRM ghi nhận thành Lead, chưa gọi hệ nào khác.</p></div>
+      <div class="demo-step"><div class="n">02</div><h5>Duyệt thành khách hàng</h5><p>Sau khi đóng phí giữ chỗ, Lead được duyệt thành Customer và cấp ParentID_CRM (mã gốc).</p></div>
+      <div class="demo-step"><div class="n">03</div><h5>Che thông tin riêng tư</h5><p>SĐT và email phụ huynh được che trước khi đưa sang hệ khác, đúng Nghị định 13/2023.</p></div>
+      <div class="demo-step"><div class="n">04</div><h5>Sẵn sàng lan toả</h5><p>ParentID_CRM trở thành "sợi chỉ" để VA Hub gắn phụ huynh với học sinh, đơn hàng và kế toán.</p></div>
+    </div>
+    <div class="outcome"><b>Kết quả:</b> mỗi phụ huynh chỉ có <b>một mã gốc duy nhất</b>; mọi hệ sau (SIS, E‑Commerce, MISA) đều tham chiếu về đây thay vì nhập lại tay.</div>
   </div>
 </section>
 
@@ -332,7 +611,7 @@
   <div class="wrap reveal">
     <div class="sys-head">
       <div class="sys-badge" style="background:var(--sis-dim);color:var(--sis);"><svg><use href="#i-grad"/></svg></div>
-      <div class="sys-meta"><div class="k" style="color:var(--sis)">Hệ thống 1 / 4 · nguồn đầu tiên</div><h2>SIS — Thông tin học sinh</h2></div>
+      <div class="sys-meta"><div class="k" style="color:var(--sis)">Hệ thống 2 / 5 · nguồn sự thật học sinh</div><h2>SIS — Thông tin học sinh</h2></div>
     </div>
     <p class="lead" style="margin-top:16px;">Đây là "sổ hộ khẩu" của trường: hồ sơ học sinh, phụ huynh, lớp học, điểm danh. Khi một học sinh <b style="color:var(--text)">chuyển từ lớp 10A1 sang 10A2</b>, VA Hub cần thấy thay đổi đó và cập nhật mọi màn hình liên quan — mà không ai phải sửa tay ở nhiều nơi.</p>
     <div class="chips">
@@ -418,221 +697,130 @@
 </section>
 
 
-<!-- ============ LMS ============ -->
-<section class="sys" id="lms" style="--acc:var(--lms);--acc-dim:var(--lms-dim);">
+<!-- ============ E-COMMERCE ============ -->
+<section class="sys" id="ecom" style="--acc:var(--ecom);--acc-dim:var(--ecom-dim);">
   <div class="wrap reveal">
     <div class="sys-head">
-      <div class="sys-badge" style="background:var(--lms-dim);color:var(--lms);"><svg><use href="#i-book"/></svg></div>
-      <div class="sys-meta"><div class="k" style="color:var(--lms)">Hệ thống 2 / 4 · nguồn qua REST API</div><h2>LMS — Học tập trực tuyến</h2></div>
+      <div class="sys-badge" style="background:var(--ecom-dim);color:var(--ecom);"><svg><use href="#i-ecom"/></svg></div>
+      <div class="sys-meta"><div class="k" style="color:var(--ecom)">Hệ thống 3 / 5 · kênh bán online</div><h2>E‑Commerce — Cửa hàng &amp; đơn hàng</h2></div>
     </div>
-    <p class="lead" style="margin-top:16px;">Đây là nơi diễn ra việc học: bài giảng, bài tập, điểm kiểm tra, thời gian học sinh online. Ví dụ: <b style="color:var(--text)">một học sinh nộp bài tập Toán và được chấm 8.5</b>. VA Hub ghép điểm này với hồ sơ SIS để tính ra bức tranh "em này đang học thế nào".</p>
+    <p class="lead" style="margin-top:16px;">Đây là nơi phụ huynh mua online: học phí, đồng phục, sách vở. Ví dụ: <b style="color:var(--text)">một phụ huynh đặt 2 bộ đồng phục 540.000 ₫</b>. E‑Commerce tạo <b style="color:var(--text)">OrderID_ECOM</b>, VA Hub chuẩn hoá tiền và ánh xạ sang <b style="color:var(--text)">OrderID_POS</b> để kho giữ hàng.</p>
     <div class="chips">
-      <span class="chip">Nguồn: <b>REST API (Moodle/Classroom)</b></span>
-      <span class="chip">Cách lấy: <b>gọi API mỗi 15 phút</b></span>
-      <span class="chip">Ghép với: <b>student_id của SIS</b></span>
-      <span class="chip">Đích: <b>bảng tiến độ học tập</b></span>
+      <span class="chip">Nguồn: <b>Node.js store</b></span>
+      <span class="chip">Cách lấy: <b>webhook đơn hàng</b></span>
+      <span class="chip">Ghép với: <b>CustomerID_ECOM ↔ ParentID</b></span>
+      <span class="chip">Đích: <b>bảng đơn hàng sạch</b></span>
+    </div>
+
+    <div class="sub-title">Luồng demo — bấm để xem dữ liệu chạy</div>
+    <div class="pipe-tools" style="color:var(--ecom);">
+      <button class="btn-run" data-pipe="pipe-ecom"><svg><use href="#i-play"/></svg> Chạy luồng E‑Commerce</button>
+      <span class="pipe-hint">→ một "đơn đồng phục vừa đặt" đi qua 6 trạm</span>
+    </div>
+    <div class="pipe-scroll">
+      <div class="pipe" id="pipe-ecom" data-log="#log-ecom">
+        <div class="packet"></div>
+        <div class="stage-row">
+          <div class="stage" data-log="Bắt: phụ huynh đặt 2 bộ đồng phục — E-Commerce tạo đơn OrderID_ECOM = EC-ORD-4471."><div class="st-ic"><svg><use href="#i-ecom"/></svg></div><div class="st-name">E‑Com nguồn</div><div class="st-sub">Đơn hàng mới</div></div>
+          <div class="stage-arrow"><svg><use href="#i-arrow"/></svg></div>
+          <div class="stage" data-log="Thu thập: nhận webhook đơn hàng mới, đọc chi tiết sản phẩm & số tiền."><div class="st-ic"><svg><use href="#i-dish"/></svg></div><div class="st-name">Thu thập</div><div class="st-sub">Nhận webhook đơn</div></div>
+          <div class="stage-arrow"><svg><use href="#i-arrow"/></svg></div>
+          <div class="stage" data-log="Băng chuyền: đưa đơn lên hàng đợi, giữ thứ tự để reserve kho đúng lượt."><div class="st-ic"><svg><use href="#i-truck"/></svg></div><div class="st-name">Băng chuyền</div><div class="st-sub">Xếp hàng đặt kho</div></div>
+          <div class="stage-arrow"><svg><use href="#i-arrow"/></svg></div>
+          <div class="stage" data-log="Lọc: chuẩn hoá tiền → 540.000 ₫, map OrderID_ECOM → OrderID_POS, gắn StudentID."><div class="st-ic"><svg><use href="#i-funnel"/></svg></div><div class="st-name">Chuẩn hoá &amp; map</div><div class="st-sub">Chuẩn tiền, nối mã</div></div>
+          <div class="stage-arrow"><svg><use href="#i-arrow"/></svg></div>
+          <div class="stage" data-log="Ghi đích: lưu đơn sạch, phát lệnh RESERVE tồn kho qua hàng đợi sang POS."><div class="st-ic"><svg><use href="#i-db"/></svg></div><div class="st-name">Kho đích</div><div class="st-sub">Giữ hàng, chống trùng</div></div>
+          <div class="stage-arrow"><svg><use href="#i-arrow"/></svg></div>
+          <div class="stage" data-log="Xong: dashboard đơn hàng +1; POS nhận lệnh giữ 2 sản phẩm để xuất kho."><div class="st-ic"><svg><use href="#i-chart"/></svg></div><div class="st-name">Màn hình</div><div class="st-sub">Đơn &amp; tồn kho</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="log" id="log-ecom"><div class="log-empty">▶ Bấm "Chạy luồng E‑Commerce" để xem từng trạm xử lý gì…</div></div>
+
+    <div class="grid2">
+      <div class="rec-card">
+        <h4>Từ "đơn web" thành "lệnh giữ hàng cho kho"</h4>
+        <div class="rec-flip">
+          <div class="rec-box before">
+            <span class="tag">Ở E‑Commerce (thô)</span>
+            <div><span class="key">OrderID_ECOM:</span> <span class="val">"EC-ORD-4471"</span></div>
+            <div><span class="key">item:</span> <span class="val">"Đồng phục hè"</span></div>
+            <div><span class="key">qty:</span> <span class="val">"2"</span></div>
+            <div><span class="key">Total_Amount:</span> <span class="val">"540000"</span></div>
+            <div><span class="key">customer:</span> <span class="val">"EC-CUS-7742"</span></div>
+          </div>
+          <div class="flip-ar"><svg><use href="#i-arrow"/></svg></div>
+          <div class="rec-box after">
+            <span class="tag">Vào kho sạch</span>
+            <div><span class="key">OrderID_POS:</span> <span class="val">"POS-8830"</span></div>
+            <div><span class="key">sku:</span> <span class="val">"UNIFORM-S ×2"</span></div>
+            <div><span class="key">amount:</span> <span class="val">"540.000 ₫"</span></div>
+            <div><span class="key">student:</span> <span class="val">"SIS-2026-1187"</span></div>
+            <div><span class="key">action:</span> <span class="val" style="color:var(--hrm)">"RESERVE ✓"</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="viz-card">
+        <h4>Đơn hàng theo loại</h4>
+        <p class="cap">Tỉ trọng đơn tuần này · ví dụ minh hoạ</p>
+        <div class="donut-wrap">
+          <div class="donut" data-segments="58|var(--ecom),30|var(--amber),12|var(--gray)" data-center="Σ" data-size="128"></div>
+          <div class="donut-legend">
+            <span><i style="background:var(--ecom)"></i>Học phí · 58%</span>
+            <span><i style="background:var(--amber)"></i>Đồng phục · 30%</span>
+            <span><i style="background:var(--gray)"></i>Khác · 12%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sub-title">Các bước demo</div>
+    <div class="steps">
+      <div class="demo-step"><div class="n">01</div><h5>Phụ huynh đặt đơn</h5><p>Trên cửa hàng online, phụ huynh chọn hàng và thanh toán như mọi trang thương mại điện tử.</p></div>
+      <div class="demo-step"><div class="n">02</div><h5>Chuẩn hoá tiền</h5><p>VA Hub quy mọi cách ghi tiền về một chuẩn (540.000 ₫) để không lệch khi đối soát sau này.</p></div>
+      <div class="demo-step"><div class="n">03</div><h5>Ánh xạ sang kho</h5><p>OrderID_ECOM được map sang OrderID_POS, kèm StudentID để kho biết giữ hàng cho ai.</p></div>
+      <div class="demo-step"><div class="n">04</div><h5>Giữ hàng qua hàng đợi</h5><p>Lệnh RESERVE đẩy sang POS qua queue — có retry nếu kho bận, không mất đơn.</p></div>
+    </div>
+    <div class="outcome"><b>Kết quả:</b> đơn web và tồn kho luôn khớp nhau; phụ huynh thấy "còn/hết hàng" đúng thực tế, kế toán có sẵn số liệu để hạch toán.</div>
+  </div>
+</section>
+
+
+<!-- ============ POS / INVENTORY ============ -->
+<section class="sys" id="pos" style="--acc:var(--lms);--acc-dim:var(--lms-dim);">
+  <div class="wrap reveal">
+    <div class="sys-head">
+      <div class="sys-badge" style="background:var(--lms-dim);color:var(--lms);"><svg><use href="#i-ware"/></svg></div>
+      <div class="sys-meta"><div class="k" style="color:var(--lms)">Hệ thống 4 / 5 · bán hàng &amp; kho</div><h2>POS — Bán hàng &amp; kho (Inventory)</h2></div>
+    </div>
+    <p class="lead" style="margin-top:16px;">Đây là nơi quản lý tồn kho và xuất bán. Ví dụ: <b style="color:var(--text)">POS nhận lệnh giữ 2 bộ đồng phục từ E‑Commerce</b>. POS kiểm tồn, trừ kho, cập nhật trạng thái rồi tổng hợp doanh thu để đẩy sang MISA — mọi con số kho và tiền luôn khớp nhau.</p>
+    <div class="chips">
+      <span class="chip">Nguồn: <b>POS / Inventory</b></span>
+      <span class="chip">Cách lấy: <b>API + gom lô</b></span>
+      <span class="chip">Việc chính: <b>trừ kho, đối soát</b></span>
+      <span class="chip">Đích: <b>bảng tồn kho &amp; giao dịch</b></span>
     </div>
 
     <div class="sub-title">Luồng demo — bấm để xem dữ liệu chạy</div>
     <div class="pipe-tools" style="color:var(--lms);">
-      <button class="btn-run" data-pipe="pipe-lms"><svg><use href="#i-play"/></svg> Chạy luồng LMS</button>
-      <span class="pipe-hint">→ một "điểm bài tập vừa chấm" đi qua 6 trạm</span>
-    </div>
-    <div class="pipe-scroll">
-      <div class="pipe" id="pipe-lms" data-log="#log-lms">
-        <div class="packet"></div>
-        <div class="stage-row">
-          <div class="stage" data-log="Bắt: LMS báo có điểm mới — bài tập Toán, học sinh #10A2-07, điểm 8.5."><div class="st-ic"><svg><use href="#i-book"/></svg></div><div class="st-name">LMS nguồn</div><div class="st-sub">Vừa chấm điểm</div></div>
-          <div class="stage-arrow"><svg><use href="#i-arrow"/></svg></div>
-          <div class="stage" data-log="Thu thập: gọi REST API lấy các điểm mới kể từ lần trước; giới hạn nhịp gọi."><div class="st-ic"><svg><use href="#i-dish"/></svg></div><div class="st-name">Thu thập</div><div class="st-sub">Gọi API lấy điểm mới</div></div>
-          <div class="stage-arrow"><svg><use href="#i-arrow"/></svg></div>
-          <div class="stage" data-log="Băng chuyền: đưa điểm lên hàng đợi, giữ thứ tự theo thời gian."><div class="st-ic"><svg><use href="#i-truck"/></svg></div><div class="st-name">Băng chuyền</div><div class="st-sub">Xếp hàng theo giờ</div></div>
-          <div class="stage-arrow"><svg><use href="#i-arrow"/></svg></div>
-          <div class="stage" data-log="Lọc: ghép mã học sinh LMS ↔ SIS, tính lại % hoàn thành môn, kiểm tra điểm 0–10."><div class="st-ic"><svg><use href="#i-funnel"/></svg></div><div class="st-name">Ghép &amp; tính</div><div class="st-sub">Nối SIS, tính tiến độ</div></div>
-          <div class="stage-arrow"><svg><use href="#i-arrow"/></svg></div>
-          <div class="stage" data-log="Ghi đích: cập nhật tiến độ học tập của học sinh vào kho sạch."><div class="st-ic"><svg><use href="#i-db"/></svg></div><div class="st-name">Kho đích</div><div class="st-sub">Cập nhật tiến độ</div></div>
-          <div class="stage-arrow"><svg><use href="#i-arrow"/></svg></div>
-          <div class="stage" data-log="Xong: nếu điểm trung bình tụt dưới ngưỡng → gắn cờ 'cần hỗ trợ' trên dashboard."><div class="st-ic"><svg><use href="#i-chart"/></svg></div><div class="st-name">Màn hình</div><div class="st-sub">Cảnh báo tụt lại</div></div>
-        </div>
-      </div>
-    </div>
-    <div class="log" id="log-lms"><div class="log-empty">▶ Bấm "Chạy luồng LMS" để xem từng trạm xử lý gì…</div></div>
-
-    <div class="grid2">
-      <div class="rec-card">
-        <h4>Từ "một điểm rời" thành "bức tranh học tập"</h4>
-        <div class="rec-flip">
-          <div class="rec-box before">
-            <span class="tag">Ở LMS (thô)</span>
-            <div><span class="key">lms_user:</span> <span class="val">"u_88213"</span></div>
-            <div><span class="key">course:</span> <span class="val">"MATH-10"</span></div>
-            <div><span class="key">assignment:</span> <span class="val">"HW-04"</span></div>
-            <div><span class="key">score:</span> <span class="val">"8.5"</span></div>
-            <div><span class="key">submitted:</span> <span class="val">"1720…"</span></div>
-          </div>
-          <div class="flip-ar"><svg><use href="#i-arrow"/></svg></div>
-          <div class="rec-box after">
-            <span class="tag">Vào kho sạch</span>
-            <div><span class="key">student:</span> <span class="val">"10A2-07 (Trần Minh)"</span></div>
-            <div><span class="key">subject:</span> <span class="val">"Toán"</span></div>
-            <div><span class="key">avg_math:</span> <span class="val">"7.8 ▲"</span></div>
-            <div><span class="key">completion:</span> <span class="val">"82%"</span></div>
-            <div><span class="key">flag:</span> <span class="val" style="color:var(--hrm)">"ổn định"</span></div>
-          </div>
-        </div>
-      </div>
-      <div class="viz-card">
-        <h4>Phân bố tiến độ toàn khối</h4>
-        <p class="cap">Học sinh theo mức hoàn thành khoá học · ví dụ minh hoạ</p>
-        <div class="donut-wrap">
-          <div class="donut" data-segments="62|var(--lms),26|var(--amber),12|var(--red)" data-center="62%" data-size="128"></div>
-          <div class="donut-legend">
-            <span><i style="background:var(--lms)"></i>Đúng tiến độ · 62%</span>
-            <span><i style="background:var(--amber)"></i>Chậm nhẹ · 26%</span>
-            <span><i style="background:var(--red)"></i>Cần hỗ trợ · 12%</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="sub-title">Các bước demo</div>
-    <div class="steps">
-      <div class="demo-step"><div class="n">01</div><h5>Giáo viên chấm bài</h5><p>Giáo viên chấm điểm như bình thường trên LMS. Không phát sinh thao tác mới.</p></div>
-      <div class="demo-step"><div class="n">02</div><h5>Ghép đúng học sinh</h5><p>VA Hub nối mã học sinh của LMS với hồ sơ SIS — cùng một em, dù hai phần mềm gọi tên khác nhau.</p></div>
-      <div class="demo-step"><div class="n">03</div><h5>Tính bức tranh lớn</h5><p>Điểm lẻ được gộp thành điểm trung bình môn, % hoàn thành, xu hướng lên/xuống.</p></div>
-      <div class="demo-step"><div class="n">04</div><h5>Phát hiện sớm</h5><p>Em nào tụt dưới ngưỡng sẽ nổi cảnh báo để giáo viên chủ nhiệm can thiệp kịp thời.</p></div>
-    </div>
-    <div class="outcome"><b>Kết quả:</b> nhà trường nhìn thấy học sinh "đang đuối" <b>trước khi</b> thành điểm kém cuối kỳ — thay vì biết khi đã muộn.</div>
-  </div>
-</section>
-
-
-<!-- ============ HRM ============ -->
-<section class="sys" id="hrm" style="--acc:var(--hrm);--acc-dim:var(--hrm-dim);">
-  <div class="wrap reveal">
-    <div class="sys-head">
-      <div class="sys-badge" style="background:var(--hrm-dim);color:var(--hrm);"><svg><use href="#i-people"/></svg></div>
-      <div class="sys-meta"><div class="k" style="color:var(--hrm)">Hệ thống 3 / 4 · nguồn SQL Server</div><h2>HRM — Nhân sự</h2></div>
-    </div>
-    <p class="lead" style="margin-top:16px;">Đây là hồ sơ của người lớn trong trường: giáo viên, nhân viên, chấm công, hợp đồng, lương. Ví dụ: <b style="color:var(--text)">một hợp đồng giáo viên sắp hết hạn trong 30 ngày</b>. VA Hub giúp phòng nhân sự thấy điều đó sớm, và tính giờ dạy để đối chiếu lương — trong khi vẫn giấu kín con số lương nhạy cảm.</p>
-    <div class="chips">
-      <span class="chip">Nguồn: <b>SQL Server</b></span>
-      <span class="chip">Cách lấy: <b>quét phần mới theo ngày</b></span>
-      <span class="chip">Nhạy cảm: <b>lương, CCCD</b></span>
-      <span class="chip">Đích: <b>bảng nhân sự sạch</b></span>
-    </div>
-
-    <div class="sub-title">Luồng demo — bấm để xem dữ liệu chạy</div>
-    <div class="pipe-tools" style="color:var(--hrm);">
-      <button class="btn-run" data-pipe="pipe-hrm"><svg><use href="#i-play"/></svg> Chạy luồng HRM</button>
-      <span class="pipe-hint">→ một "hợp đồng sắp hết hạn" đi qua 6 trạm</span>
-    </div>
-    <div class="pipe-scroll">
-      <div class="pipe" id="pipe-hrm" data-log="#log-hrm">
-        <div class="packet"></div>
-        <div class="stage-row">
-          <div class="stage" data-log="Bắt: HRM có bản ghi cập nhật — hợp đồng GV 'Lê Hoa' còn 28 ngày."><div class="st-ic"><svg><use href="#i-people"/></svg></div><div class="st-name">HRM nguồn</div><div class="st-sub">Hợp đồng đổi trạng thái</div></div>
-          <div class="stage-arrow"><svg><use href="#i-arrow"/></svg></div>
-          <div class="stage" data-log="Thu thập: đọc SQL Server, chỉ lấy bản ghi thay đổi từ mốc lần trước."><div class="st-ic"><svg><use href="#i-dish"/></svg></div><div class="st-name">Thu thập</div><div class="st-sub">Đọc phần mới</div></div>
-          <div class="stage-arrow"><svg><use href="#i-arrow"/></svg></div>
-          <div class="stage" data-log="Băng chuyền: đưa lên hàng đợi kèm mã truy vết để lần sau còn đối chiếu."><div class="st-ic"><svg><use href="#i-truck"/></svg></div><div class="st-name">Băng chuyền</div><div class="st-sub">Xếp hàng an toàn</div></div>
-          <div class="stage-arrow"><svg><use href="#i-arrow"/></svg></div>
-          <div class="stage" data-log="Lọc: che lương & CCCD, tính số ngày còn lại, tính tổng giờ dạy trong tháng."><div class="st-ic"><svg><use href="#i-funnel"/></svg></div><div class="st-name">Lọc &amp; tính</div><div class="st-sub">Ẩn lương, tính giờ</div></div>
-          <div class="stage-arrow"><svg><use href="#i-arrow"/></svg></div>
-          <div class="stage" data-log="Ghi đích: cập nhật hồ sơ nhân sự sạch, giữ lịch sử thay đổi."><div class="st-ic"><svg><use href="#i-db"/></svg></div><div class="st-name">Kho đích</div><div class="st-sub">Cập nhật hồ sơ</div></div>
-          <div class="stage-arrow"><svg><use href="#i-arrow"/></svg></div>
-          <div class="stage" data-log="Xong: dashboard nhân sự nổi thẻ 'Hợp đồng sắp hết hạn (1)' để HR xử lý."><div class="st-ic"><svg><use href="#i-chart"/></svg></div><div class="st-name">Màn hình</div><div class="st-sub">Nhắc gia hạn HĐ</div></div>
-        </div>
-      </div>
-    </div>
-    <div class="log" id="log-hrm"><div class="log-empty">▶ Bấm "Chạy luồng HRM" để xem từng trạm xử lý gì…</div></div>
-
-    <div class="grid2">
-      <div class="rec-card">
-        <h4>Giữ việc cần biết, giấu con số nhạy cảm</h4>
-        <div class="rec-flip">
-          <div class="rec-box before">
-            <span class="tag">Ở HRM (thô)</span>
-            <div><span class="key">emp_id:</span> <span class="val">"GV-0421"</span></div>
-            <div><span class="key">name:</span> <span class="val">"Lê Thị Hoa"</span></div>
-            <div><span class="key">salary:</span> <span class="val">"18500000"</span></div>
-            <div><span class="key">cccd:</span> <span class="val">"040189…"</span></div>
-            <div><span class="key">contract_end:</span> <span class="val">"2026-08-03"</span></div>
-          </div>
-          <div class="flip-ar"><svg><use href="#i-arrow"/></svg></div>
-          <div class="rec-box after">
-            <span class="tag">Vào kho sạch</span>
-            <div><span class="key">staff:</span> <span class="val">"GV-0421 · Lê Hoa"</span></div>
-            <div><span class="key">salary_band:</span> <span class="mask">"Bậc 3 (ẩn số)"</span></div>
-            <div><span class="key">cccd:</span> <span class="mask">"sha256:c1d8…"</span></div>
-            <div><span class="key">days_left:</span> <span class="val" style="color:var(--amber)">"28 ngày"</span></div>
-            <div><span class="key">hours_month:</span> <span class="val">"96h"</span></div>
-          </div>
-        </div>
-      </div>
-      <div class="viz-card">
-        <h4>Chấm công &amp; hợp đồng</h4>
-        <p class="cap">Giờ dạy theo tháng + cảnh báo hợp đồng · ví dụ minh hoạ</p>
-        <div class="viz-row">
-          <div>
-            <div class="barchart" data-values="88,92,96,90,94,98" data-color="var(--hrm)"></div>
-            <div class="bar-x"><span>T2</span><span>T3</span><span>T4</span><span>T5</span><span>T6</span><span>T7</span></div>
-          </div>
-          <div class="stat-mini">
-            <div class="s"><b style="color:var(--hrm)">142</b><span>nhân sự</span></div>
-            <div class="s"><b style="color:var(--amber)">3</b><span>HĐ sắp hết hạn</span></div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="sub-title">Các bước demo</div>
-    <div class="steps">
-      <div class="demo-step"><div class="n">01</div><h5>HR cập nhật hồ sơ</h5><p>Phòng nhân sự làm việc bình thường trên phần mềm HRM hiện có (SQL Server).</p></div>
-      <div class="demo-step"><div class="n">02</div><h5>Giấu lương ngay từ cổng</h5><p>Lương và CCCD không bao giờ vào kho phân tích ở dạng đọc được — chỉ giữ "bậc lương" đủ để báo cáo.</p></div>
-      <div class="demo-step"><div class="n">03</div><h5>Tự tính giờ &amp; hạn</h5><p>Số giờ dạy trong tháng và số ngày còn lại của hợp đồng được tính tự động.</p></div>
-      <div class="demo-step"><div class="n">04</div><h5>Nhắc trước khi trễ</h5><p>Hợp đồng sắp hết hạn nổi cảnh báo sớm để không ai bị "quên gia hạn".</p></div>
-    </div>
-    <div class="outcome"><b>Kết quả:</b> phòng nhân sự chủ động thay vì chữa cháy, còn dữ liệu lương nhạy cảm vẫn được bảo vệ đúng quy định.</div>
-  </div>
-</section>
-
-
-<!-- ============ POS ============ -->
-<section class="sys" id="pos" style="--acc:var(--pos);--acc-dim:var(--pos-dim);">
-  <div class="wrap reveal">
-    <div class="sys-head">
-      <div class="sys-badge" style="background:var(--pos-dim);color:var(--pos);"><svg><use href="#i-cart"/></svg></div>
-      <div class="sys-meta"><div class="k" style="color:var(--pos)">Hệ thống 4 / 4 · nguồn file Excel/SFTP</div><h2>POS — Thu ngân &amp; căng tin</h2></div>
-    </div>
-    <p class="lead" style="margin-top:16px;">Đây là dòng tiền hằng ngày: học phí thu tại quầy, căng tin, đồng phục, thư viện. Ví dụ: <b style="color:var(--text)">cuối ngày căng tin xuất một file Excel 1.200 giao dịch</b>. VA Hub gộp lại theo học sinh, đối soát tổng tiền, và dựng báo cáo doanh thu — thay cho việc kế toán ngồi cộng tay.</p>
-    <div class="chips">
-      <span class="chip">Nguồn: <b>Excel / SFTP</b></span>
-      <span class="chip">Cách lấy: <b>gom theo lô mỗi tối</b></span>
-      <span class="chip">Việc chính: <b>chuẩn hoá tiền, đối soát</b></span>
-      <span class="chip">Đích: <b>bảng giao dịch sạch</b></span>
-    </div>
-
-    <div class="sub-title">Luồng demo — bấm để xem dữ liệu chạy</div>
-    <div class="pipe-tools" style="color:var(--pos);">
       <button class="btn-run" data-pipe="pipe-pos"><svg><use href="#i-play"/></svg> Chạy luồng POS</button>
-      <span class="pipe-hint">→ một "file căng tin cuối ngày" đi qua 6 trạm</span>
+      <span class="pipe-hint">→ một "lệnh xuất kho đồng phục" đi qua 6 trạm</span>
     </div>
     <div class="pipe-scroll">
       <div class="pipe" id="pipe-pos" data-log="#log-pos">
         <div class="packet"></div>
         <div class="stage-row">
-          <div class="stage" data-log="Bắt: file Excel 'cangtin_06-07.xlsx' (1.200 dòng) được đẩy lên SFTP lúc 21:00."><div class="st-ic"><svg><use href="#i-cart"/></svg></div><div class="st-name">POS nguồn</div><div class="st-sub">File cuối ngày</div></div>
+          <div class="stage" data-log="Bắt: POS nhận lệnh RESERVE 2 sản phẩm (đơn POS-8830) từ E-Commerce."><div class="st-ic"><svg><use href="#i-ware"/></svg></div><div class="st-name">POS nguồn</div><div class="st-sub">Nhận lệnh giữ hàng</div></div>
           <div class="stage-arrow"><svg><use href="#i-arrow"/></svg></div>
-          <div class="stage" data-log="Thu thập: nhận file, kiểm tra định dạng cột, tách từng dòng giao dịch."><div class="st-ic"><svg><use href="#i-dish"/></svg></div><div class="st-name">Thu thập</div><div class="st-sub">Đọc &amp; tách dòng</div></div>
+          <div class="stage" data-log="Thu thập: đọc lệnh, kiểm tra tồn kho hiện tại của SKU UNIFORM-S."><div class="st-ic"><svg><use href="#i-dish"/></svg></div><div class="st-name">Thu thập</div><div class="st-sub">Kiểm tồn kho</div></div>
           <div class="stage-arrow"><svg><use href="#i-arrow"/></svg></div>
-          <div class="stage" data-log="Băng chuyền: đưa từng giao dịch lên hàng đợi để xử lý song song."><div class="st-ic"><svg><use href="#i-truck"/></svg></div><div class="st-name">Băng chuyền</div><div class="st-sub">Xử lý theo lô</div></div>
+          <div class="stage" data-log="Băng chuyền: xếp lệnh xuất kho lên hàng đợi để xử lý tuần tự, tránh âm kho."><div class="st-ic"><svg><use href="#i-truck"/></svg></div><div class="st-name">Băng chuyền</div><div class="st-sub">Xếp lệnh xuất</div></div>
           <div class="stage-arrow"><svg><use href="#i-arrow"/></svg></div>
-          <div class="stage" data-log="Lọc: chuẩn hoá '15k','15.000','15000'→15000đ; gộp theo học sinh; loại dòng lỗi."><div class="st-ic"><svg><use href="#i-funnel"/></svg></div><div class="st-name">Chuẩn hoá tiền</div><div class="st-sub">Gộp, dọn định dạng</div></div>
+          <div class="stage" data-log="Lọc: trừ tồn (−2), cập nhật StockStatus, đối soát tổng tiền với đơn gốc."><div class="st-ic"><svg><use href="#i-funnel"/></svg></div><div class="st-name">Trừ kho &amp; đối soát</div><div class="st-sub">Xuất kho, khớp tiền</div></div>
           <div class="stage-arrow"><svg><use href="#i-arrow"/></svg></div>
-          <div class="stage" data-log="Ghi đích: lưu giao dịch sạch; chống ghi trùng nếu file bị đẩy lại 2 lần."><div class="st-ic"><svg><use href="#i-db"/></svg></div><div class="st-name">Kho đích</div><div class="st-sub">Chống trùng file</div></div>
+          <div class="stage" data-log="Ghi đích: lưu giao dịch xuất kho sạch, chống ghi trùng nếu lệnh bị gửi lại."><div class="st-ic"><svg><use href="#i-db"/></svg></div><div class="st-name">Kho đích</div><div class="st-sub">Chống trùng lệnh</div></div>
           <div class="stage-arrow"><svg><use href="#i-arrow"/></svg></div>
-          <div class="stage" data-log="Xong: dashboard doanh thu + cảnh báo lệch nếu tổng file ≠ tổng đối soát."><div class="st-ic"><svg><use href="#i-chart"/></svg></div><div class="st-name">Màn hình</div><div class="st-sub">Doanh thu &amp; đối soát</div></div>
+          <div class="stage" data-log="Xong: dashboard tồn kho −2, doanh thu +540.000 ₫, đẩy chứng từ sang MISA."><div class="st-ic"><svg><use href="#i-chart"/></svg></div><div class="st-name">Màn hình</div><div class="st-sub">Tồn kho &amp; doanh thu</div></div>
         </div>
       </div>
     </div>
@@ -640,37 +828,38 @@
 
     <div class="grid2">
       <div class="rec-card">
-        <h4>Từ ô Excel lộn xộn thành số liệu chuẩn</h4>
+        <h4>Từ "lệnh giữ hàng" thành "xuất kho đã đối soát"</h4>
         <div class="rec-flip">
           <div class="rec-box before">
-            <span class="tag">Ô Excel (thô)</span>
-            <div><span class="key">HS:</span> <span class="val">"tran minh 10a2"</span></div>
-            <div><span class="key">Mon:</span> <span class="val">"Bánh mì + sữa"</span></div>
-            <div><span class="key">Tien:</span> <span class="val">"25k"</span></div>
-            <div><span class="key">Gio:</span> <span class="val">"7h05"</span></div>
-            <div><span class="key">TT:</span> <span class="val">"ok"</span></div>
+            <span class="tag">Ở POS (thô)</span>
+            <div><span class="key">order:</span> <span class="val">"POS-8830"</span></div>
+            <div><span class="key">sku:</span> <span class="val">"UNIFORM-S"</span></div>
+            <div><span class="key">on_hand:</span> <span class="val">"120"</span></div>
+            <div><span class="key">req:</span> <span class="val">"2"</span></div>
+            <div><span class="key">status:</span> <span class="val">"RESERVE"</span></div>
           </div>
           <div class="flip-ar"><svg><use href="#i-arrow"/></svg></div>
           <div class="rec-box after">
             <span class="tag">Vào kho sạch</span>
-            <div><span class="key">student:</span> <span class="val">"10A2-07"</span></div>
-            <div><span class="key">items:</span> <span class="val">2</span></div>
-            <div><span class="key">amount:</span> <span class="val">"25.000 ₫"</span></div>
-            <div><span class="key">ts:</span> <span class="val">"07:05"</span></div>
-            <div><span class="key">status:</span> <span class="val" style="color:var(--hrm)">"paid ✓"</span></div>
+            <div><span class="key">picked:</span> <span class="val">"−2 đã xuất"</span></div>
+            <div><span class="key">remaining:</span> <span class="val">"118"</span></div>
+            <div><span class="key">StockStatus:</span> <span class="val" style="color:var(--hrm)">"FULFILLED ✓"</span></div>
+            <div><span class="key">amount:</span> <span class="val">"540.000 ₫"</span></div>
+            <div><span class="key">to_misa:</span> <span class="val" style="color:var(--amber)">"chờ hạch toán"</span></div>
           </div>
         </div>
       </div>
       <div class="viz-card">
-        <h4>Doanh thu theo nguồn thu</h4>
-        <p class="cap">Tỉ trọng doanh thu tuần này · ví dụ minh hoạ</p>
-        <div class="donut-wrap">
-          <div class="donut" data-segments="54|var(--pos),22|var(--sis),16|var(--lms),8|var(--gray)" data-center="Σ" data-size="128"></div>
-          <div class="donut-legend">
-            <span><i style="background:var(--pos)"></i>Học phí · 54%</span>
-            <span><i style="background:var(--sis)"></i>Căng tin · 22%</span>
-            <span><i style="background:var(--lms)"></i>Đồng phục · 16%</span>
-            <span><i style="background:var(--gray)"></i>Khác · 8%</span>
+        <h4>Xuất kho &amp; cảnh báo tồn</h4>
+        <p class="cap">Số lượt xuất kho theo ngày · ví dụ minh hoạ</p>
+        <div class="viz-row">
+          <div>
+            <div class="barchart" data-values="42,55,38,60,48,26,14" data-color="var(--lms)"></div>
+            <div class="bar-x"><span>T2</span><span>T3</span><span>T4</span><span>T5</span><span>T6</span><span>T7</span><span>CN</span></div>
+          </div>
+          <div class="stat-mini">
+            <div class="s"><b style="color:var(--lms)">1.240</b><span>SKU trong kho</span></div>
+            <div class="s"><b style="color:var(--amber)">3</b><span>SKU sắp hết hàng</span></div>
           </div>
         </div>
       </div>
@@ -678,28 +867,247 @@
 
     <div class="sub-title">Các bước demo</div>
     <div class="steps">
-      <div class="demo-step"><div class="n">01</div><h5>Cuối ngày xuất file</h5><p>Căng tin/thu ngân xuất file như thường lệ và đặt vào thư mục SFTP — không đổi thói quen.</p></div>
-      <div class="demo-step"><div class="n">02</div><h5>Máy đọc thay người</h5><p>VA Hub tự đọc file, hiểu các cách viết tiền khác nhau ("25k", "25.000") và quy về một chuẩn.</p></div>
-      <div class="demo-step"><div class="n">03</div><h5>Đối soát tự động</h5><p>Tổng tiền hệ thống tính được đem so với tổng trên file; lệch là báo ngay.</p></div>
-      <div class="demo-step"><div class="n">04</div><h5>Gộp về học sinh</h5><p>Chi tiêu căng tin gắn đúng học sinh, ghép được với hồ sơ SIS khi cần.</p></div>
+      <div class="demo-step"><div class="n">01</div><h5>Nhận lệnh từ E‑Com</h5><p>Mỗi đơn web hợp lệ sinh một lệnh giữ hàng (RESERVE) gửi sang POS/Kho qua hàng đợi.</p></div>
+      <div class="demo-step"><div class="n">02</div><h5>Trừ kho an toàn</h5><p>Lệnh xử lý tuần tự để không bao giờ bán quá tồn thực (âm kho), có retry khi lỗi.</p></div>
+      <div class="demo-step"><div class="n">03</div><h5>Đối soát tiền</h5><p>Tổng tiền xuất kho được so với đơn gốc E‑Com; lệch là báo ngay trước khi lên sổ.</p></div>
+      <div class="demo-step"><div class="n">04</div><h5>Đẩy doanh thu</h5><p>Sau khi xuất kho, doanh thu &amp; giá vốn được tổng hợp và chuyển sang MISA để hạch toán.</p></div>
     </div>
-    <div class="outcome"><b>Kết quả:</b> kế toán hết cộng tay Excel mỗi tối; sai lệch tiền được phát hiện trong phút thay vì cuối tháng.</div>
+    <div class="outcome"><b>Kết quả:</b> tồn kho, đơn hàng và doanh thu luôn khớp nhau; hết cảnh "bán rồi mới biết hết hàng" hay "cuối tháng lệch tiền không rõ vì đâu".</div>
   </div>
 </section>
 
+
+<!-- ============ MISA ============ -->
+<section class="sys" id="misa" style="--acc:var(--hrm);--acc-dim:var(--hrm-dim);">
+  <div class="wrap reveal">
+    <div class="sys-head">
+      <div class="sys-badge" style="background:var(--hrm-dim);color:var(--hrm);"><svg><use href="#i-calc"/></svg></div>
+      <div class="sys-meta"><div class="k" style="color:var(--hrm)">Hệ thống 5 / 5 · khép vòng kế toán</div><h2>MISA — Kế toán</h2></div>
+    </div>
+    <p class="lead" style="margin-top:16px;">Đây là điểm khép vòng: mọi doanh thu, chứng từ đổ về kế toán. Ví dụ: <b style="color:var(--text)">một phiếu bán hàng 540.000 ₫ cần hạch toán Nợ 131 / Có 511</b>. VA Hub ánh xạ Customer → CustomerID_MISA, đẩy chứng từ; MISA ghi sổ rồi phản hồi trạng thái <b style="color:var(--text)">POSTED</b> về Hub.</p>
+    <div class="chips">
+      <span class="chip">Nguồn/Đích: <b>MISA</b></span>
+      <span class="chip">Cách lấy: <b>API chứng từ</b></span>
+      <span class="chip">Nhạy cảm: <b>số liệu tài chính</b></span>
+      <span class="chip">Đích: <b>sổ cái &amp; báo cáo</b></span>
+    </div>
+
+    <div class="sub-title">Luồng demo — bấm để xem dữ liệu chạy</div>
+    <div class="pipe-tools" style="color:var(--hrm);">
+      <button class="btn-run" data-pipe="pipe-misa"><svg><use href="#i-play"/></svg> Chạy luồng MISA</button>
+      <span class="pipe-hint">→ một "chứng từ doanh thu" đi qua 6 trạm</span>
+    </div>
+    <div class="pipe-scroll">
+      <div class="pipe" id="pipe-misa" data-log="#log-misa">
+        <div class="packet"></div>
+        <div class="stage-row">
+          <div class="stage" data-log="Bắt: POS/Kho tổng hợp doanh thu đơn EC-ORD-4471 (540.000 ₫) cần hạch toán."><div class="st-ic"><svg><use href="#i-calc"/></svg></div><div class="st-name">Nguồn chứng từ</div><div class="st-sub">Doanh thu chờ ghi sổ</div></div>
+          <div class="stage-arrow"><svg><use href="#i-arrow"/></svg></div>
+          <div class="stage" data-log="Thu thập: nhận chứng từ từ Hub, kiểm tra đủ trường bắt buộc (mã KH, số tiền)."><div class="st-ic"><svg><use href="#i-dish"/></svg></div><div class="st-name">Thu thập</div><div class="st-sub">Nhận chứng từ</div></div>
+          <div class="stage-arrow"><svg><use href="#i-arrow"/></svg></div>
+          <div class="stage" data-log="Băng chuyền: xếp chứng từ theo kỳ kế toán, giữ mã truy vết để đối soát."><div class="st-ic"><svg><use href="#i-truck"/></svg></div><div class="st-name">Băng chuyền</div><div class="st-sub">Xếp theo kỳ</div></div>
+          <div class="stage-arrow"><svg><use href="#i-arrow"/></svg></div>
+          <div class="stage" data-log="Lọc: map Customer → CustomerID_MISA, dựng bút toán Nợ 131 / Có 511."><div class="st-ic"><svg><use href="#i-funnel"/></svg></div><div class="st-name">Map &amp; tạo bút toán</div><div class="st-sub">Nối mã, dựng sổ</div></div>
+          <div class="stage-arrow"><svg><use href="#i-arrow"/></svg></div>
+          <div class="stage" data-log="Ghi đích: ghi sổ doanh thu, sinh số chứng từ PT-2026-00912, chống hạch toán trùng."><div class="st-ic"><svg><use href="#i-db"/></svg></div><div class="st-name">Ghi sổ</div><div class="st-sub">Ghi sổ, chống trùng</div></div>
+          <div class="stage-arrow"><svg><use href="#i-arrow"/></svg></div>
+          <div class="stage" data-log="Xong: báo cáo tài chính cập nhật; trạng thái đơn = POSTED ✓ — khép vòng đời."><div class="st-ic"><svg><use href="#i-chart"/></svg></div><div class="st-name">Màn hình</div><div class="st-sub">Báo cáo tài chính</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="log" id="log-misa"><div class="log-empty">▶ Bấm "Chạy luồng MISA" để xem từng trạm xử lý gì…</div></div>
+
+    <div class="grid2">
+      <div class="rec-card">
+        <h4>Từ "doanh thu thô" thành "bút toán đã ghi sổ"</h4>
+        <div class="rec-flip">
+          <div class="rec-box before">
+            <span class="tag">Ở nguồn (thô)</span>
+            <div><span class="key">OrderID:</span> <span class="val">"EC-ORD-4471"</span></div>
+            <div><span class="key">Total_Amount:</span> <span class="val">"540000"</span></div>
+            <div><span class="key">cost:</span> <span class="val">"320000"</span></div>
+            <div><span class="key">type:</span> <span class="val">"Xuất bán"</span></div>
+            <div><span class="key">customer:</span> <span class="val">"EC-CUS-7742"</span></div>
+          </div>
+          <div class="flip-ar"><svg><use href="#i-arrow"/></svg></div>
+          <div class="rec-box after">
+            <span class="tag">Vào sổ MISA</span>
+            <div><span class="key">voucher:</span> <span class="val">"PT-2026-00912"</span></div>
+            <div><span class="key">debit:</span> <span class="val">"131 · Phải thu"</span></div>
+            <div><span class="key">credit:</span> <span class="val">"511 · Doanh thu"</span></div>
+            <div><span class="key">Amount_Acc:</span> <span class="val">"540.000 ₫"</span></div>
+            <div><span class="key">status:</span> <span class="val" style="color:var(--hrm)">"POSTED ✓"</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="viz-card">
+        <h4>Doanh thu đã hạch toán</h4>
+        <p class="cap">Doanh thu ghi sổ theo ngày (triệu ₫) · ví dụ minh hoạ</p>
+        <div class="viz-row">
+          <div>
+            <div class="barchart" data-values="12,18,15,22,19,9,4" data-color="var(--hrm)"></div>
+            <div class="bar-x"><span>T2</span><span>T3</span><span>T4</span><span>T5</span><span>T6</span><span>T7</span><span>CN</span></div>
+          </div>
+          <div class="stat-mini">
+            <div class="s"><b style="color:var(--hrm)">62,4tr</b><span>đã hạch toán</span></div>
+            <div class="s"><b style="color:var(--amber)">2</b><span>chứng từ chờ soát</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sub-title">Các bước demo</div>
+    <div class="steps">
+      <div class="demo-step"><div class="n">01</div><h5>Nhận chứng từ</h5><p>POS/Kho gửi doanh thu &amp; giá vốn qua Hub; MISA nhận đúng định dạng chứng từ chuẩn.</p></div>
+      <div class="demo-step"><div class="n">02</div><h5>Ánh xạ khách hàng</h5><p>Customer được map sang CustomerID_MISA để ghi đúng đối tượng công nợ.</p></div>
+      <div class="demo-step"><div class="n">03</div><h5>Dựng bút toán</h5><p>Hệ sinh bút toán Nợ 131 / Có 511 và số chứng từ, chống hạch toán trùng.</p></div>
+      <div class="demo-step"><div class="n">04</div><h5>Phản hồi khép vòng</h5><p>Trạng thái POSTED trả ngược về Hub, cập nhật đơn hàng — vòng đời giao dịch hoàn tất.</p></div>
+    </div>
+    <div class="outcome"><b>Kết quả:</b> mỗi giao dịch được truy vết trọn vẹn từ đơn web → xuất kho → ghi sổ; báo cáo tài chính khớp với bán hàng thực tế, không còn cộng tay.</div>
+  </div>
+</section>
+
+
+<!-- ============ COMING SOON: LMS & HRM ============ -->
+<section id="sap-co" style="padding-top:56px;">
+  <div class="wrap reveal">
+    <div class="banner" style="max-width:none;background:var(--panel);border-color:var(--border);">
+      <svg style="stroke:var(--text-dim);"><use href="#i-hub"/></svg>
+      <p><b style="color:var(--text)">Sắp bổ sung — LMS &amp; HRM.</b> Sau 5 hệ thống lõi trên, dự án sẽ mở rộng thêm <b>LMS</b> (học tập trực tuyến: bài giảng, điểm, tiến độ) và <b>HRM</b> (nhân sự: giáo viên, chấm công, hợp đồng). Hai hệ này sẽ <b>cắm vào VA Hub theo đúng mô hình</b> ở trên — thu thập → băng chuyền → lọc &amp; che PII → kho sạch → màn hình — nên không phải làm lại kiến trúc.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============ FULL PROJECT FLOW ============ -->
+<section id="giao-thoa">
+  <div class="wrap reveal">
+    <div class="eyebrow">Bức tranh liên kết toàn hệ thống</div>
+    <h2 class="h2">Sơ đồ luồng dự án tổng thể</h2>
+    <p class="lead">Sáu phần mềm — <b style="color:var(--crm)">CRM</b>, <b style="color:var(--sis)">SIS</b>, <b style="color:var(--amber)">VA Hub</b>, <b style="color:var(--ecom)">E‑Commerce</b>, <b style="color:var(--lms)">POS</b> (Inventory), <b style="color:var(--hrm)">MISA</b> — không đứng riêng lẻ. Mọi dữ liệu đều đi <b style="color:var(--text)">qua VA Hub (Middleware · Integration Hub)</b>: được kiểm tra, ánh xạ (mapping), xếp hàng đợi rồi giao sang hệ kế tiếp. Bấm <b style="color:var(--text)">Chạy</b> để đi qua trọn vẹn 11 bước — mỗi bước cho bạn thấy <b style="color:var(--text)">đúng mẩu dữ liệu nào đang được xử lý</b>.</p>
+
+    <div class="flow-controls">
+      <button class="flow-btn" id="flowPrev"><svg><use href="#i-prev"/></svg> Trước</button>
+      <button class="flow-btn primary" id="flowPlay"><svg><use href="#i-play"/></svg> Chạy toàn bộ</button>
+      <button class="flow-btn" id="flowNext">Tiếp <svg><use href="#i-next"/></svg></button>
+      <button class="flow-btn" id="flowReset"><svg><use href="#i-restart"/></svg> Về đầu</button>
+      <span class="flow-counter">Bước <b id="flowCur">1</b> / 11</span>
+    </div>
+
+    <div class="flow-timeline" id="flowTimeline"></div>
+  </div>
+
+  <div class="flow-canvas reveal">
+    <div class="flow-stagewrap">
+      <div class="flow-stage" id="flowStage">
+        <svg class="flow-wires" viewBox="0 0 1120 640" id="flowWires"></svg>
+
+        <div class="fnode" data-sys="crm" style="left:50%;top:16.4%;--nc:var(--crm);--nc-dim:var(--crm-dim);">
+          <div class="fn-badge">1</div><div class="fn-tag">NGUỒN</div>
+          <div class="fn-head"><div class="fn-ic"><svg><use href="#i-crm"/></svg></div><div><div class="fn-k">CRM</div><div class="fn-role">Quản lý phụ huynh</div></div></div>
+          <ul class="fn-list"><li>Lead → Customer</li><li>Gắn Student ID</li><li>Chăm sóc phụ huynh</li></ul>
+        </div>
+
+        <div class="fnode" data-sys="fis" style="left:83.93%;top:39.7%;--nc:var(--sis);--nc-dim:var(--sis-dim);">
+          <div class="fn-badge">2</div><div class="fn-tag">ĐÍCH</div>
+          <div class="fn-head"><div class="fn-ic"><svg><use href="#i-grad"/></svg></div><div><div class="fn-k">SIS</div><div class="fn-role">Quản lý học sinh · SIS</div></div></div>
+          <ul class="fn-list"><li>Tạo hồ sơ học sinh</li><li>Sinh Student ID (gốc)</li><li>Trả về Hub</li></ul>
+        </div>
+
+        <div class="fnode" data-sys="ecom" style="left:70.98%;top:77.2%;--nc:var(--ecom);--nc-dim:var(--ecom-dim);">
+          <div class="fn-badge">4</div><div class="fn-tag">ĐÍCH</div>
+          <div class="fn-head"><div class="fn-ic"><svg><use href="#i-ecom"/></svg></div><div><div class="fn-k">E‑COMMERCE</div><div class="fn-role">Cửa hàng (Node.js)</div></div></div>
+          <ul class="fn-list"><li>Tài khoản khách hàng</li><li>Đơn học phí, đồng phục</li><li>Tạo đơn hàng</li></ul>
+        </div>
+
+        <div class="fnode" data-sys="inv" style="left:29.02%;top:77.2%;--nc:var(--lms);--nc-dim:var(--lms-dim);">
+          <div class="fn-badge">5</div><div class="fn-tag">ĐÍCH</div>
+          <div class="fn-head"><div class="fn-ic"><svg><use href="#i-ware"/></svg></div><div><div class="fn-k">POS</div><div class="fn-role">Bán hàng &amp; kho · Inventory</div></div></div>
+          <ul class="fn-list"><li>Kiểm tra tồn kho</li><li>Trừ kho, xuất kho</li><li>Gửi doanh thu → MISA</li></ul>
+        </div>
+
+        <div class="fnode" data-sys="misa" style="left:16.07%;top:39.7%;--nc:var(--hrm);--nc-dim:var(--hrm-dim);">
+          <div class="fn-badge">6</div><div class="fn-tag">ĐÍCH</div>
+          <div class="fn-head"><div class="fn-ic"><svg><use href="#i-calc"/></svg></div><div><div class="fn-k">MISA</div><div class="fn-role">Kế toán</div></div></div>
+          <ul class="fn-list"><li>Nhận chứng từ</li><li>Hạch toán doanh thu</li><li>Báo cáo tài chính</li></ul>
+        </div>
+
+        <div class="fnode mid" id="fMid" data-sys="mid" style="left:50%;top:50%;--nc:var(--amber);--nc-dim:var(--amber-dim);">
+          <div class="fn-badge">3</div>
+          <div class="fn-head"><div class="fn-ic"><svg><use href="#i-hub"/></svg></div><div><div class="fn-k">VA HUB</div><div class="fn-role">Middleware · Integration Hub</div></div></div>
+          <ul class="fn-list"><li>Kết nối &amp; đồng bộ</li><li>Mapping &amp; chuyển đổi</li><li>Queue · retry · log · audit</li></ul>
+          <div class="mid-status" id="midStatus"><span class="spin"></span><span id="midStatusTxt">Sẵn sàng — chờ dữ liệu…</span></div>
+        </div>
+
+        <div class="fpacket" id="fPacket"><span class="plabel" id="fPacketLabel"></span><svg><use href="#i-box"/></svg></div>
+      </div>
+    </div>
+    <p class="flow-hint">Mỗi gói dữ liệu luôn đi xuyên qua Middleware ở giữa · sơ đồ co giãn theo chiều ngang màn hình.</p>
+  </div>
+
+  <div class="wrap reveal">
+    <!-- current step detail -->
+    <div class="flow-step-title"><span class="fst-n" id="stepNum">1</span><h3 id="stepTitle"></h3></div>
+    <div class="flow-detail">
+      <div class="fd-card from" id="fdFrom"><div class="fd-h"><i></i><span></span></div><div class="fd-rec"></div></div>
+      <div class="fd-card mid"><div class="fd-h"><i style="background:var(--amber)"></i>Middleware xử lý</div><ul class="fd-mid-list" id="fdMid"></ul></div>
+      <div class="fd-card to" id="fdTo"><div class="fd-h"><i></i><span></span></div><div class="fd-rec"></div></div>
+    </div>
+    <div class="fd-note" id="fdNote"></div>
+
+    <!-- mapping table -->
+    <div class="sub-title" style="margin-top:40px;">Bảng mapping dữ liệu giữa các hệ thống</div>
+    <p class="lead" style="font-size:15px;">Cùng một con người / giao dịch nhưng mỗi phần mềm gọi bằng mã khác nhau. Middleware giữ bảng ánh xạ này để mọi hệ luôn hiểu nhau và có thể đối soát.</p>
+    <div class="map-scroll">
+      <table class="map-table">
+        <thead><tr>
+          <th>Thực thể</th>
+          <th class="mono" style="color:var(--crm)">CRM (Source)</th>
+          <th class="mono" style="color:var(--sis)">SIS</th>
+          <th class="mono" style="color:var(--ecom)">E‑COMMERCE</th>
+          <th class="mono" style="color:var(--lms)">POS <span style="color:var(--text-faint)">(Inventory)</span></th>
+          <th class="mono" style="color:var(--hrm)">MISA</th>
+        </tr></thead>
+        <tbody>
+          <tr><td>Phụ huynh</td><td class="mono">ParentID_CRM</td><td class="mono">ParentID_SIS</td><td class="mono">CustomerID_ECOM</td><td class="mono">CustomerID_POS</td><td class="mono">CustomerID_MISA</td></tr>
+          <tr><td>Học sinh</td><td class="mono">StudentID_CRM<br><span style="color:var(--text-faint)">(đồng bộ)</span></td><td class="mono" style="color:var(--sis)">StudentID_SIS<br><span style="color:var(--text-faint)">(Primary)</span></td><td class="mono">StudentID_ECOM</td><td class="na">N/A</td><td class="mono">StudentID_MISA</td></tr>
+          <tr><td>Đơn hàng</td><td class="mono">OrderID</td><td class="na">N/A</td><td class="mono">OrderID_ECOM</td><td class="mono">OrderID_POS</td><td class="na">N/A</td></tr>
+          <tr><td>Số tiền</td><td class="mono">Amount</td><td class="na">N/A</td><td class="mono">Total_Amount</td><td class="mono">Total_Amount</td><td class="mono">Amount_Acc</td></tr>
+          <tr><td>Trạng thái</td><td class="mono">Status</td><td class="mono">Status</td><td class="mono">Status</td><td class="mono">StockStatus</td><td class="mono">PostingStatus</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- principles + tech -->
+    <div class="sub-title" style="margin-top:40px;">Nguyên tắc &amp; công nghệ đề xuất</div>
+    <div class="prin-grid">
+      <div class="prin"><div class="pn">01 · Trung gian</div><p>VA Hub (Middleware) là <b>trung gian tích hợp</b>, không lưu trữ nghiệp vụ gốc — chỉ điều phối &amp; ánh xạ.</p></div>
+      <div class="prin"><div class="pn">02 · Nguồn sự thật</div><p><b>Source of Truth:</b> CRM (phụ huynh), SIS (học sinh), POS/Kho (Inventory), MISA (kế toán).</p></div>
+      <div class="prin"><div class="pn">03 · API + Queue</div><p>Mọi giao tiếp qua <b>API + Hàng đợi</b>, đảm bảo tin cậy và có thể <b>retry</b> khi lỗi.</p></div>
+      <div class="prin"><div class="pn">04 · Log &amp; đối soát</div><p>Có <b>log, audit và mapping</b> để đối soát dữ liệu giữa các hệ thống bất cứ lúc nào.</p></div>
+    </div>
+    <div class="tech-row">
+      <span class="tech">API: <b>RESTful</b> (Laravel / NestJS)</span>
+      <span class="tech">Queue: <b>RabbitMQ / Kafka</b></span>
+      <span class="tech">DB: <b>MySQL</b> (mapping &amp; log)</span>
+      <span class="tech">Cache: <b>Redis</b></span>
+      <span class="tech">Monitoring: <b>ELK / Grafana</b></span>
+    </div>
+  </div>
+</section>
 
 <!-- ============ UNIFIED DASHBOARD ============ -->
 <section id="dashboard">
   <div class="wrap reveal">
     <div class="eyebrow">Khi cả 4 dòng chảy về một chỗ</div>
     <h2 class="h2">Màn hình quản lý hợp nhất sẽ trông như thế nào</h2>
-    <p class="lead">Khi SIS + LMS + HRM + POS cùng chảy qua VA Hub, ban giám hiệu mở <b style="color:var(--text)">một màn hình duy nhất</b> và thấy toàn cảnh nhà trường theo thời gian gần-thực. Dưới đây là bản phác thảo màn hình đó — số liệu là ví dụ minh hoạ.</p>
+    <p class="lead">Khi CRM + SIS + E‑Commerce + POS + MISA cùng chảy qua VA Hub, ban giám hiệu mở <b style="color:var(--text)">một màn hình duy nhất</b> và thấy toàn cảnh nhà trường theo thời gian gần-thực. Dưới đây là bản phác thảo màn hình đó — số liệu là ví dụ minh hoạ.</p>
 
     <div class="kpi-grid">
-      <div class="kpi"><div class="lab"><i style="background:var(--sis)"></i>Sĩ số hôm nay</div><div class="num" style="color:var(--sis)">1.842</div><div class="delta">▲ 6 vắng đã đồng bộ</div></div>
-      <div class="kpi"><div class="lab"><i style="background:var(--lms)"></i>Đúng tiến độ học</div><div class="num" style="color:var(--lms)">88%</div><div class="delta down">▼ 12% cần hỗ trợ</div></div>
-      <div class="kpi"><div class="lab"><i style="background:var(--hrm)"></i>Nhân sự đi làm</div><div class="num" style="color:var(--hrm)">138/142</div><div class="delta">3 HĐ sắp hết hạn</div></div>
-      <div class="kpi"><div class="lab"><i style="background:var(--pos)"></i>Thu hôm nay</div><div class="num" style="color:var(--pos)">62,4 tr</div><div class="delta">✓ đã đối soát</div></div>
+      <div class="kpi"><div class="lab"><i style="background:var(--crm)"></i>Phụ huynh (CRM)</div><div class="num" style="color:var(--crm)">1.560</div><div class="delta">▲ 22 khách mới tuần này</div></div>
+      <div class="kpi"><div class="lab"><i style="background:var(--sis)"></i>Học sinh có hồ sơ</div><div class="num" style="color:var(--sis)">1.842</div><div class="delta">✓ 99,6% hợp lệ</div></div>
+      <div class="kpi"><div class="lab"><i style="background:var(--lms)"></i>Đơn đã xuất kho</div><div class="num" style="color:var(--lms)">96%</div><div class="delta down">3 đơn chờ kho</div></div>
+      <div class="kpi"><div class="lab"><i style="background:var(--hrm)"></i>Doanh thu hạch toán</div><div class="num" style="color:var(--hrm)">62,4 tr</div><div class="delta">✓ đã đối soát / POSTED</div></div>
     </div>
 
     <div class="dash-grid">
@@ -708,16 +1116,20 @@
         <p class="cap">Số bản ghi mỗi hệ thống gửi về Hub mỗi ngày · ví dụ minh hoạ</p>
         <div style="display:flex;flex-direction:column;gap:16px;margin-top:6px;">
           <div>
+            <div style="display:flex;justify-content:space-between;font-size:12.5px;color:var(--text-dim);margin-bottom:4px;"><span style="color:var(--crm)">CRM</span><span class="mono">312</span></div>
+            <div class="barchart" data-values="48,60,52,71,58,18,8" data-color="var(--crm)"></div>
+          </div>
+          <div>
             <div style="display:flex;justify-content:space-between;font-size:12.5px;color:var(--text-dim);margin-bottom:4px;"><span style="color:var(--sis)">SIS</span><span class="mono">256</span></div>
             <div class="barchart" data-values="34,52,41,63,48,12,6" data-color="var(--sis)"></div>
           </div>
           <div>
-            <div style="display:flex;justify-content:space-between;font-size:12.5px;color:var(--text-dim);margin-bottom:4px;"><span style="color:var(--lms)">LMS</span><span class="mono">1.910</span></div>
-            <div class="barchart" data-values="280,340,300,420,390,110,70" data-color="var(--lms)"></div>
+            <div style="display:flex;justify-content:space-between;font-size:12.5px;color:var(--text-dim);margin-bottom:4px;"><span style="color:var(--ecom)">E‑Com</span><span class="mono">1.180</span></div>
+            <div class="barchart" data-values="160,210,190,260,240,80,40" data-color="var(--ecom)"></div>
           </div>
           <div>
-            <div style="display:flex;justify-content:space-between;font-size:12.5px;color:var(--text-dim);margin-bottom:4px;"><span style="color:var(--pos)">POS</span><span class="mono">6.240</span></div>
-            <div class="barchart" data-values="980,1020,1100,1180,1200,560,200" data-color="var(--pos)"></div>
+            <div style="display:flex;justify-content:space-between;font-size:12.5px;color:var(--text-dim);margin-bottom:4px;"><span style="color:var(--lms)">POS</span><span class="mono">6.240</span></div>
+            <div class="barchart" data-values="980,1020,1100,1180,1200,560,200" data-color="var(--lms)"></div>
           </div>
         </div>
       </div>
@@ -725,21 +1137,22 @@
         <h4>Cảnh báo cần chú ý</h4>
         <p class="cap">Do VA Hub tự phát hiện từ dữ liệu · ví dụ minh hoạ</p>
         <div style="margin-top:6px;">
-          <div class="alert-row"><span class="dot" style="background:var(--red)"></span><div><b>12 học sinh</b> tụt dưới ngưỡng học tập tuần này <span style="color:var(--lms)">· nguồn LMS</span></div></div>
-          <div class="alert-row"><span class="dot" style="background:var(--amber)"></span><div><b>3 hợp đồng</b> giáo viên hết hạn trong 30 ngày <span style="color:var(--hrm)">· nguồn HRM</span></div></div>
-          <div class="alert-row"><span class="dot" style="background:var(--amber)"></span><div>File căng tin ngày 05/07 <b>lệch 180.000 ₫</b> khi đối soát <span style="color:var(--pos)">· nguồn POS</span></div></div>
+          <div class="alert-row"><span class="dot" style="background:var(--red)"></span><div><b>2 chứng từ</b> lệch khi đối soát MISA ↔ POS <span style="color:var(--hrm)">· nguồn MISA</span></div></div>
+          <div class="alert-row"><span class="dot" style="background:var(--amber)"></span><div><b>3 đơn hàng</b> chờ xuất kho quá 24h <span style="color:var(--lms)">· nguồn POS</span></div></div>
+          <div class="alert-row"><span class="dot" style="background:var(--amber)"></span><div><b>5 phụ huynh</b> chưa kích hoạt tài khoản mua học phí <span style="color:var(--ecom)">· nguồn E‑Commerce</span></div></div>
           <div class="alert-row"><span class="dot" style="background:var(--hrm)"></span><div>Đồng bộ SIS <b>hoàn tất</b> lúc 07:05 · 99,6% hợp lệ <span style="color:var(--sis)">· nguồn SIS</span></div></div>
         </div>
         <div style="margin-top:14px;">
           <div style="font-size:12.5px;color:var(--text-dim);margin-bottom:6px;">Nguồn đóng góp dữ liệu</div>
           <div class="stack-bar">
-            <i style="background:var(--sis);width:22%"></i>
-            <i style="background:var(--lms);width:30%"></i>
-            <i style="background:var(--hrm);width:8%"></i>
-            <i style="background:var(--pos);width:40%"></i>
+            <i style="background:var(--crm);width:12%"></i>
+            <i style="background:var(--sis);width:14%"></i>
+            <i style="background:var(--ecom);width:18%"></i>
+            <i style="background:var(--lms);width:44%"></i>
+            <i style="background:var(--hrm);width:12%"></i>
           </div>
           <div style="display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--text-faint);">
-            <span>SIS</span><span>LMS</span><span>HRM</span><span>POS</span>
+            <span>CRM</span><span>SIS</span><span>E‑Com</span><span>POS</span><span>MISA</span>
           </div>
         </div>
       </div>
@@ -751,12 +1164,26 @@
   </div>
 </section>
 
-<footer>
-  <div class="wrap">
-    <div class="sig">VA HUB · VÍ DỤ LUỒNG DỮ LIỆU · SIS / LMS / HRM / POS</div>
-    <p>Đây là phần minh hoạ trực quan bổ sung cho báo cáo tổng quan. Các luồng và số liệu mang tính thiết kế để hình dung giai đoạn P1–P5; hôm nay hệ thống mới chạy đăng nhập + giám sát sức khoẻ.</p>
-    <p>Cập nhật: 06/07/2026 · Trạng thái repo: Phase 0 đóng (v0.1.0), Phase 1 đang mở.</p>
-    <a class="big" href="va-hub-tong-quan.html">← Quay lại báo cáo tổng quan</a>
+<footer class="site-footer">
+  <div class="sf-inner">
+    <div class="sf-eyebrow">Hết Phần 2 · tiếp tục câu chuyện</div>
+    <div class="sf-story">
+      <a class="sf-card" href="va-hub-tong-quan.html">
+        <span class="k">← Phần 1 / 2</span>
+        <b>Bức tranh toàn cảnh</b>
+        <p>VA Hub <em>là gì</em>, vì sao cần, kiến trúc và tiến độ thật của dự án.</p>
+      </a>
+      <a class="sf-card next" href="#giao-thoa">
+        <span class="k">Xem lại ↻</span>
+        <b>Sơ đồ luồng tổng thể</b>
+        <p>Chạy lại 11 bước dữ liệu đi qua CRM · SIS · VA Hub · E‑Commerce · POS · MISA.</p>
+      </a>
+    </div>
+    <div class="sf-meta">
+      <div class="sig">VA HUB · VÍ DỤ LUỒNG DỮ LIỆU · CRM / SIS / POS / E‑COM / MISA</div>
+      <p>Đây là phần minh hoạ trực quan bổ sung cho báo cáo tổng quan. Các luồng và số liệu mang tính thiết kế để hình dung giai đoạn P1–P5; hôm nay hệ thống mới chạy đăng nhập + giám sát sức khoẻ.</p>
+      <p>Cập nhật: 06/07/2026 · Trạng thái repo: Phase 0 đóng (v0.1.0), Phase 1 đang mở.</p>
+    </div>
   </div>
 </footer>
 
@@ -766,6 +1193,13 @@
   var bar=document.getElementById('progressbar');
   function onScroll(){var h=document.documentElement;var pct=h.scrollTop/(h.scrollHeight-h.clientHeight)*100;bar.style.width=(isFinite(pct)?pct:0)+'%';}
   document.addEventListener('scroll',onScroll,{passive:true});onScroll();
+
+  // responsive header menu
+  var hdr=document.getElementById('siteHeader'),burger=document.getElementById('shBurger');
+  if(hdr&&burger){
+    burger.addEventListener('click',function(){hdr.classList.toggle('open');});
+    hdr.querySelectorAll('.sh-nav a').forEach(function(a){a.addEventListener('click',function(){hdr.classList.remove('open');});});
+  }
 
   // reveal
   var reveals=document.querySelectorAll('.reveal');
@@ -812,14 +1246,13 @@
     stages.forEach(function(s){s.classList.remove('lit');});
     if(log) log.innerHTML='';
     packet.style.opacity='1';
-    var pr=pipeEl.getBoundingClientRect();
     var i=0;
     function step(){
       if(i>=stages.length){ setTimeout(function(){packet.style.opacity='0';},500);
         if(log){var d=document.createElement('div');d.className='logline';d.innerHTML='<span class="tk">✓</span> Hoàn tất — dữ liệu đã lên màn hình.';log.appendChild(d);} return; }
-      var s=stages[i], sr=s.getBoundingClientRect();
-      var x=sr.left-pr.left+sr.width/2-packet.offsetWidth/2;
-      var y=sr.top-pr.top-6;
+      var s=stages[i];
+      var x=s.offsetLeft+s.offsetWidth/2-packet.offsetWidth/2;
+      var y=s.offsetTop-6;
       packet.style.transform='translate('+x+'px,'+y+'px)';
       setTimeout(function(){
         s.classList.add('lit');
@@ -840,6 +1273,241 @@
       if(e.isIntersecting && !seen[e.target.id]){seen[e.target.id]=true; setTimeout(function(){runPipe(e.target);},400);}
     });},{threshold:.4});
     document.querySelectorAll('.pipe').forEach(function(p){pio.observe(p);});
+  }
+
+  // ---- full project flow player (11 steps) ----
+  var SYS={
+    crm :{name:'CRM',c:'var(--crm)',d:'var(--crm-dim)'},
+    fis :{name:'SIS',c:'var(--sis)',d:'var(--sis-dim)'},
+    ecom:{name:'E‑Commerce',c:'var(--ecom)',d:'var(--ecom-dim)'},
+    inv :{name:'POS',c:'var(--lms)',d:'var(--lms-dim)'},
+    misa:{name:'MISA',c:'var(--hrm)',d:'var(--hrm-dim)'},
+    mid :{name:'VA Hub',c:'var(--amber)',d:'var(--amber-dim)'}
+  };
+  var C={crm:[560,105],fis:[940,254],ecom:[795,494],inv:[325,494],misa:[180,254],mid:[560,320]};
+
+  var STEPS=[
+    {from:'crm',to:'crm',internal:true,tl:'Tiếp nhận Lead',plabel:'Lead phụ huynh',
+      title:'CRM tiếp nhận Lead phụ huynh',
+      note:'Phụ huynh để lại thông tin (hội thảo, landing page). CRM lưu thành <b>Lead</b> — chưa phải khách chính thức, chưa gọi hệ nào khác.',
+      mid:['Chưa cần Middleware','Lead nằm trong CRM','Chờ được duyệt'],
+      fromRec:[['nguồn','"Landing tuyển sinh"'],['parent','"Nguyễn Thị Lan"'],['phone','"0912345678"'],['child','"Nguyễn An"']],
+      toRec:[['LeadID','"LEAD-20871"','new'],['stage','"Tiềm năng"','new'],['owner','"tuyensinh01"'],['status','"NEW"']]},
+    {from:'crm',to:'crm',internal:true,tl:'Duyệt → Customer',plabel:'ParentID_CRM',
+      title:'CRM duyệt Lead → Customer',
+      note:'Sau khi phụ huynh đóng phí giữ chỗ, CRM <b>duyệt Lead thành Customer</b> chính thức và cấp <b>ParentID_CRM</b> — mã gốc của phụ huynh.',
+      mid:['Nội bộ CRM','Kiểm tra điều kiện duyệt','Cấp ParentID_CRM'],
+      fromRec:[['LeadID','"LEAD-20871"'],['check','"Đã đóng phí giữ chỗ ✓"'],['approver','"truongphong"']],
+      toRec:[['ParentID_CRM','"PA-3391"','pk'],['type','"CUSTOMER"','new'],['status','"ACTIVE"','new']]},
+    {from:'crm',to:'fis',tl:'CRM → SIS',plabel:'PA-3391',
+      title:'CRM gửi thông tin phụ huynh sang SIS',
+      note:'CRM đẩy hồ sơ phụ huynh sang <b>SIS</b> (phần mềm SIS) để chuẩn bị tạo học sinh. VA Hub <b>ánh xạ ParentID_CRM → ParentID_SIS</b> và che số điện thoại (PII).',
+      mid:['Validate ParentID_CRM','Map ParentID_CRM → ParentID_SIS','Che SĐT (PII)','Đẩy vào Queue → SIS'],
+      fromRec:[['ParentID_CRM','"PA-3391"','pk'],['parent','"Nguyễn Thị Lan"'],['phone','"0912345678"'],['child','"Nguyễn An"'],['dob','"2015-03-12"']],
+      toRec:[['ParentID_SIS','"PS-1187"','new'],['parent','"Nguyễn Thị Lan"'],['phone','"091•••••78"','mask'],['child','"Nguyễn An"']]},
+    {from:'fis',to:'crm',tl:'SIS → Student ID',plabel:'StudentID_SIS',
+      title:'SIS tạo hồ sơ học sinh & trả Student ID',
+      note:'SIS tạo hồ sơ học sinh và sinh <b>StudentID_SIS (mã gốc)</b>. VA Hub đồng bộ ngược về CRM để CRM biết phụ huynh này ứng với học sinh nào.',
+      mid:['SIS sinh StudentID_SIS (Primary)','Map StudentID_SIS → StudentID_CRM','Ghi log đối soát','Trả kết quả về CRM'],
+      fromRec:[['StudentID_SIS','"SIS-2026-1187"','pk'],['ParentID_SIS','"PS-1187"'],['full_name','"Nguyễn An"'],['status','"CREATED"']],
+      toRec:[['StudentID_CRM','"SIS-2026-1187"','new'],['linked_parent','"PA-3391"'],['status','"Có hồ sơ ✓"','new']]},
+    {from:'mid',to:'crm',tl:'Đồng bộ về CRM',plabel:'Hồ sơ học sinh',
+      title:'VA Hub đồng bộ hồ sơ học sinh về CRM',
+      note:'VA Hub lấy thông tin học tập đầy đủ (lớp, khối, năm học) từ SIS và <b>đồng bộ về CRM</b> để bộ phận tuyển sinh chăm sóc đúng ngữ cảnh.',
+      mid:['Đọc snapshot học sinh (SIS)','Chuẩn hoá lớp / khối','Đồng bộ sang CRM'],
+      fromRec:[['StudentID','"SIS-2026-1187"'],['class','"6A3"'],['grade','"Khối 6"'],['year','"2026-2027"']],
+      toRec:[['StudentID_CRM','"SIS-2026-1187"'],['class','"6A3"','new'],['grade','"Khối 6"','new'],['sync_at','"09:15"']]},
+    {from:'crm',to:'ecom',tl:'CRM → E‑Com',plabel:'Customer + Student',
+      title:'CRM gửi Customer + Student ID sang E‑Commerce',
+      note:'Để phụ huynh mua học phí / đồng phục online, CRM đẩy khách hàng sang <b>E‑Commerce</b>. VA Hub <b>ánh xạ ParentID_CRM → CustomerID_ECOM</b>, kèm Student ID để gắn đơn.',
+      mid:['Map ParentID_CRM → CustomerID_ECOM','Đính kèm StudentID','Đẩy Queue → E‑Commerce'],
+      fromRec:[['ParentID_CRM','"PA-3391"','pk'],['StudentID_CRM','"SIS-2026-1187"'],['email','"lan.nguyen@…"']],
+      toRec:[['CustomerID_ECOM','"EC-CUS-7742"','new'],['StudentID_ECOM','"SIS-2026-1187"'],['email','"lan.nguyen@…"']]},
+    {from:'ecom',to:'ecom',internal:true,tl:'Tạo tài khoản KH',plabel:'Account KH',
+      title:'E‑Commerce tạo / đồng bộ tài khoản khách hàng',
+      note:'E‑Commerce nhận Customer và <b>tạo tài khoản khách hàng</b>, gửi email kích hoạt, gắn với học sinh để hiển thị đúng học phí.',
+      mid:['Nội bộ E‑Commerce','Tạo tài khoản','Gửi email kích hoạt'],
+      fromRec:[['CustomerID_ECOM','"EC-CUS-7742"'],['link_student','"SIS-2026-1187"']],
+      toRec:[['account','"ACTIVE"','new'],['coupon','"WELCOME10"','new'],['cart','"trống"']]},
+    {from:'ecom',to:'inv',tl:'Tạo đơn → Kho',plabel:'Order 540.000₫',
+      title:'E‑Commerce tạo đơn hàng → gửi sang Kho',
+      note:'Phụ huynh đặt mua đồng phục. E‑Commerce tạo <b>OrderID_ECOM</b>, VA Hub chuẩn hoá tiền và <b>ánh xạ sang OrderID_POS</b> để POS/Kho giữ hàng.',
+      mid:['Chuẩn hoá tiền → 540.000 ₫','Map OrderID_ECOM → OrderID_POS','Reserve tồn kho qua Queue'],
+      fromRec:[['OrderID_ECOM','"EC-ORD-4471"','pk'],['item','"Đồng phục hè"'],['qty','2'],['Total_Amount','540000'],['StudentID','"SIS-2026-1187"']],
+      toRec:[['OrderID_POS','"POS-8830"','new'],['sku','"UNIFORM-S"'],['qty','2'],['action','"RESERVE"','new'],['status','"PENDING"']]},
+    {from:'inv',to:'ecom',tl:'Trừ kho → trả KQ',plabel:'Kết quả xuất kho',
+      title:'POS/Kho xử lý, trừ kho & trả kết quả',
+      note:'POS/Kho (Inventory) kiểm tra tồn, <b>trừ 2 sản phẩm</b>, cập nhật StockStatus rồi báo ngược cho E‑Commerce để xác nhận với phụ huynh.',
+      mid:['Trừ tồn kho (−2)','Cập nhật StockStatus','Trả kết quả về E‑Commerce'],
+      fromRec:[['OrderID_POS','"POS-8830"'],['picked','2'],['remaining','118'],['StockStatus','"FULFILLED"','new']],
+      toRec:[['OrderID_ECOM','"EC-ORD-4471"'],['status','"ĐÃ XUẤT KHO ✓"','new'],['tracking','"GHN-77120"','new']]},
+    {from:'inv',to:'misa',tl:'POS/Kho → MISA',plabel:'Doanh thu + xuất kho',
+      title:'POS/Kho gửi xuất kho + doanh thu sang MISA',
+      note:'Sau khi xuất kho, POS/Kho tổng hợp doanh thu &amp; giá vốn, VA Hub <b>ánh xạ sang CustomerID_MISA</b> và đẩy chứng từ sang <b>MISA</b>.',
+      mid:['Tổng hợp doanh thu đơn','Map Customer → CustomerID_MISA','Đẩy chứng từ sang MISA'],
+      fromRec:[['OrderID','"EC-ORD-4471"'],['Total_Amount','540000'],['cost','320000'],['type','"Xuất bán"']],
+      toRec:[['CustomerID_MISA','"MISA-CUS-2210"','new'],['Amount_Acc','540000'],['doc','"Phiếu bán hàng"','new'],['PostingStatus','"CHỜ HẠCH TOÁN"']]},
+    {from:'misa',to:'inv',tl:'MISA hạch toán',plabel:'Chứng từ POSTED',
+      title:'MISA hạch toán & phản hồi kết quả',
+      note:'MISA ghi sổ (Nợ 131 / Có 511), sinh <b>số chứng từ</b> và phản hồi trạng thái <b>POSTED</b> về Hub — khép kín vòng đời một giao dịch.',
+      mid:['Ghi sổ Doanh thu / Giá vốn','Sinh số chứng từ','Phản hồi trạng thái về Hub'],
+      fromRec:[['voucher','"PT-2026-00912"','pk'],['debit','"131 · Phải thu"'],['credit','"511 · Doanh thu"'],['Amount_Acc','540000']],
+      toRec:[['OrderID','"EC-ORD-4471"'],['PostingStatus','"POSTED ✓"','new'],['voucher_no','"PT-2026-00912"','new'],['closed','true','new']]}
+  ];
+
+  var secEl=document.getElementById('giao-thoa');
+  if(secEl){
+    var nodes={};
+    document.querySelectorAll('.fnode').forEach(function(n){nodes[n.dataset.sys]=n;});
+    var stage=document.getElementById('flowStage');
+    var wires=document.getElementById('flowWires');
+    var packet=document.getElementById('fPacket'), packetLabel=document.getElementById('fPacketLabel');
+    var midNode=document.getElementById('fMid'), midStatusTxt=document.getElementById('midStatusTxt');
+    var tlEl=document.getElementById('flowTimeline'), curEl=document.getElementById('flowCur');
+    var stepNum=document.getElementById('stepNum'), stepTitle=document.getElementById('stepTitle');
+    var fdFrom=document.getElementById('fdFrom'), fdTo=document.getElementById('fdTo'), fdMid=document.getElementById('fdMid'), fdNote=document.getElementById('fdNote');
+    var btnPrev=document.getElementById('flowPrev'), btnNext=document.getElementById('flowNext'), btnPlay=document.getElementById('flowPlay'), btnReset=document.getElementById('flowReset');
+
+    var idx=0, token=0, playing=false;
+    function rec(arr){return arr.map(function(r){return '<div><span class="key">'+r[0]+':</span> <span class="'+(r[2]||'val')+'">'+r[1]+'</span></div>';}).join('');}
+    var STAGE_W=1120, STAGE_H=640;
+    function setPacket(x,y){
+      packet.style.left=(x/STAGE_W*100)+'%';
+      packet.style.top=(y/STAGE_H*100)+'%';
+      packet.style.transform='translate(-50%,-50%)';
+    }
+    function pcolor(cvar){packet.style.background=cvar;packet.style.boxShadow='0 0 22px '+cvar;}
+
+    function drawWires(st){
+      var s='';
+      // faint spokes: every business system <-> middleware (tight coupling)
+      ['crm','fis','ecom','inv','misa'].forEach(function(k){
+        s+='<line x1="'+C[k][0]+'" y1="'+C[k][1]+'" x2="'+C.mid[0]+'" y2="'+C.mid[1]+'" stroke="var(--border-soft)" stroke-width="1.5"/>';
+      });
+      if(st){
+        var f=SYS[st.from],t=SYS[st.to];
+        if(st.internal){
+          var p=C[st.from];
+          s+='<circle cx="'+p[0]+'" cy="'+(p[1]-64)+'" r="26" fill="none" stroke="'+f.c+'" stroke-width="2.6" stroke-dasharray="5 5"/>';
+        } else if(st.from==='mid'){
+          s+='<line x1="'+C.mid[0]+'" y1="'+C.mid[1]+'" x2="'+C[st.to][0]+'" y2="'+C[st.to][1]+'" stroke="'+t.c+'" stroke-width="3"/>';
+        } else {
+          s+='<line x1="'+C[st.from][0]+'" y1="'+C[st.from][1]+'" x2="'+C.mid[0]+'" y2="'+C.mid[1]+'" stroke="'+f.c+'" stroke-width="3"/>';
+          s+='<line x1="'+C.mid[0]+'" y1="'+C.mid[1]+'" x2="'+C[st.to][0]+'" y2="'+C[st.to][1]+'" stroke="'+t.c+'" stroke-width="3"/>';
+        }
+      }
+      wires.innerHTML=s;
+    }
+
+    function highlight(st){
+      Object.keys(nodes).forEach(function(k){nodes[k].classList.remove('act-src','act-dst','faded');});
+      var involved={}; involved[st.from]=1; involved[st.to]=1;
+      if(!st.internal) involved['mid']=1;
+      Object.keys(nodes).forEach(function(k){ if(!involved[k]) nodes[k].classList.add('faded'); });
+      if(st.from!=='mid') nodes[st.from].classList.add('act-src');
+      if(!st.internal && st.to!=='mid') nodes[st.to].classList.add('act-dst');
+      // tags
+      nodes[st.from].querySelector('.fn-tag') && (nodes[st.from].querySelector('.fn-tag').textContent = st.internal?'XỬ LÝ':'NGUỒN');
+      if(!st.internal && nodes[st.to].querySelector('.fn-tag')) nodes[st.to].querySelector('.fn-tag').textContent='ĐÍCH';
+    }
+
+    function renderDetail(st,showTo){
+      var f=SYS[st.from],t=SYS[st.to];
+      stepNum.textContent=st._n; stepTitle.textContent=st.title;
+      var fromLbl=st.internal?(f.name+' · trước'):(f.name+' · gửi đi');
+      var toLbl=st.internal?(t.name+' · sau'):(t.name+' · nhận');
+      fdFrom.querySelector('.fd-h').innerHTML='<i style="background:'+f.c+'"></i><span style="color:'+f.c+'">'+fromLbl+'</span>';
+      fdFrom.querySelector('.fd-rec').innerHTML=rec(st.fromRec);
+      fdFrom.style.setProperty('--from',f.c);
+      fdTo.style.setProperty('--to',t.c);
+      fdTo.querySelector('.fd-h').innerHTML='<i style="background:'+t.c+'"></i><span style="color:'+t.c+'">'+toLbl+'</span>';
+      fdTo.querySelector('.fd-rec').innerHTML= showTo ? rec(st.toRec) : '<div style="color:var(--text-faint)">Đang chờ Middleware…</div>';
+      fdMid.innerHTML=st.mid.map(function(m){return '<li>'+m+'</li>';}).join('');
+      fdNote.innerHTML='<b>Ý nghĩa:</b> '+st.note;
+    }
+
+    function updateTL(){
+      tlEl.querySelectorAll('.ft-step').forEach(function(b,i){
+        b.classList.toggle('active',i===idx);
+        b.classList.toggle('done',i<idx);
+      });
+      curEl.textContent=(idx+1);
+    }
+
+    function anim(x1,y1,x2,y2,dur,my,done){
+      var t0=null;
+      requestAnimationFrame(function fr(ts){ if(my!==token)return; if(t0===null)t0=ts;
+        var p=Math.min(1,(ts-t0)/dur); var e=p<.5?2*p*p:1-Math.pow(-2*p+2,2)/2;
+        setPacket(x1+(x2-x1)*e, y1+(y2-y1)*e);
+        if(p<1) requestAnimationFrame(fr); else if(done) done();
+      });
+    }
+    function runMid(list,my,done){ var i=0; midNode.classList.add('busy');
+      (function nx(){ if(my!==token)return;
+        if(i<list.length){ midStatusTxt.textContent=(i+1)+'. '+list[i]; i++; setTimeout(nx,520); }
+        else done();
+      })();
+    }
+    function finish(my){ if(my!==token)return; midNode.classList.remove('busy');
+      var st=STEPS[idx]; midStatusTxt.textContent= st.internal?'Nội bộ hệ thống ✓':'Đã giao cho '+SYS[st.to].name+' ✓';
+      fdTo.querySelector('.fd-rec').innerHTML=rec(st.toRec);
+      packet.style.opacity='0';
+      if(playing){ setTimeout(function(){ if(my!==token)return; if(idx<STEPS.length-1){ go(idx+1,true);} else { stopPlay(); } },1000); }
+    }
+
+    function go(i,animate){
+      idx=Math.max(0,Math.min(STEPS.length-1,i)); token++; var my=token;
+      var st=STEPS[idx]; var f=SYS[st.from],t=SYS[st.to];
+      updateTL(); drawWires(st); highlight(st); renderDetail(st,!animate);
+      midNode.classList.remove('busy');
+      if(!animate){ midStatusTxt.textContent='Sẵn sàng'; packet.style.opacity='0'; return; }
+      packetLabel.textContent=st.plabel;
+      if(st.internal){
+        var p=C[st.from]; setPacket(p[0],p[1]-64); pcolor(f.c); packet.style.opacity='1';
+        midStatusTxt.textContent='Nội bộ '+f.name+'…';
+        setTimeout(function(){ finish(my); },1300); return;
+      }
+      if(st.from==='mid'){
+        setPacket(C.mid[0],C.mid[1]); pcolor(t.c); packet.style.opacity='1';
+        runMid(st.mid,my,function(){ if(my!==token)return; midStatusTxt.textContent='Giao cho '+t.name+'…';
+          anim(C.mid[0],C.mid[1],C[st.to][0],C[st.to][1],850,my,function(){finish(my);}); });
+        return;
+      }
+      // normal: from -> mid -> to
+      setPacket(C[st.from][0],C[st.from][1]); pcolor(f.c); packet.style.opacity='1';
+      midStatusTxt.textContent='Nhận từ '+f.name+'…';
+      anim(C[st.from][0],C[st.from][1],C.mid[0],C.mid[1],850,my,function(){ if(my!==token)return;
+        runMid(st.mid,my,function(){ if(my!==token)return; midStatusTxt.textContent='Giao cho '+t.name+'…'; pcolor(t.c);
+          anim(C.mid[0],C.mid[1],C[st.to][0],C[st.to][1],850,my,function(){finish(my);});
+        });
+      });
+    }
+
+    function stopPlay(){ playing=false; btnPlay.innerHTML='<svg><use href="#i-play"/></svg> Chạy toàn bộ'; }
+    function startPlay(){ playing=true; btnPlay.innerHTML='<svg><use href="#i-pause"/></svg> Tạm dừng'; go(idx,true); }
+
+    // timeline
+    STEPS.forEach(function(st,i){ st._n=i+1;
+      var f=SYS[st.from];
+      var b=document.createElement('button'); b.className='ft-step'; b.style.setProperty('--ft',f.c);
+      b.innerHTML='<div class="ft-n"><i></i>'+(i+1)+'</div><div class="ft-l">'+st.tl+'</div>';
+      b.addEventListener('click',function(){ stopPlay(); go(i,true); });
+      tlEl.appendChild(b);
+    });
+
+    btnPrev.addEventListener('click',function(){ stopPlay(); go(idx-1,true); });
+    btnNext.addEventListener('click',function(){ stopPlay(); go(idx+1,true); });
+    btnReset.addEventListener('click',function(){ stopPlay(); go(0,true); });
+    btnPlay.addEventListener('click',function(){ if(playing) stopPlay(); else startPlay(); });
+
+    go(0,false); // static initial render
+    var jseen=false;
+    if('IntersectionObserver' in window){
+      var jio=new IntersectionObserver(function(es){es.forEach(function(e){
+        if(e.isIntersecting && !jseen){jseen=true; setTimeout(function(){go(0,true);},400);}
+      });},{threshold:.25});
+      jio.observe(secEl);
+    }
   }
 })();
 </script>
