@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VA Hub — Bức tranh toàn cảnh (giải thích dễ hiểu)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0A0E1A;
+    --bg-soft:#0D1424;
+    --panel:#111A2E;
+    --panel-2:#0D1626;
+    --border:#233150;
+    --border-soft:#182238;
+    --text:#E9EDF6;
+    --text-dim:#98A3BF;
+    --text-faint:#5C6784;
+    --cyan:#4FD8EC;
+    --cyan-dim:rgba(79,216,236,.13);
+    --amber:#F5A742;
+    --amber-dim:rgba(245,167,66,.13);
+    --red:#F2555F;
+    --red-dim:rgba(242,85,95,.13);
+    --gray:#4A5878;
+    --gray-dim:rgba(74,88,120,.15);
+    --radius:16px;
+    --maxw:1120px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter',system-ui,sans-serif;
+    font-size:16px;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+    background-image:
+      linear-gradient(var(--bg-soft) 1px, transparent 1px),
+      linear-gradient(90deg, var(--bg-soft) 1px, transparent 1px);
+    background-size:64px 64px;
+    background-position:-1px -1px;
+  }
+  ::selection{background:var(--cyan-dim);color:var(--text);}
+  :focus-visible{outline:2px solid var(--cyan);outline-offset:3px;border-radius:4px;}
+  a{color:var(--cyan);}
+  .mono{font-family:'JetBrains Mono',monospace;}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px;}
+
+  /* progress bar */
+  #progressbar{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--cyan),var(--amber));width:0%;z-index:100;transition:width .08s linear;}
+
+  /* side nav */
+  #sidenav{position:fixed;right:22px;top:50%;transform:translateY(-50%);z-index:90;display:flex;flex-direction:column;gap:14px;}
+  #sidenav a{width:9px;height:9px;border-radius:50%;background:var(--border);display:block;position:relative;transition:background .2s,transform .2s;}
+  #sidenav a:hover, #sidenav a.active{background:var(--cyan);transform:scale(1.3);}
+  #sidenav a span{position:absolute;right:20px;top:50%;transform:translateY(-50%);white-space:nowrap;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-dim);background:var(--panel);border:1px solid var(--border);padding:4px 8px;border-radius:6px;opacity:0;pointer-events:none;transition:opacity .15s;}
+  #sidenav a:hover span{opacity:1;}
+  @media (max-width:1100px){#sidenav{display:none;}}
+
+  /* ruler decoration */
+  #ruler{position:fixed;left:0;top:0;bottom:0;width:14px;z-index:5;background-image:repeating-linear-gradient(to bottom, var(--border-soft) 0 1px, transparent 1px 40px);opacity:.6;}
+  @media (max-width:1100px){#ruler{display:none;}}
+
+  section{padding:88px 0;border-top:1px solid var(--border-soft);position:relative;}
+  section:nth-of-type(even){background:linear-gradient(180deg,var(--panel-2),transparent 40%,transparent 60%,var(--panel-2));}
+
+  .eyebrow{font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.14em;color:var(--cyan);font-size:12.5px;font-weight:500;display:flex;align-items:center;gap:8px;}
+  .eyebrow::before{content:"";width:16px;height:1px;background:var(--cyan);display:inline-block;}
+  h2.h2{font-family:'Be Vietnam Pro',sans-serif;font-weight:800;font-size:clamp(26px,4vw,38px);margin:10px 0 18px;letter-spacing:-.01em;}
+  .lead{color:var(--text-dim);font-size:17px;max-width:720px;line-height:1.65;margin:0 0 8px;}
+
+  /* reveal on scroll */
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease, transform .6s ease;}
+  .reveal.in{opacity:1;transform:none;}
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important;transition:none !important;}
+    .reveal{opacity:1;transform:none;}
+  }
+
+  /* ============ HERO ============ */
+  header.hero{padding:120px 0 80px;border-top:none;position:relative;overflow:hidden;}
+  header.hero::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 700px 400px at 80% 0%, var(--cyan-dim), transparent 70%);pointer-events:none;}
+  .hero-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:48px;align-items:center;}
+  @media (max-width:860px){.hero-grid{grid-template-columns:1fr;}}
+  .hero h1{font-family:'Be Vietnam Pro',sans-serif;font-weight:800;font-size:clamp(40px,7vw,64px);margin:14px 0 6px;letter-spacing:-.02em;}
+  .hero .tagline{font-family:'JetBrains Mono',monospace;color:var(--amber);font-size:15px;margin-bottom:20px;}
+  .hero .lead{font-size:18px;color:var(--text-dim);max-width:560px;}
+  .chip-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px;}
+  .chip{font-family:'JetBrains Mono',monospace;font-size:12.5px;border:1px solid var(--border);background:var(--panel);padding:7px 12px;border-radius:999px;color:var(--text-dim);display:flex;align-items:center;gap:7px;}
+  .chip .dot{width:7px;height:7px;border-radius:50%;}
+  .dot-cyan{background:var(--cyan);box-shadow:0 0 8px var(--cyan);}
+  .dot-amber{background:var(--amber);box-shadow:0 0 8px var(--amber);}
+  .dot-red{background:var(--red);box-shadow:0 0 8px var(--red);}
+  .dot-gray{background:var(--gray);}
+
+  .dial-card{background:var(--panel);border:1px solid var(--border);border-radius:20px;padding:28px;text-align:center;}
+  .dial-wrap{position:relative;width:190px;height:190px;margin:0 auto 14px;}
+  .dial-wrap svg{width:100%;height:100%;transform:rotate(-90deg);}
+  .dial-wrap .dial-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+  .dial-num{font-family:'Be Vietnam Pro',sans-serif;font-weight:800;font-size:36px;}
+  .dial-label{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-dim);margin-top:4px;text-align:center;padding:0 10px;}
+  .dial-card .foot{font-size:13.5px;color:var(--text-dim);margin-top:10px;}
+  .dial-card .foot b{color:var(--text);}
+
+  /* ============ PROBLEM CARDS ============ */
+  .cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px;margin-top:36px;}
+  .card{background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);padding:22px;transition:transform .2s,border-color .2s;}
+  .card:hover{transform:translateY(-3px);border-color:var(--cyan);}
+  .card .icon{width:38px;height:38px;color:var(--cyan);margin-bottom:14px;}
+  .card .icon svg{width:100%;height:100%;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;}
+  .card h3{font-family:'Be Vietnam Pro',sans-serif;font-size:16.5px;font-weight:700;margin:0 0 8px;}
+  .card p{color:var(--text-dim);font-size:14.5px;margin:0;line-height:1.55;}
+
+  /* ============ ARCH DIAGRAM ============ */
+  .legend{display:flex;flex-wrap:wrap;gap:22px;margin:30px 0 6px;font-size:13.5px;color:var(--text-dim);}
+  .legend span{display:flex;align-items:center;gap:8px;}
+  .legend .dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+  .legend .dot.dashed{border:2px dashed var(--gray);background:transparent;}
+
+  .diagram-hint{display:none;font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--text-faint);margin:4px 0 0;}
+  @media (max-width:900px){.diagram-hint{display:block;}}
+
+  .arch-scroll{overflow-x:auto;margin:18px -24px 0;padding:6px 24px 24px;}
+  .arch-diagram{position:relative;width:1240px;height:650px;}
+  .arch-diagram svg.lines{position:absolute;inset:0;width:100%;height:100%;overflow:visible;}
+  .flow-real{stroke:var(--cyan);stroke-width:2.4;fill:none;stroke-dasharray:7 6;animation:flowmove 1s linear infinite;}
+  .flow-amber{stroke:var(--amber);stroke-width:1.6;fill:none;stroke-dasharray:3 5;opacity:.5;animation:pulseop 2.6s ease-in-out infinite;}
+  .flow-planned{stroke:var(--gray);stroke-width:1.8;fill:none;stroke-dasharray:5 6;}
+  @keyframes flowmove{to{stroke-dashoffset:-26;}}
+  @keyframes pulseop{0%,100%{opacity:.28;}50%{opacity:.85;}}
+
+  .node{position:absolute;border-radius:14px;padding:14px 16px;background:linear-gradient(180deg,var(--panel),var(--panel-2));}
+  .node .node-top{display:flex;align-items:flex-start;gap:10px;}
+  .node .node-icon{width:22px;height:22px;flex-shrink:0;margin-top:1px;}
+  .node .node-icon svg{width:100%;height:100%;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;}
+  .node .title{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.05em;text-transform:uppercase;font-weight:600;}
+  .node .sub{font-size:12.5px;color:var(--text-dim);margin-top:5px;line-height:1.45;}
+  .node .badge{display:inline-flex;align-items:center;gap:6px;margin-top:11px;font-size:11px;font-family:'JetBrains Mono',monospace;padding:3px 9px;border-radius:999px;}
+  .node .badge .dot{width:6px;height:6px;border-radius:50%;}
+
+  .st-real{border:1.5px solid var(--cyan);color:var(--cyan);}
+  .st-real .badge{background:var(--cyan-dim);color:var(--cyan);}
+  .st-real .badge .dot{background:var(--cyan);}
+  .st-scaffold{border:1.5px solid var(--amber);color:var(--amber);}
+  .st-scaffold .badge{background:var(--amber-dim);color:var(--amber);}
+  .st-scaffold .badge .dot{background:var(--amber);}
+  .st-planned{border:1.5px dashed var(--gray);color:var(--gray);opacity:.92;}
+  .st-planned .badge{background:var(--gray-dim);color:var(--text-dim);}
+  .st-planned .badge .dot{background:var(--gray);}
+  .node .title, .node .sub{color:var(--text);}
+  .node.st-planned .title{color:var(--text-dim);}
+
+  .diagram-note{margin-top:22px;background:var(--panel);border:1px solid var(--border);border-left:3px solid var(--cyan);border-radius:10px;padding:16px 18px;font-size:14.5px;color:var(--text-dim);max-width:760px;}
+  .diagram-note b{color:var(--text);}
+
+  /* ============ STEPPER ============ */
+  .stepper{position:relative;margin-top:36px;padding-left:6px;max-width:680px;}
+  .stepper::before{content:"";position:absolute;left:19px;top:12px;bottom:12px;width:2px;background:repeating-linear-gradient(to bottom, var(--gray) 0 6px, transparent 6px 12px);}
+  .step{position:relative;padding:0 0 30px 54px;}
+  .step:last-child{padding-bottom:0;}
+  .step .num{position:absolute;left:0;top:0;width:40px;height:40px;border-radius:50%;border:1.5px dashed var(--gray);display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-weight:600;color:var(--gray);background:var(--bg);}
+  .step h4{margin:2px 0 6px;font-family:'Be Vietnam Pro',sans-serif;font-size:16px;font-weight:700;}
+  .step p{margin:0;color:var(--text-dim);font-size:14.5px;line-height:1.55;}
+
+  .real-flow-box{margin-top:44px;border:1px solid var(--cyan);border-radius:var(--radius);padding:22px 24px;background:var(--cyan-dim);}
+  .real-flow-box .eyebrow{color:var(--cyan);}
+  .mini-steps{display:flex;gap:14px;flex-wrap:wrap;margin-top:16px;}
+  .mini-step{display:flex;align-items:center;gap:10px;background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:10px 14px;font-size:14px;}
+  .mini-step .num{width:26px;height:26px;border-radius:50%;background:var(--cyan);color:var(--bg);display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:12.5px;flex-shrink:0;}
+  .mini-arrow{color:var(--text-faint);align-self:center;}
+
+  .warn-tag{display:inline-flex;align-items:center;gap:8px;margin-top:24px;font-family:'JetBrains Mono',monospace;font-size:12.5px;color:var(--amber);background:var(--amber-dim);border:1px solid var(--amber);padding:8px 14px;border-radius:999px;}
+
+  /* ============ PROGRESS ============ */
+  .bigbar-wrap{margin-top:8px;max-width:640px;}
+  .bigbar-label{display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--text-dim);margin-bottom:8px;}
+  .bigbar{height:18px;border-radius:999px;background:var(--panel-2);border:1px solid var(--border);overflow:hidden;}
+  .bigbar-fill{height:100%;width:17%;border-radius:999px;background:linear-gradient(90deg,var(--cyan),var(--amber));}
+
+  .roadmap-track{display:flex;align-items:flex-start;justify-content:space-between;position:relative;margin:56px 0 0;padding-top:10px;}
+  .roadmap-track::before{content:"";position:absolute;top:19px;left:19px;right:19px;height:2px;background:var(--border);}
+  .rt-item{position:relative;display:flex;flex-direction:column;align-items:center;gap:12px;flex:1;min-width:70px;}
+  .rt-dot{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:12px;background:var(--bg);z-index:1;}
+  .rt-done .rt-dot{border:2px solid var(--cyan);color:var(--cyan);}
+  .rt-now .rt-dot{border:2px solid var(--amber);color:var(--amber);box-shadow:0 0 0 6px var(--amber-dim);animation:pulsering 2s ease-in-out infinite;}
+  @keyframes pulsering{0%,100%{box-shadow:0 0 0 5px var(--amber-dim);}50%{box-shadow:0 0 0 9px var(--amber-dim);}}
+  .rt-future .rt-dot{border:2px dashed var(--gray);color:var(--gray);}
+  .rt-label{font-size:12px;text-align:center;color:var(--text-dim);max-width:96px;line-height:1.35;}
+  .rt-now .rt-label{color:var(--text);font-weight:600;}
+  @media (max-width:760px){.roadmap-track{flex-wrap:wrap;gap:22px 8px;}.roadmap-track::before{display:none;}.rt-item{flex:0 0 30%;}}
+
+  .module-block{margin-top:56px;}
+  .module-grid{display:grid;grid-template-columns:repeat(10,1fr);gap:8px;max-width:640px;margin-top:16px;}
+  @media (max-width:560px){.module-grid{grid-template-columns:repeat(5,1fr);}}
+  .module-tile{aspect-ratio:1;border-radius:8px;border:1.5px dashed var(--border);display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-faint);}
+  .module-tile.done{border-style:solid;border-color:var(--cyan);background:var(--cyan-dim);color:var(--cyan);font-weight:700;}
+  .module-note{margin-top:14px;font-size:13.5px;color:var(--text-dim);}
+  .module-note b{color:var(--text);}
+
+  /* ============ READINESS ============ */
+  .gauge-row{display:flex;gap:40px;align-items:center;flex-wrap:wrap;margin-top:30px;}
+  .ready-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;margin-top:40px;}
+  .ready-card{background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);padding:20px;}
+  .ready-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px;}
+  .ready-top h4{margin:0;font-family:'Be Vietnam Pro',sans-serif;font-size:15px;font-weight:700;}
+  .ready-score{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:17px;}
+  .score-good{color:var(--cyan);}
+  .score-mid{color:var(--amber);}
+  .score-bad{color:var(--red);}
+  .ready-bar{height:6px;border-radius:999px;background:var(--panel-2);overflow:hidden;margin-bottom:12px;}
+  .ready-bar i{display:block;height:100%;border-radius:999px;}
+  .ready-card p{margin:0;color:var(--text-dim);font-size:13.5px;line-height:1.5;}
+
+  /* ============ RISKS ============ */
+  .risk-list{margin-top:32px;display:flex;flex-direction:column;gap:12px;}
+  .risk-row{display:flex;gap:16px;align-items:flex-start;background:var(--panel);border:1px solid var(--border);border-left:4px solid var(--gray);border-radius:12px;padding:16px 18px;}
+  .risk-row.sev-cao{border-left-color:var(--red);}
+  .risk-row.sev-tb{border-left-color:var(--amber);}
+  .sev-pill{flex-shrink:0;font-family:'JetBrains Mono',monospace;font-size:11px;padding:4px 10px;border-radius:999px;font-weight:600;white-space:nowrap;margin-top:2px;}
+  .sev-cao .sev-pill{background:var(--red-dim);color:var(--red);}
+  .sev-tb .sev-pill{background:var(--amber-dim);color:var(--amber);}
+  .risk-row p{margin:0;font-size:14.5px;color:var(--text-dim);line-height:1.5;}
+  .risk-row p b{color:var(--text);}
+
+  /* ============ ROADMAP AHEAD ============ */
+  .roadmap-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px;margin-top:36px;}
+  .rc{background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);padding:20px;position:relative;}
+  .rc.current{border-color:var(--amber);background:linear-gradient(180deg,var(--amber-dim),transparent 60%);}
+  .rc .tag{font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--text-faint);}
+  .rc.current .tag{color:var(--amber);}
+  .rc h4{margin:8px 0 8px;font-family:'Be Vietnam Pro',sans-serif;font-size:16px;font-weight:700;}
+  .rc p{margin:0;color:var(--text-dim);font-size:13.5px;line-height:1.5;}
+  .pilot-note{margin-top:20px;background:var(--panel);border:1px solid var(--border);border-left:3px solid var(--amber);border-radius:10px;padding:16px 18px;font-size:14.5px;color:var(--text-dim);}
+  .pilot-note b{color:var(--text);}
+
+  /* footer */
+  footer{padding:60px 0 90px;text-align:center;}
+  footer p{color:var(--text-faint);font-size:13px;max-width:560px;margin:6px auto;line-height:1.6;}
+  footer .sig{font-family:'JetBrains Mono',monospace;color:var(--text-dim);font-size:13px;margin-bottom:18px;}
+</style>
+</head>
+<body>
+
+<div id="progressbar"></div>
+<div id="ruler"></div>
+<nav id="sidenav">
+  <a href="#hero" data-label="Mở đầu"><span>Mở đầu</span></a>
+  <a href="#van-de" data-label="Vấn đề"><span>Vấn đề</span></a>
+  <a href="#kien-truc" data-label="Kiến trúc"><span>Kiến trúc</span></a>
+  <a href="#luong" data-label="Luồng dữ liệu"><span>Luồng dữ liệu</span></a>
+  <a href="#tien-do" data-label="Tiến độ"><span>Tiến độ</span></a>
+  <a href="#san-sang" data-label="Sẵn sàng?"><span>Sẵn sàng?</span></a>
+  <a href="#rui-ro" data-label="Rủi ro"><span>Rủi ro</span></a>
+  <a href="#lo-trinh" data-label="Sắp tới"><span>Sắp tới</span></a>
+</nav>
+
+<!-- ICON DEFS -->
+<svg width="0" height="0" style="position:absolute">
+<defs>
+  <symbol id="i-monitor" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></symbol>
+  <symbol id="i-gate" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 12h6M12.5 9l3 3-3 3"/></symbol>
+  <symbol id="i-dish" viewBox="0 0 24 24"><path d="M4 16a8 8 0 0 1 16 0"/><line x1="12" y1="16" x2="12" y2="21"/><line x1="9" y1="21" x2="15" y2="21"/><circle cx="12" cy="16" r="1.3" fill="currentColor" stroke="none"/><path d="M15 6l3-2M18 9l3.5-1"/></symbol>
+  <symbol id="i-truck" viewBox="0 0 24 24"><rect x="1.5" y="7" width="14" height="9" rx="1.5"/><path d="M15.5 10h3.5l3 3.2V16h-6.5z"/><circle cx="6" cy="18" r="2"/><circle cx="17.5" cy="18" r="2"/></symbol>
+  <symbol id="i-funnel" viewBox="0 0 24 24"><path d="M4 4h16l-6.2 8.4v6.1l-3.6 1.9v-8z"/></symbol>
+  <symbol id="i-db" viewBox="0 0 24 24"><ellipse cx="12" cy="5.5" rx="8" ry="3"/><path d="M4 5.5v13c0 1.7 3.6 3 8 3s8-1.3 8-3v-13"/><path d="M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></symbol>
+  <symbol id="i-radar" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.3" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="i-robot" viewBox="0 0 24 24"><rect x="5" y="8.5" width="14" height="10" rx="3"/><circle cx="9.5" cy="13.5" r="1.2" fill="currentColor" stroke="none"/><circle cx="14.5" cy="13.5" r="1.2" fill="currentColor" stroke="none"/><line x1="12" y1="8.5" x2="12" y2="4.5"/><circle cx="12" cy="3.5" r="1" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="i-scatter" viewBox="0 0 24 24"><circle cx="5" cy="6" r="2"/><circle cx="17" cy="4" r="2"/><circle cx="19" cy="16" r="2"/><circle cx="6" cy="18" r="2"/><circle cx="13" cy="11" r="2"/></symbol>
+  <symbol id="i-warn" viewBox="0 0 24 24"><path d="M12 3.5l9.5 16.5H2.5z"/><line x1="12" y1="10" x2="12" y2="14.5"/><circle cx="12" cy="17.3" r="1" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><line x1="15.3" y1="15.3" x2="21" y2="21"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7.5 3v6c0 5.2-3.7 8.4-7.5 9.3-3.8-.9-7.5-4.1-7.5-9.3V6z"/><path d="M8.5 12l2.3 2.3L15.5 9.5"/></symbol>
+</defs>
+</svg>
+
+<!-- ================= HERO ================= -->
+<header class="hero" id="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">Báo cáo toàn cảnh dự án · cập nhật 06/07/2026</div>
+      <h1>VA&nbsp;Hub</h1>
+      <div class="tagline">// trạm trung chuyển dữ liệu cho hệ thống trường học</div>
+      <p class="lead">Nhà trường đang dùng nhiều phần mềm khác nhau — quản lý học sinh, kế toán, file Excel — nhưng chúng không "nói chuyện" được với nhau. VA Hub được xây để làm cầu nối: tự động lấy dữ liệu, làm sạch, rồi gửi đến đúng nơi cần — kèm một màn hình để đội kỹ thuật nhìn thấy dữ liệu đang đi tới đâu, lúc nào.</p>
+      <div class="chip-row">
+        <span class="chip"><span class="dot dot-cyan"></span>Giai đoạn 0: đã xong</span>
+        <span class="chip"><span class="dot dot-amber"></span>Giai đoạn 1: đang chạy</span>
+        <span class="chip"><span class="dot dot-red"></span>Sẵn sàng chạy thật: 2.5/10</span>
+        <span class="chip"><span class="dot dot-gray"></span>~5 người vận hành, dùng nội bộ</span>
+      </div>
+    </div>
+    <div class="dial-card">
+      <div class="dial-wrap">
+        <svg viewBox="0 0 120 120">
+          <circle cx="60" cy="60" r="52" fill="none" stroke="var(--panel-2)" stroke-width="10"/>
+          <circle cx="60" cy="60" r="52" fill="none" stroke="url(#dialGrad)" stroke-width="10" stroke-linecap="round" stroke-dasharray="326.7" stroke-dashoffset="271.2"/>
+          <defs><linearGradient id="dialGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="var(--cyan)"/><stop offset="100%" stop-color="var(--amber)"/></linearGradient></defs>
+        </svg>
+        <div class="dial-center">
+          <div class="dial-num">17%</div>
+          <div class="dial-label">so với kế hoạch<br>6 tháng</div>
+        </div>
+      </div>
+      <div class="foot">Nền móng kỹ thuật: <b>vững</b>. Nghiệp vụ thật: <b>mới bắt đầu</b>.</div>
+    </div>
+  </div>
+</header>
+
+<!-- ================= VẤN ĐỀ ================= -->
+<section id="van-de">
+  <div class="wrap reveal">
+    <div class="eyebrow">Vì sao dự án này tồn tại</div>
+    <h2 class="h2">Bài toán đang cần giải</h2>
+    <p class="lead">Trước khi nói về công nghệ, hãy nói về vấn đề thật của nhà trường.</p>
+    <div class="cards-grid">
+      <div class="card">
+        <div class="icon"><svg><use href="#i-scatter"/></svg></div>
+        <h3>Dữ liệu nằm rải rác</h3>
+        <p>Thông tin học sinh, phụ huynh, nhân sự nằm ở nhiều hệ thống khác nhau, không đồng bộ với nhau.</p>
+      </div>
+      <div class="card">
+        <div class="icon"><svg><use href="#i-warn"/></svg></div>
+        <h3>Nhập tay dễ sai</h3>
+        <p>Copy dữ liệu qua lại bằng tay giữa các phần mềm — chỉ cần lơ là một phút là sai lệch số liệu.</p>
+      </div>
+      <div class="card">
+        <div class="icon"><svg><use href="#i-search"/></svg></div>
+        <h3>Không truy vết được lỗi</h3>
+        <p>Khi dữ liệu sai, không có cách nào lần ngược lại xem lỗi phát sinh từ bước nào, hệ nào.</p>
+      </div>
+      <div class="card">
+        <div class="icon"><svg><use href="#i-shield"/></svg></div>
+        <h3>Phải tuân thủ luật</h3>
+        <p>Dữ liệu học sinh, phụ huynh là dữ liệu cá nhân — bắt buộc bảo vệ theo Nghị định 13/2023.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= KIẾN TRÚC ================= -->
+<section id="kien-truc">
+  <div class="wrap reveal">
+    <div class="eyebrow">Bức tranh toàn cảnh</div>
+    <h2 class="h2">Hệ thống được ghép từ những "trạm" nào?</h2>
+    <p class="lead">Đây là toàn bộ các trạm sẽ tạo nên VA Hub khi hoàn thiện — mỗi trạm được tô màu theo <b>mức độ có thật</b> của nó hôm nay, không phải theo kế hoạch trên giấy.</p>
+
+    <div class="legend">
+      <span><i class="dot" style="background:var(--cyan)"></i>Thật, đang chạy</span>
+      <span><i class="dot" style="background:var(--amber)"></i>Có khung, còn rỗng / chỉ kiểm tra định kỳ</span>
+      <span><i class="dot dashed"></i>Mới là kế hoạch, chưa xây</span>
+    </div>
+    <p class="diagram-hint">→ Vuốt ngang để xem toàn bộ sơ đồ</p>
+
+    <div class="arch-scroll">
+      <div class="arch-diagram">
+        <svg class="lines" viewBox="0 0 1240 650" preserveAspectRatio="xMinYMin meet">
+          <defs>
+            <marker id="arrC" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="var(--cyan)"/></marker>
+            <marker id="arrG" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="var(--gray)"/></marker>
+          </defs>
+
+          <!-- planned pipeline between data-plane boxes -->
+          <path class="flow-planned" marker-end="url(#arrG)" d="M230,395 L278,395"/>
+          <path class="flow-planned" marker-end="url(#arrG)" d="M472,395 L520,395"/>
+          <path class="flow-planned" marker-end="url(#arrG)" d="M714,395 L762,395"/>
+          <path class="flow-planned" marker-end="url(#arrG)" d="M956,395 L1004,395"/>
+
+          <!-- health-check manifold (amber) -->
+          <path class="flow-amber" d="M600,276 L600,316"/>
+          <path class="flow-amber" d="M135,316 L1103,316"/>
+          <path class="flow-amber" d="M135,316 L135,350"/>
+          <path class="flow-amber" d="M377,316 L377,350"/>
+          <path class="flow-amber" d="M619,316 L619,350"/>
+          <path class="flow-amber" d="M861,316 L861,350"/>
+          <path class="flow-amber" d="M1103,316 L1103,350"/>
+
+          <!-- copilot dashed link -->
+          <path class="flow-planned" d="M700,206 C830,150 950,140 1090,126"/>
+
+          <!-- web -> bff real flow -->
+          <path class="flow-real" marker-end="url(#arrC)" d="M150,126 C150,178 610,178 610,188"/>
+
+          <!-- telemetry (real) into observability -->
+          <path class="flow-real" marker-end="url(#arrC)" d="M150,126 C150,175 34,205 34,470 L34,556"/>
+          <path class="flow-real" marker-end="url(#arrC)" d="M700,276 C742,300 742,330 742,400 L742,556"/>
+          <path class="flow-real" marker-end="url(#arrC)" d="M377,440 L377,556"/>
+          <path class="flow-real" marker-end="url(#arrC)" d="M861,440 L861,556"/>
+        </svg>
+
+        <!-- WEB -->
+        <div class="node st-real" style="left:40px;top:40px;width:220px;">
+          <div class="node-top"><div class="node-icon"><svg><use href="#i-monitor"/></svg></div><div class="title">Trình duyệt</div></div>
+          <div class="sub">Bạn và đội kỹ thuật ngồi ở đây để đăng nhập, xem trạng thái.</div>
+          <div class="badge"><i class="dot"></i>Thật, đang chạy</div>
+        </div>
+
+        <!-- COPILOT -->
+        <div class="node st-planned" style="left:980px;top:40px;width:220px;">
+          <div class="node-top"><div class="node-icon"><svg><use href="#i-robot"/></svg></div><div class="title">Trợ lý AI</div></div>
+          <div class="sub">Sau này sẽ trả lời câu hỏi vận hành thay đội kỹ thuật.</div>
+          <div class="badge"><i class="dot"></i>Tạm hoãn</div>
+        </div>
+
+        <!-- BFF -->
+        <div class="node st-real" style="left:510px;top:190px;width:220px;">
+          <div class="node-top"><div class="node-icon"><svg><use href="#i-gate"/></svg></div><div class="title">Cổng trung tâm</div></div>
+          <div class="sub">Mọi yêu cầu từ trình duyệt đều đi qua đây trước.</div>
+          <div class="badge"><i class="dot"></i>Chạy — nhưng mới làm 1 việc: kiểm tra sức khỏe</div>
+        </div>
+
+        <!-- SOURCE DB -->
+        <div class="node st-planned" style="left:40px;top:350px;width:190px;">
+          <div class="node-top"><div class="node-icon"><svg><use href="#i-db"/></svg></div><div class="title">Kho dữ liệu nguồn</div></div>
+          <div class="sub">Nơi dữ liệu gốc nằm (vd: hệ quản lý học sinh).</div>
+          <div class="badge"><i class="dot"></i>Đã tạo, còn trống — 0 bảng</div>
+        </div>
+
+        <!-- ADAPTERS -->
+        <div class="node st-scaffold" style="left:282px;top:350px;width:190px;">
+          <div class="node-top"><div class="node-icon"><svg><use href="#i-dish"/></svg></div><div class="title">Đội thu thập</div></div>
+          <div class="sub">Sẽ đi lấy dữ liệu mới từ các nguồn theo lịch.</div>
+          <div class="badge"><i class="dot"></i>Có khung, chưa biết lấy dữ liệu</div>
+        </div>
+
+        <!-- KAFKA -->
+        <div class="node st-scaffold" style="left:524px;top:350px;width:190px;">
+          <div class="node-top"><div class="node-icon"><svg><use href="#i-truck"/></svg></div><div class="title">Băng chuyền</div></div>
+          <div class="sub">Mang dữ liệu đi giữa các trạm, tránh thất lạc.</div>
+          <div class="badge"><i class="dot"></i>Đang chạy, chưa chuyển gì</div>
+        </div>
+
+        <!-- ETL -->
+        <div class="node st-scaffold" style="left:766px;top:350px;width:190px;">
+          <div class="node-top"><div class="node-icon"><svg><use href="#i-funnel"/></svg></div><div class="title">Trạm lọc &amp; đóng gói</div></div>
+          <div class="sub">Làm sạch, che thông tin nhạy cảm, chuẩn hoá dữ liệu.</div>
+          <div class="badge"><i class="dot"></i>Có khung, chưa xử lý gì</div>
+        </div>
+
+        <!-- SINK DB -->
+        <div class="node st-planned" style="left:1008px;top:350px;width:190px;">
+          <div class="node-top"><div class="node-icon"><svg><use href="#i-db"/></svg></div><div class="title">Kho lưu trữ đích</div></div>
+          <div class="sub">Nơi dữ liệu sạch được gửi tới cuối cùng.</div>
+          <div class="badge"><i class="dot"></i>Đã tạo, còn trống — 0 bảng</div>
+        </div>
+
+        <!-- OBSERVABILITY -->
+        <div class="node st-real" style="left:40px;top:560px;width:1160px;">
+          <div class="node-top"><div class="node-icon"><svg><use href="#i-radar"/></svg></div><div class="title">Phòng giám sát</div></div>
+          <div class="sub">Theo dõi sức khoẻ, nhật ký và cảnh báo của toàn hệ thống — công cụ đang chạy: OTel, Jaeger, Prometheus, Loki, Grafana.</div>
+          <div class="badge"><i class="dot"></i>Thật, đang chạy tốt</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="diagram-note">Tóm lại: hôm nay dữ liệu <b>chưa thực sự "chảy"</b> qua băng chuyền. Phần chạy thật duy nhất là đăng nhập + xem trạng thái sức khỏe. Việc vận chuyển dữ liệu thật là trọng tâm của giai đoạn tiếp theo.</div>
+  </div>
+</section>
+
+<!-- ================= LUỒNG DỮ LIỆU ================= -->
+<section id="luong">
+  <div class="wrap reveal">
+    <div class="eyebrow">Luồng hoạt động</div>
+    <h2 class="h2">Dữ liệu sẽ "chảy" như thế nào?</h2>
+    <p class="lead">Đây là 5 bước dữ liệu sẽ đi qua khi hệ thống hoàn thiện.</p>
+
+    <div class="stepper">
+      <div class="step">
+        <div class="num">1</div>
+        <h4>Lấy dữ liệu mới</h4>
+        <p>Đội thu thập ghé thăm hệ thống nguồn định kỳ, chỉ lấy phần vừa mới thay đổi — không lấy lại toàn bộ.</p>
+      </div>
+      <div class="step">
+        <div class="num">2</div>
+        <h4>Đưa lên băng chuyền</h4>
+        <p>Dữ liệu được gắn "tem thời gian" rồi đặt lên băng chuyền chung để di chuyển an toàn.</p>
+      </div>
+      <div class="step">
+        <div class="num">3</div>
+        <h4>Lọc &amp; làm sạch</h4>
+        <p>Trạm lọc kiểm tra tính hợp lệ, che các thông tin nhạy cảm, chuẩn hoá định dạng.</p>
+      </div>
+      <div class="step">
+        <div class="num">4</div>
+        <h4>Giao đến đích</h4>
+        <p>Dữ liệu sạch được ghi vào kho đích, có cơ chế chống ghi trùng lặp.</p>
+      </div>
+      <div class="step">
+        <div class="num">5</div>
+        <h4>Ghi lại dấu vết</h4>
+        <p>Mỗi bước đều để lại "dấu chân" để đội kỹ thuật truy vết khi có sự cố.</p>
+      </div>
+    </div>
+    <span class="warn-tag">Toàn bộ 5 bước này hiện là KẾ HOẠCH — chưa bước nào chạy với dữ liệu thật</span>
+
+    <div class="real-flow-box">
+      <div class="eyebrow">Luồng đang chạy thật hôm nay</div>
+      <p class="lead" style="margin-top:10px;">Chỉ vỏn vẹn 2 bước, và không có dữ liệu nghiệp vụ nào di chuyển:</p>
+      <div class="mini-steps">
+        <div class="mini-step"><span class="num">1</span>Đăng nhập vào hệ thống</div>
+        <span class="mini-arrow">→</span>
+        <div class="mini-step"><span class="num">2</span>Xem trạng thái sức khỏe các trạm</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TIẾN ĐỘ ================= -->
+<section id="tien-do">
+  <div class="wrap reveal">
+    <div class="eyebrow">Hiện trạng</div>
+    <h2 class="h2">Đang ở đâu trên chặng đường 6 tháng?</h2>
+
+    <div class="bigbar-wrap">
+      <div class="bigbar-label"><span>Tổng tiến độ</span><span>≈ 17%</span></div>
+      <div class="bigbar"><div class="bigbar-fill"></div></div>
+    </div>
+
+    <div class="roadmap-track">
+      <div class="rt-item rt-done"><div class="rt-dot">✓</div><div class="rt-label">P0<br>Nền móng</div></div>
+      <div class="rt-item rt-now"><div class="rt-dot">P1</div><div class="rt-label">Bộ khung<br>đi bộ</div></div>
+      <div class="rt-item rt-future"><div class="rt-dot">P2</div><div class="rt-label">Thấy dữ liệu<br>chảy</div></div>
+      <div class="rt-item rt-future"><div class="rt-dot">P3</div><div class="rt-label">Bền hơn<br>khi lỗi</div></div>
+      <div class="rt-item rt-future"><div class="rt-dot">P4</div><div class="rt-label">Nhiều<br>nguồn hơn</div></div>
+      <div class="rt-item rt-future"><div class="rt-dot">P5</div><div class="rt-label">Tự thiết kế<br>&amp; cảnh báo</div></div>
+      <div class="rt-item rt-future"><div class="rt-dot">P6</div><div class="rt-label">Làm chắc<br>trước khi chạy</div></div>
+    </div>
+
+    <div class="module-block">
+      <h3 style="font-family:'Be Vietnam Pro',sans-serif;font-size:17px;margin-bottom:4px;">20 mục trong giao diện quản trị — chỉ 2 mục hoạt động</h3>
+      <p style="color:var(--text-dim);font-size:14.5px;max-width:640px;">Mỗi ô vuông dưới đây là một mục trong menu (Pipelines, Connectors, Scheduler, Users...). Ô sáng = đã có logic thật. Ô còn lại đều hiện chữ "Sắp ra mắt".</p>
+      <div class="module-grid">
+        <div class="module-tile done">DB</div>
+        <div class="module-tile done">Flow</div>
+        <div class="module-tile">···</div><div class="module-tile">···</div><div class="module-tile">···</div>
+        <div class="module-tile">···</div><div class="module-tile">···</div><div class="module-tile">···</div>
+        <div class="module-tile">···</div><div class="module-tile">···</div><div class="module-tile">···</div>
+        <div class="module-tile">···</div><div class="module-tile">···</div><div class="module-tile">···</div>
+        <div class="module-tile">···</div><div class="module-tile">···</div><div class="module-tile">···</div>
+        <div class="module-tile">···</div><div class="module-tile">···</div><div class="module-tile">···</div>
+      </div>
+      <p class="module-note">Ngoài ra có thêm 1 trang <b>Trạng thái hệ thống</b> công khai, hoạt động khá tốt (~90%) nhưng nằm ngoài 20 mục quản trị này.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SẴN SÀNG PRODUCTION ================= -->
+<section id="san-sang">
+  <div class="wrap reveal">
+    <div class="eyebrow">Chuẩn production</div>
+    <h2 class="h2">Đã sẵn sàng chạy thật chưa?</h2>
+    <p class="lead">Đánh giá theo 8 tiêu chí, thang điểm 10 — dựa trên việc đọc trực tiếp mã nguồn, không suy đoán.</p>
+
+    <div class="gauge-row">
+      <div class="dial-wrap" style="width:150px;height:150px;">
+        <svg viewBox="0 0 120 120">
+          <circle cx="60" cy="60" r="52" fill="none" stroke="var(--panel-2)" stroke-width="10"/>
+          <circle cx="60" cy="60" r="52" fill="none" stroke="url(#dialGrad2)" stroke-width="10" stroke-linecap="round" stroke-dasharray="326.7" stroke-dashoffset="111"/>
+          <defs><linearGradient id="dialGrad2" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="var(--cyan)"/><stop offset="100%" stop-color="var(--amber)"/></linearGradient></defs>
+        </svg>
+        <div class="dial-center"><div class="dial-num" style="font-size:28px;">6.6</div><div class="dial-label">/ 10 điểm<br>trung bình</div></div>
+      </div>
+      <p style="color:var(--text-dim);max-width:480px;font-size:14.5px;">Nền tảng kỹ thuật &amp; kỷ luật làm việc <b style="color:var(--text)">rất tốt</b>, nhưng dự án đang ở giai đoạn <b style="color:var(--text)">rất sớm</b> của việc biến kế hoạch thành sản phẩm chạy thật.</p>
+    </div>
+
+    <div class="ready-grid">
+      <div class="ready-card"><div class="ready-top"><h4>Kiến trúc nền tảng</h4><span class="ready-score score-good">9/10</span></div><div class="ready-bar"><i style="width:90%;background:var(--cyan)"></i></div><p>Cách xây dựng rất bài bản, chia việc rõ ràng giữa các phần.</p></div>
+      <div class="ready-card"><div class="ready-top"><h4>Giá trị nghiệp vụ</h4><span class="ready-score score-mid">6/10</span></div><div class="ready-bar"><i style="width:60%;background:var(--amber)"></i></div><p>Biết rõ vấn đề cần giải quyết, nhưng giá trị thực tế chưa xuất hiện; tính năng nổi bật (trợ lý AI) đang tạm dừng.</p></div>
+      <div class="ready-card"><div class="ready-top"><h4>Dễ bảo trì</h4><span class="ready-score score-good">9/10</span></div><div class="ready-bar"><i style="width:90%;background:var(--cyan)"></i></div><p>Mã nguồn gọn gàng, có quy tắc rõ ràng khi sửa hoặc thêm việc mới.</p></div>
+      <div class="ready-card"><div class="ready-top"><h4>Bảo mật</h4><span class="ready-score score-bad">4/10</span></div><div class="ready-bar"><i style="width:40%;background:var(--red)"></i></div><p>Mới dùng 1 tài khoản cố định, chưa phân quyền người dùng, đường truyền nội bộ chưa mã hoá.</p></div>
+      <div class="ready-card"><div class="ready-top"><h4>Khả năng chịu tải</h4><span class="ready-score score-mid">5/10</span></div><div class="ready-bar"><i style="width:50%;background:var(--amber)"></i></div><p>Nguyên tắc thiết kế đúng hướng, nhưng chưa từng thử với lượng dữ liệu lớn.</p></div>
+      <div class="ready-card"><div class="ready-top"><h4>Chất lượng mã nguồn</h4><span class="ready-score score-good">8.5/10</span></div><div class="ready-bar"><i style="width:85%;background:var(--cyan)"></i></div><p>Sạch sẽ, dễ đọc, không có phần "vá víu" rải rác khắp nơi.</p></div>
+      <div class="ready-card"><div class="ready-top"><h4>Tài liệu</h4><span class="ready-score score-good">9.5/10</span></div><div class="ready-bar"><i style="width:95%;background:var(--cyan)"></i></div><p>Ghi chép cực kỳ đầy đủ — điểm mạnh nhất của dự án hiện nay.</p></div>
+      <div class="ready-card"><div class="ready-top"><h4>Sẵn sàng chạy thật</h4><span class="ready-score score-bad">2.5/10</span></div><div class="ready-bar"><i style="width:25%;background:var(--red)"></i></div><p>Mới chạy trên máy phát triển; chưa có môi trường thật, chưa sao lưu, chưa thử tải.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= RỦI RO ================= -->
+<section id="rui-ro">
+  <div class="wrap reveal">
+    <div class="eyebrow">Cần lưu ý</div>
+    <h2 class="h2">Rủi ro chính</h2>
+
+    <div class="risk-list">
+      <div class="risk-row sev-cao"><span class="sev-pill">CAO</span><p><b>Khoảng cách lớn:</b> từ bộ khung hiện tại đến đợt chạy thử tháng 7 vẫn còn khá xa.</p></div>
+      <div class="risk-row sev-cao"><span class="sev-pill">CAO</span><p><b>Bảo mật sơ khai:</b> chỉ nên dùng nội bộ, chưa nên đưa dữ liệu thật vào lúc này.</p></div>
+      <div class="risk-row sev-cao"><span class="sev-pill">CAO</span><p><b>Chưa có nơi vận hành thật:</b> mới chỉ chạy trên máy phát triển, chưa có đường lên môi trường sản xuất.</p></div>
+      <div class="risk-row sev-cao"><span class="sev-pill">CAO</span><p><b>Dữ liệu nhạy cảm:</b> chưa có cơ chế che giấu thông tin học sinh/phụ huynh lúc vận hành thật.</p></div>
+      <div class="risk-row sev-tb"><span class="sev-pill">TB</span><p><b>Nghẽn nhân sự:</b> chỉ 2 người phụ trách phần giao diện — dễ chậm tiến độ nếu vắng mặt.</p></div>
+      <div class="risk-row sev-tb"><span class="sev-pill">TB</span><p><b>Công nghệ phức tạp:</b> "băng chuyền" (Kafka) khá nặng để vận hành cho một đội chỉ 6 người.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= LỘ TRÌNH ================= -->
+<section id="lo-trinh">
+  <div class="wrap reveal">
+    <div class="eyebrow">Sắp tới</div>
+    <h2 class="h2">Sáu chặng còn lại</h2>
+
+    <div class="roadmap-cards">
+      <div class="rc current"><div class="tag">Đang làm</div><h4>P1 — Bộ khung đi bộ</h4><p>Cho một luồng dữ liệu thật chạy trọn vẹn từ đầu đến cuối, dù chỉ một đường đơn giản.</p></div>
+      <div class="rc"><div class="tag">Kế tiếp</div><h4>P2 — Nhìn thấy dữ liệu chảy</h4><p>Màn hình cập nhật trực tiếp theo thời gian thực, thêm đăng nhập an toàn hơn.</p></div>
+      <div class="rc"><div class="tag">Kế hoạch</div><h4>P3 — Bền hơn khi có sự cố</h4><p>Thêm khả năng định tuyến, tự thử lại khi lỗi, không xử lý trùng lặp.</p></div>
+      <div class="rc"><div class="tag">Kế hoạch</div><h4>P4 — Kết nối nhiều nguồn hơn</h4><p>Thêm bộ kết nối cho REST/SQL Server/Excel, chuẩn hoá cách khai báo luồng xử lý.</p></div>
+      <div class="rc"><div class="tag">Kế hoạch</div><h4>P5 — Tự thiết kế &amp; cảnh báo</h4><p>Giao diện kéo-thả để tạo luồng mới, cảnh báo qua Email/Zalo, phát hiện bất thường.</p></div>
+      <div class="rc"><div class="tag">Kế hoạch</div><h4>P6 — Làm chắc trước khi chạy thật</h4><p>Kiểm thử tải, sao lưu/khôi phục, bảo mật nâng cao, chuẩn bị hạ tầng chạy thật.</p></div>
+    </div>
+
+    <div class="pilot-note"><b>Mốc tháng 7:</b> chạy thử ở chế độ "quan sát" (shadow mode) — theo dõi song song, chưa thay thế hệ thống hiện tại.</div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="sig">VA HUB · ĐỌC TRỰC TIẾP MÃ NGUỒN, KHÔNG SUY ĐOÁN</div>
+    <p>Khi tài liệu và mã nguồn lệch nhau, bản tóm tắt này luôn ưu tiên mã nguồn thật. Mọi con số hoàn thành đều dựa trên bằng chứng cụ thể trong repo, không phải ước lượng cảm tính.</p>
+    <p>Cập nhật lần cuối: 06/07/2026 · Trạng thái: Phase 0 đóng (v0.1.0), Phase 1 đang mở.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  // scroll progress bar
+  var bar = document.getElementById('progressbar');
+  function onScroll(){
+    var h = document.documentElement;
+    var pct = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+    bar.style.width = (isFinite(pct) ? pct : 0) + '%';
+  }
+  document.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+
+  // reveal on scroll
+  var reveals = document.querySelectorAll('.reveal');
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, {threshold:.12});
+    reveals.forEach(function(el){ io.observe(el); });
+  } else {
+    reveals.forEach(function(el){ el.classList.add('in'); });
+  }
+
+  // side nav active state
+  var navLinks = document.querySelectorAll('#sidenav a');
+  var sections = Array.prototype.map.call(navLinks, function(a){ return document.querySelector(a.getAttribute('href')); }).filter(Boolean);
+  if('IntersectionObserver' in window && sections.length){
+    var navIo = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        var idx = sections.indexOf(e.target);
+        if(idx > -1 && e.isIntersecting){
+          navLinks.forEach(function(l){ l.classList.remove('active'); });
+          navLinks[idx].classList.add('active');
+        }
+      });
+    }, {rootMargin:'-40% 0px -50% 0px'});
+    sections.forEach(function(s){ navIo.observe(s); });
+  }
+})();
+</script>
+</body>
+</html>
