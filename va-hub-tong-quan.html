@@ -253,6 +253,7 @@
   <a href="#van-de" data-label="Vấn đề"><span>Vấn đề</span></a>
   <a href="#kien-truc" data-label="Kiến trúc"><span>Kiến trúc</span></a>
   <a href="#luong" data-label="Luồng dữ liệu"><span>Luồng dữ liệu</span></a>
+  <a href="#vi-du" data-label="Ví dụ hệ thống"><span>Ví dụ hệ thống</span></a>
   <a href="#tien-do" data-label="Tiến độ"><span>Tiến độ</span></a>
   <a href="#san-sang" data-label="Sẵn sàng?"><span>Sẵn sàng?</span></a>
   <a href="#rui-ro" data-label="Rủi ro"><span>Rủi ro</span></a>
@@ -503,6 +504,46 @@
         <span class="mini-arrow">→</span>
         <div class="mini-step"><span class="num">2</span>Xem trạng thái sức khỏe các trạm</div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= VÍ DỤ 4 HỆ THỐNG ================= -->
+<section id="vi-du">
+  <div class="wrap reveal">
+    <div class="eyebrow">Kể bằng ví dụ cụ thể</div>
+    <h2 class="h2">Bốn hệ thống của trường sẽ chảy thế nào?</h2>
+    <p class="lead">Phần trên nói VA Hub <b>là gì</b>. Nhưng dễ hình dung nhất là đi theo chân từng mẩu dữ liệu thật: khi một học sinh đổi lớp, một điểm bài tập được chấm, một hợp đồng sắp hết hạn, hay một file căng tin cuối ngày — chúng đi tới màn hình quản lý ra sao? Chúng tôi dựng riêng một trang minh hoạ bấm-để-chạy cho 4 hệ thống trường học phổ biến.</p>
+
+    <div class="cards-grid" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr));">
+      <div class="card" style="border-top:3px solid #4FD8EC;">
+        <div class="icon" style="color:#4FD8EC"><svg><use href="#i-scatter"/></svg></div>
+        <h3>SIS · Thông tin học sinh</h3>
+        <p>Hồ sơ, lớp, điểm danh, phụ huynh. Ví dụ: học sinh đổi lớp → mọi báo cáo sĩ số tự cập nhật.</p>
+      </div>
+      <div class="card" style="border-top:3px solid #A78BFA;">
+        <div class="icon" style="color:#A78BFA"><svg><use href="#i-radar"/></svg></div>
+        <h3>LMS · Học tập trực tuyến</h3>
+        <p>Bài giảng, bài tập, điểm số. Ví dụ: điểm mới → phát hiện sớm học sinh đang đuối.</p>
+      </div>
+      <div class="card" style="border-top:3px solid #56D9A3;">
+        <div class="icon" style="color:#56D9A3"><svg><use href="#i-shield"/></svg></div>
+        <h3>HRM · Nhân sự</h3>
+        <p>Giáo viên, chấm công, hợp đồng. Ví dụ: hợp đồng sắp hết hạn → nhắc gia hạn, giấu kín lương.</p>
+      </div>
+      <div class="card" style="border-top:3px solid #F5A742;">
+        <div class="icon" style="color:#F5A742"><svg><use href="#i-truck"/></svg></div>
+        <h3>POS · Thu ngân &amp; căng tin</h3>
+        <p>Học phí, căng tin, đồng phục. Ví dụ: file Excel cuối ngày → doanh thu &amp; đối soát tự động.</p>
+      </div>
+    </div>
+
+    <div class="real-flow-box" style="margin-top:32px;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;">
+      <div>
+        <div class="eyebrow">Trang minh hoạ trực quan</div>
+        <p class="lead" style="margin:10px 0 0;">Sơ đồ pipeline chi tiết, luồng demo động, dữ liệu trước/sau khi làm sạch, biểu đồ &amp; màn hình quản lý hợp nhất — giải thích ít kỹ thuật nhưng đầy đủ.</p>
+      </div>
+      <a href="va-hub-vi-du-luong.html" style="flex-shrink:0;display:inline-flex;align-items:center;gap:10px;font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:600;background:var(--cyan);color:var(--bg);padding:14px 22px;border-radius:999px;text-decoration:none;">Xem 4 luồng demo →</a>
     </div>
   </div>
 </section>
