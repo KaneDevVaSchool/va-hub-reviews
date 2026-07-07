@@ -119,6 +119,14 @@
   .dial-num{font-family:'Be Vietnam Pro',sans-serif;font-weight:800;font-size:30px;line-height:1;}
   .dial-num small{font-size:16px;color:var(--text-dim);font-weight:600;}
   .dial-label{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-dim);margin-top:8px;text-align:center;padding:0 10px;line-height:1.5;}
+  .dial-pct{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--amber);margin-top:6px;font-weight:600;}
+  .dial-pct b{color:var(--text);font-weight:700;}
+  .phase-ring .pr-pct{font-family:'Be Vietnam Pro',sans-serif;font-weight:800;font-size:15px;color:var(--amber);margin-top:4px;}
+  .ph-metrics{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px;}
+  .ph-metric{font-family:'JetBrains Mono',monospace;font-size:12px;border:1px solid var(--border);background:var(--panel-2);padding:8px 12px;border-radius:10px;color:var(--text-dim);}
+  .ph-metric b{color:var(--text);}
+  .ph-metric.accent{border-color:var(--amber);background:var(--amber-dim);color:var(--amber);}
+  .ph-metric.accent b{color:var(--text);}
   .dial-card .foot{font-size:13.5px;color:var(--text-dim);margin-top:12px;position:relative;}
   .dial-card .foot b{color:var(--text);}
 
@@ -429,14 +437,15 @@
 <header class="hero" id="hero">
   <div class="wrap hero-grid">
     <div>
-      <div class="eyebrow">Báo cáo toàn cảnh dự án · đọc trực tiếp mã nguồn</div>
+      <div class="eyebrow">Báo cáo toàn cảnh · đối chiếu trực tiếp với mã nguồn</div>
       <h1>VA&nbsp;<span class="grad">Hub</span></h1>
-      <div class="tagline">// trạm trung chuyển dữ liệu cho hệ thống trường học</div>
-      <p class="lead">Nhà trường đang dùng nhiều phần mềm khác nhau — quản lý học sinh, kế toán, cửa hàng, file Excel — nhưng chúng <b>không "nói chuyện" được với nhau</b>. VA Hub là cầu nối: tự động lấy dữ liệu, làm sạch, che thông tin nhạy cảm, rồi gửi đến đúng nơi cần — kèm một màn hình để đội kỹ thuật thấy dữ liệu đang đi tới đâu, lúc nào.</p>
+      <div class="tagline">// trạm trung chuyển dữ liệu cho nhà trường</div>
+      <p class="lead">Nhà trường đang dùng nhiều phần mềm — quản lý học sinh, kế toán, cửa hàng, cả file Excel — nhưng chúng <b>không nói chuyện được với nhau</b>. VA Hub là cầu nối: tự động lấy dữ liệu, làm sạch, che thông tin nhạy cảm, rồi đưa đúng chỗ cần. Đội kỹ thuật có một màn hình để thấy dữ liệu đang đi đâu, lúc nào.</p>
       <div class="chip-row">
         <span class="chip"><span class="dot dot-cyan"></span>Giai đoạn 0: <b>đã xong</b></span>
         <span class="chip"><span class="dot dot-amber"></span>Giai đoạn 1: <b>đang chạy</b></span>
         <span class="chip"><span class="dot dot-red"></span>Sẵn sàng chạy thật: <b>2.5/10</b></span>
+        <span class="chip"><span class="dot dot-cyan"></span>Tiến độ lộ trình: <b id="chipOverallPct">~17%</b></span>
       </div>
     </div>
     <div class="dial-card reveal" data-delay="1">
@@ -447,8 +456,9 @@
           <defs><linearGradient id="dialGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="var(--cyan)"/><stop offset="100%" stop-color="var(--amber)"/></linearGradient></defs>
         </svg>
         <div class="dial-center">
-          <div class="dial-num" data-count="1" data-suffix="/7">0</div>
-          <div class="dial-label">giai đoạn hoàn tất<br>trong lộ trình 7 giai đoạn</div>
+          <div class="dial-num" id="heroPct" data-count="17" data-suffix="%">0</div>
+          <div class="dial-pct"><span data-count="1" data-suffix="/7">0</span> giai đoạn đã xong</div>
+          <div class="dial-label">Tiến độ lộ trình 7 giai đoạn<br><b style="color:var(--text-faint);font-weight:500">(Giai đoạn 0 xong · Giai đoạn 1 khoảng 15%)</b></div>
         </div>
       </div>
       <div class="foot">Nền móng kỹ thuật: <b>vững</b> · Nghiệp vụ thật: <b>mới bắt đầu</b></div>
@@ -461,7 +471,7 @@
   <div class="wrap reveal">
     <div class="eyebrow">Vì sao dự án này tồn tại</div>
     <h2 class="h2">Bài toán đang cần giải</h2>
-    <p class="lead">Trước khi nói về công nghệ, hãy nói về vấn đề thật của nhà trường — bằng ngôn ngữ ai cũng hiểu.</p>
+    <p class="lead">Trước hết là vấn đề thật của nhà trường — nói bằng ngôn ngữ ai cũng hiểu, chưa cần đụng tới công nghệ.</p>
     <div class="cards-grid">
       <div class="card reveal" data-delay="1">
         <div class="icon"><svg><use href="#i-scatter"/></svg></div>
@@ -471,7 +481,7 @@
       <div class="card reveal" data-delay="2">
         <div class="icon"><svg><use href="#i-warn"/></svg></div>
         <h3>Nhập tay dễ sai</h3>
-        <p>Chép số liệu qua lại bằng tay giữa các phần mềm — chỉ cần lơ là một phút là lệch số.</p>
+        <p>Chép tay giữa các phần mềm — chỉ cần lơ một phút là lệch số.</p>
       </div>
       <div class="card reveal" data-delay="3">
         <div class="icon"><svg><use href="#i-search"/></svg></div>
@@ -596,7 +606,7 @@
         <!-- OBSERVABILITY -->
         <div class="node st-real" style="left:3.23%;top:86.15%;width:93.55%;">
           <div class="node-top"><div class="node-icon"><svg><use href="#i-radar"/></svg></div><div class="title">Phòng giám sát</div></div>
-          <div class="sub">Theo dõi sức khoẻ, nhật ký và cảnh báo của toàn hệ thống — công cụ đang chạy: OTel, Jaeger, Prometheus, Loki, Grafana.</div>
+          <div class="sub">Theo dõi sức khỏe, nhật ký và cảnh báo của toàn hệ thống — công cụ đang chạy: OTel, Jaeger, Prometheus, Loki, Grafana.</div>
           <div class="badge"><i class="dot"></i>Thật, đang chạy tốt</div>
         </div>
       </div>
@@ -605,7 +615,7 @@
   <div class="wrap reveal">
     <div class="callout">
       <span class="co-ic"><svg><use href="#i-info"/></svg></span>
-      <div>Tóm lại: hôm nay dữ liệu <b>chưa thực sự "chảy"</b> qua băng chuyền. Phần chạy thật duy nhất là đăng nhập + xem trạng thái sức khỏe. Việc vận chuyển dữ liệu thật là trọng tâm của <b>giai đoạn tiếp theo</b>.</div>
+      <div>Tóm lại: hôm nay dữ liệu nghiệp vụ <b>chưa chảy</b> qua băng chuyền. Phần đang chạy thật chỉ có đăng nhập và xem sức khỏe hệ thống. Đưa dữ liệu thật đi hết vòng là trọng tâm của <b>giai đoạn tiếp theo</b>.</div>
     </div>
   </div>
 </section>
@@ -648,11 +658,11 @@
         <p>Mỗi bước đều để lại "dấu chân" để đội kỹ thuật truy vết khi có sự cố.</p>
       </div>
     </div>
-    <span class="warn-tag"><svg><use href="#i-warn"/></svg>Toàn bộ 5 bước này hiện là KẾ HOẠCH — chưa bước nào chạy với dữ liệu thật</span>
+    <span class="warn-tag"><svg><use href="#i-warn"/></svg>Cả 5 bước trên vẫn là <b>kế hoạch</b> — chưa có bước nào chạy với dữ liệu thật</span>
 
     <div class="real-flow-box reveal">
       <div class="eyebrow">Luồng đang chạy thật hôm nay</div>
-      <p class="lead" style="margin-top:10px;">Chỉ vỏn vẹn 2 bước, và <b>không có dữ liệu nghiệp vụ nào di chuyển</b>:</p>
+      <p class="lead" style="margin-top:10px;">Hiện chỉ có <b>hai việc</b> chạy thật — và <b>chưa có dữ liệu nghiệp vụ</b> nào được chuyển đi:</p>
       <div class="mini-steps">
         <div class="mini-step"><span class="num">1</span>Đăng nhập vào hệ thống</div>
         <span class="mini-arrow"><svg width="18" height="18" viewBox="0 0 24 24" style="stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
@@ -662,40 +672,45 @@
   </div>
 </section>
 
-<!-- ================= VÍ DỤ 4 HỆ THỐNG ================= -->
+<!-- ================= VÍ DỤ 5 HỆ THỐNG (PHẦN 2) ================= -->
 <section id="vi-du">
   <div class="wrap reveal">
     <div class="eyebrow">Kể bằng ví dụ cụ thể</div>
-    <h2 class="h2">Bốn hệ thống của trường sẽ chảy thế nào?</h2>
-    <p class="lead">Phần trên nói VA Hub <b>là gì</b>. Nhưng dễ hình dung nhất là đi theo chân từng mẩu dữ liệu thật: khi một học sinh đổi lớp, một điểm bài tập được chấm, một hợp đồng sắp hết hạn, hay một file căng tin cuối ngày — chúng đi tới màn hình quản lý ra sao? Chúng tôi dựng riêng một trang minh hoạ <b>bấm-để-chạy</b> cho các hệ thống trường học phổ biến.</p>
+    <h2 class="h2">Năm hệ thống lõi sẽ chảy thế nào?</h2>
+    <p class="lead">Ở trên là VA Hub <b>là gì</b>. Cách dễ hình dung nhất: đi theo từng mẩu dữ liệu — phụ huynh được duyệt, học sinh đổi lớp, đơn đồng phục, xuất kho, ghi sổ — tất cả qua Hub. <b>Phần 2</b> có demo <b>bấm để xem chạy</b> cho CRM · SIS · E‑Commerce · POS · MISA (LMS và HRM sẽ thêm sau, cùng một mô hình).</p>
 
-    <div class="cards-grid" style="grid-template-columns:repeat(auto-fit,minmax(230px,1fr));">
+    <div class="cards-grid" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr));">
       <div class="card reveal" data-delay="1">
-        <div class="icon" style="color:#4FD8EC;background:rgba(79,216,236,.12)"><svg><use href="#i-scatter"/></svg></div>
-        <h3>SIS · Thông tin học sinh</h3>
-        <p>Hồ sơ, lớp, điểm danh, phụ huynh. Ví dụ: học sinh đổi lớp → mọi báo cáo sĩ số tự cập nhật.</p>
+        <div class="icon" style="color:#F472B6;background:rgba(244,114,182,.13)"><svg><use href="#i-scatter"/></svg></div>
+        <h3>CRM · Phụ huynh</h3>
+        <p>Lead → Customer, mã gốc ParentID. Ví dụ: duyệt phụ huynh → mọi hệ bám cùng một mã.</p>
       </div>
       <div class="card reveal" data-delay="2">
-        <div class="icon" style="color:#A78BFA;background:rgba(167,139,250,.13)"><svg><use href="#i-radar"/></svg></div>
-        <h3>LMS · Học tập trực tuyến</h3>
-        <p>Bài giảng, bài tập, điểm số. Ví dụ: điểm mới → phát hiện sớm học sinh đang đuối.</p>
+        <div class="icon" style="color:#4FD8EC;background:rgba(79,216,236,.12)"><svg><use href="#i-scatter"/></svg></div>
+        <h3>SIS · Học sinh</h3>
+        <p>Hồ sơ, lớp, Student ID. Ví dụ: đổi lớp → báo cáo sĩ số tự cập nhật.</p>
       </div>
       <div class="card reveal" data-delay="3">
-        <div class="icon" style="color:#56D9A3;background:rgba(86,217,163,.13)"><svg><use href="#i-shield"/></svg></div>
-        <h3>HRM · Nhân sự</h3>
-        <p>Giáo viên, chấm công, hợp đồng. Ví dụ: hợp đồng sắp hết hạn → nhắc gia hạn, giấu kín lương.</p>
+        <div class="icon" style="color:#60A5FA;background:rgba(96,165,250,.13)"><svg><use href="#i-monitor"/></svg></div>
+        <h3>E‑Commerce</h3>
+        <p>Đơn online, học phí, đồng phục. Ví dụ: thanh toán → Hub map sang POS giữ kho.</p>
       </div>
       <div class="card reveal" data-delay="4">
         <div class="icon" style="color:#F5A742;background:rgba(245,167,66,.13)"><svg><use href="#i-truck"/></svg></div>
-        <h3>POS · Thu ngân &amp; căng tin</h3>
-        <p>Học phí, căng tin, đồng phục. Ví dụ: file Excel cuối ngày → doanh thu &amp; đối soát tự động.</p>
+        <h3>POS · Kho</h3>
+        <p>Tồn kho, xuất bán, đối soát tiền. Ví dụ: RESERVE → FULFILLED → đẩy doanh thu.</p>
+      </div>
+      <div class="card reveal" data-delay="4">
+        <div class="icon" style="color:#56D9A3;background:rgba(86,217,163,.13)"><svg><use href="#i-shield"/></svg></div>
+        <h3>MISA · Kế toán</h3>
+        <p>Chứng từ, bút toán, POSTED. Ví dụ: 540.000 ₫ khớp từ đơn web đến sổ cái.</p>
       </div>
     </div>
 
     <div class="real-flow-box reveal" style="margin-top:34px;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;">
       <div>
-        <div class="eyebrow">Trang minh hoạ trực quan</div>
-        <p class="lead" style="margin:10px 0 0;">Sơ đồ pipeline chi tiết, luồng demo động, dữ liệu <b>trước/sau khi làm sạch</b>, <b>so sánh 5 luồng nguồn &amp; ETL</b>, biểu đồ &amp; màn hình quản lý hợp nhất — giải thích ít kỹ thuật nhưng đầy đủ.</p>
+        <div class="eyebrow">Trang minh họa trực quan</div>
+        <p class="lead" style="margin:10px 0 0;">Sơ đồ từng bước, demo chạy thử, dữ liệu <b>trước và sau khi làm sạch</b>, so sánh <b>5 luồng và ETL</b>, cùng bản phác màn hình quản lý — ít thuật ngữ, đủ để hình dung.</p>
       </div>
       <div style="display:flex;flex-wrap:wrap;gap:10px;flex-shrink:0;">
         <a href="va-hub-vi-du-luong.html#da-luong-etl" style="display:inline-flex;align-items:center;gap:10px;font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600;border:1px solid var(--cyan);color:var(--cyan);padding:14px 20px;border-radius:999px;text-decoration:none;">Đa luồng &amp; ETL →</a>
@@ -710,7 +725,7 @@
   <div class="wrap reveal">
     <div class="eyebrow">Hiện trạng</div>
     <h2 class="h2">Đang ở đâu trong lộ trình 7 giai đoạn?</h2>
-    <p class="lead">Chúng tôi đo tiến độ <b>theo giai đoạn hoàn thành</b>, không theo mốc tháng — vì mỗi giai đoạn là một bước có thể kiểm chứng bằng bằng chứng trong mã nguồn.</p>
+    <p class="lead">Tiến độ được đo <b>theo giai đoạn hoàn thành</b>, không gắn cứng mốc tháng — mỗi giai đoạn đều có thể kiểm tra lại trong mã nguồn.</p>
 
     <div class="phase-hero reveal">
       <div class="phase-ring">
@@ -720,13 +735,19 @@
           <defs><linearGradient id="dialGrad3" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="var(--cyan)"/><stop offset="100%" stop-color="var(--amber)"/></linearGradient></defs>
         </svg>
         <div class="pr-center">
-          <div class="pr-big"><span data-count="1">0</span><small>/7</small></div>
-          <div class="pr-sub">GIAI ĐOẠN XONG</div>
+          <div class="pr-big"><span id="phasePctBig" data-count="17" data-suffix="%">0</span></div>
+          <div class="pr-pct"><span data-count="1">0</span>/7 giai đoạn đã xong</div>
+          <div class="pr-sub">TIẾN ĐỘ LỘ TRÌNH</div>
         </div>
       </div>
       <div class="ph-txt">
         <h3>Xong Giai đoạn 0 · Đang chạy Giai đoạn 1</h3>
-        <p><b>Giai đoạn 0 (Nền móng)</b> đã đóng: dựng khung hạ tầng, giám sát, đăng nhập. <b>Giai đoạn 1 (Bộ khung đi bộ)</b> đang mở: mục tiêu cho một luồng dữ liệu thật chạy trọn vẹn từ đầu đến cuối. Còn <b>5 giai đoạn</b> nữa để biến kế hoạch thành sản phẩm chạy thật.</p>
+        <div class="ph-metrics">
+          <span class="ph-metric accent">Tổng lộ trình: <b id="phOverallPct">~17%</b></span>
+          <span class="ph-metric">Một giai đoạn xong: <b>14%</b> <span style="color:var(--text-faint)">(1/7)</span></span>
+          <span class="ph-metric">Menu quản trị: <b>10%</b> <span style="color:var(--text-faint)">(2/20 mục)</span></span>
+        </div>
+        <p><b>Giai đoạn 0 (Nền móng)</b> đã xong: hạ tầng, giám sát, đăng nhập. <b>Giai đoạn 1 (Bộ khung đi bộ)</b> đang mở — mục tiêu là một luồng dữ liệu thật chạy trọn từ đầu đến cuối. Còn <b>5 giai đoạn</b> nữa trước khi kế hoạch trở thành sản phẩm vận hành thật.</p>
       </div>
     </div>
 
@@ -743,7 +764,7 @@
     <div class="module-block reveal">
       <div class="module-head">
         <h3>Các mục trong giao diện quản trị</h3>
-        <span class="mh-count">2 / 20 hoạt động</span>
+        <span class="mh-count">2 / 20 hoạt động · <b>10%</b></span>
       </div>
       <p style="color:var(--text-dim);font-size:14.5px;max-width:660px;margin:6px 0 0;">Mỗi ô vuông dưới đây là một mục trong menu (Pipelines, Connectors, Scheduler, Users...). <b style="color:var(--text)">Ô sáng = đã có logic thật</b>. Ô còn lại đều hiện chữ "Sắp ra mắt".</p>
       <div class="module-grid">
@@ -764,9 +785,9 @@
 <!-- ================= SẴN SÀNG PRODUCTION ================= -->
 <section id="san-sang">
   <div class="wrap reveal">
-    <div class="eyebrow">Chuẩn production</div>
-    <h2 class="h2">Đã sẵn sàng chạy thật chưa?</h2>
-    <p class="lead">Đánh giá theo 8 tiêu chí, thang điểm 10 — dựa trên việc <b>đọc trực tiếp mã nguồn</b>, không suy đoán.</p>
+    <div class="eyebrow">Sẵn sàng vận hành thật</div>
+    <h2 class="h2">Đã đủ điều kiện chạy thật chưa?</h2>
+    <p class="lead">Chấm theo 8 tiêu chí, thang 10 — dựa trên <b>mã nguồn thực tế</b>, không đoán.</p>
 
     <div class="gauge-row reveal">
       <div class="dial-wrap" style="width:158px;height:158px;">
@@ -775,7 +796,7 @@
           <circle id="readyRing" cx="60" cy="60" r="52" fill="none" stroke="url(#dialGrad2)" stroke-width="10" stroke-linecap="round" stroke-dasharray="326.7" stroke-dashoffset="326.7"/>
           <defs><linearGradient id="dialGrad2" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="var(--cyan)"/><stop offset="100%" stop-color="var(--amber)"/></linearGradient></defs>
         </svg>
-        <div class="dial-center"><div class="dial-num" data-count="6.6" data-decimals="1">0</div><div class="dial-label">/ 10 điểm<br>trung bình</div></div>
+        <div class="dial-center"><div class="dial-num" data-count="6.7" data-decimals="1">0</div><div class="dial-pct"><b>67%</b> thang điểm</div><div class="dial-label">/ 10 điểm<br>trung bình 8 tiêu chí</div></div>
       </div>
       <p style="color:var(--text-dim);max-width:490px;font-size:14.5px;">Nền tảng kỹ thuật &amp; kỷ luật làm việc <b style="color:var(--text)">rất tốt</b>, nhưng dự án đang ở giai đoạn <b style="color:var(--text)">rất sớm</b> của việc biến kế hoạch thành sản phẩm chạy thật.</p>
     </div>
@@ -828,7 +849,7 @@
 
     <div class="pilot-note reveal">
       <span class="co-ic"><svg><use href="#i-flag"/></svg></span>
-      <div><b>Cột mốc chạy thử đầu tiên:</b> chạy ở chế độ "quan sát" (shadow mode) — theo dõi song song với hệ thống hiện tại, <b>chưa thay thế</b> gì cả. Đây là bước kiểm chứng an toàn trước khi tính đến vận hành thật.</div>
+      <div><b>Cột mốc chạy thử đầu tiên:</b> chạy ở chế độ <b>quan sát</b> (shadow) — theo dõi song song hệ hiện tại, <b>chưa thay thế</b> gì. Đó là bước kiểm tra an toàn trước khi nghĩ tới vận hành thật.</div>
     </div>
   </div>
 </section>
@@ -851,7 +872,7 @@
     <div class="sf-meta">
       <div class="sig">VA HUB · ĐỌC TRỰC TIẾP MÃ NGUỒN, KHÔNG SUY ĐOÁN</div>
       <p>Khi tài liệu và mã nguồn lệch nhau, bản tóm tắt này luôn ưu tiên mã nguồn thật. Mọi con số hoàn thành đều dựa trên bằng chứng cụ thể trong repo, không phải ước lượng cảm tính.</p>
-      <p>Trạng thái: Giai đoạn 0 đóng (v0.1.0), Giai đoạn 1 đang mở.</p>
+      <p>Trạng thái: Giai đoạn 0 đã hoàn thành (v0.1.0), Giai đoạn 1 đang triển khai.</p>
     </div>
   </div>
 </footer>
@@ -859,6 +880,23 @@
 <script>
 (function(){
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Tiến độ % — một nguồn số cho toàn trang (1 GĐ xong + GĐ1 ~15% → ~17% tổng)
+  var PHASES_TOTAL = 7;
+  var PHASES_DONE = 1;
+  var CURRENT_PHASE_FRAC = 0.15;
+  var OVERALL_PCT = Math.round(((PHASES_DONE + CURRENT_PHASE_FRAC) / PHASES_TOTAL) * 100);
+  var PHASES_CLOSED_PCT = Math.round((PHASES_DONE / PHASES_TOTAL) * 100);
+  var MODULE_PCT = 10;
+  var overallFrac = OVERALL_PCT / 100;
+
+  document.querySelectorAll('#chipOverallPct, #phOverallPct').forEach(function(el){
+    el.textContent = '~' + OVERALL_PCT + '%';
+  });
+  var heroPct = document.getElementById('heroPct');
+  if(heroPct){ heroPct.setAttribute('data-count', String(OVERALL_PCT)); }
+  var phasePctBig = document.getElementById('phasePctBig');
+  if(phasePctBig){ phasePctBig.setAttribute('data-count', String(OVERALL_PCT)); }
 
   // scroll progress bar
   var bar = document.getElementById('progressbar');
@@ -916,7 +954,7 @@
     var heroCard = document.querySelector('.dial-card');
     if(heroCard){
       var hio = new IntersectionObserver(function(es){es.forEach(function(e){ if(e.isIntersecting){
-        setRing(document.getElementById('heroRing'), 1/7);
+        setRing(document.getElementById('heroRing'), overallFrac);
         heroCard.querySelectorAll('[data-count]').forEach(animateCount);
         hio.unobserve(e.target);
       }});},{threshold:.3});
@@ -926,9 +964,10 @@
     var phaseHero = document.querySelector('.phase-hero');
     if(phaseHero){
       var pio = new IntersectionObserver(function(es){es.forEach(function(e){ if(e.isIntersecting){
-        setRing(document.getElementById('phaseRing'), 1/7);
+        setRing(document.getElementById('phaseRing'), overallFrac);
         var track = document.getElementById('roadmapTrack');
-        if(track) track.style.setProperty('--rm-fill','17%');
+        if(track) track.style.setProperty('--rm-fill', OVERALL_PCT + '%');
+        phaseHero.querySelectorAll('[data-count]').forEach(animateCount);
         pio.unobserve(e.target);
       }});},{threshold:.3});
       pio.observe(phaseHero);
@@ -936,7 +975,7 @@
     var gaugeRow = document.querySelector('.gauge-row');
     if(gaugeRow){
       var gio = new IntersectionObserver(function(es){es.forEach(function(e){ if(e.isIntersecting){
-        setRing(document.getElementById('readyRing'), 6.6/10);
+        setRing(document.getElementById('readyRing'), 6.7/10);
         gio.unobserve(e.target);
       }});},{threshold:.3});
       gio.observe(gaugeRow);
@@ -945,10 +984,10 @@
     reveals.forEach(function(el){ el.classList.add('in'); });
     document.querySelectorAll('[data-count]').forEach(animateCount);
     document.querySelectorAll('.ready-bar i[data-w]').forEach(function(i){ i.style.width=i.getAttribute('data-w')+'%'; });
-    setRing(document.getElementById('heroRing'),1/7);
-    setRing(document.getElementById('phaseRing'),1/7);
-    setRing(document.getElementById('readyRing'),6.6/10);
-    var t=document.getElementById('roadmapTrack'); if(t) t.style.setProperty('--rm-fill','17%');
+    setRing(document.getElementById('heroRing'), overallFrac);
+    setRing(document.getElementById('phaseRing'), overallFrac);
+    setRing(document.getElementById('readyRing'),6.7/10);
+    var t=document.getElementById('roadmapTrack'); if(t) t.style.setProperty('--rm-fill', OVERALL_PCT + '%');
   }
 
   // side nav active state

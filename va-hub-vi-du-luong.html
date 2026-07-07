@@ -561,14 +561,14 @@
 <!-- HERO -->
 <header class="hero">
   <div class="wrap">
-    <div class="eyebrow">Kể chuyện bằng ví dụ · phần bổ sung cho báo cáo tổng quan</div>
-    <h1 class="h1">Các hệ thống lõi<br>sẽ <span class="grad">"chảy"</span> qua VA Hub thế nào?</h1>
+    <div class="eyebrow">Ví dụ cụ thể · bổ sung cho báo cáo tổng quan</div>
+    <h1 class="h1">Các hệ thống lõi<br>sẽ <span class="grad">chảy</span> qua VA Hub thế nào?</h1>
     <div class="tagline">// CRM · SIS · E‑Commerce · POS · MISA → VA Hub → màn hình &amp; báo cáo</div>
-    <p class="lead">Trang tổng quan giải thích VA Hub <em>là gì</em>. Trang này trả lời câu hỏi thực tế hơn: <b>một mẩu dữ liệu đi từ hệ thống này sang hệ thống khác ra sao?</b> Chúng ta đi theo <b>5 hệ thống lõi</b> — CRM, SIS, E‑Commerce, POS/Kho và MISA — theo chân từng mẩu dữ liệu bằng hình ảnh, ví dụ số liệu dễ hình dung, và luồng demo bấm‑để‑chạy.</p>
+    <p class="lead">Trang tổng quan giải thích VA Hub <em>là gì</em>. Trang này trả lời câu hỏi gần gũi hơn: <b>một mẩu dữ liệu đi từ hệ này sang hệ kia như thế nào?</b> Chúng ta theo <b>5 hệ lõi</b> — CRM, SIS, E‑Commerce, POS/Kho và MISA — qua hình ảnh, số liệu mẫu và demo <b>bấm để xem chạy</b>.</p>
 
     <div class="banner">
       <span class="bn-ic"><svg><use href="#i-warn"/></svg></span>
-      <p><b>Lưu ý trung thực:</b> tất cả luồng dưới đây là <b>thiết kế minh hoạ</b> cho các giai đoạn sắp tới (Giai đoạn 1 → 5). Hôm nay hệ thống mới chạy phần đăng nhập + xem sức khoẻ; số liệu trong biểu đồ là <b>ví dụ để hình dung</b>. <b>LMS (học tập)</b> và <b>HRM (nhân sự)</b> sẽ được bổ sung ở giai đoạn sau, cùng chảy qua VA Hub theo đúng mô hình này.</p>
+      <p><b>Nói thẳng:</b> mọi luồng dưới đây là <b>minh họa thiết kế</b> cho các giai đoạn sắp tới (1 → 5). Hôm nay mới chạy được đăng nhập và xem sức khỏe hệ thống; số trên biểu đồ chỉ để <b>dễ hình dung</b>. <b>LMS</b> và <b>HRM</b> sẽ bổ sung sau, theo cùng mô hình.</p>
     </div>
 
     <div class="sys-quick">
@@ -586,10 +586,10 @@
   <div class="wrap reveal">
     <div class="eyebrow">Bức tranh hoàn thiện</div>
     <h2 class="h2">Nhiều nguồn vào — một trạm trung chuyển — nhiều màn hình ra</h2>
-    <p class="lead">Thay vì mỗi phần mềm nói một ngôn ngữ riêng và không ai ghép được, tất cả cùng đổ về VA Hub. Bốn <b>nguồn sự thật</b> (CRM · SIS · POS/Kho · MISA) gửi dữ liệu qua Hub — nơi nó được <b>làm sạch, che thông tin nhạy cảm, ánh xạ mã chung</b> — rồi mới toả ra các màn hình và báo cáo. E‑Commerce là kênh bán online, đứng giữa như trong sơ đồ tổng thể phía dưới.</p>
+    <p class="lead">Mỗi phần mềm từng nói một “ngôn ngữ” riêng. Giờ cùng đổ về VA Hub: <b>năm luồng lõi</b> (CRM · SIS · E‑Commerce · POS/Kho · MISA) được <b>làm sạch, che thông tin nhạy cảm và gắn mã chung</b>, rồi mới tỏa ra màn hình và báo cáo.</p>
 
     <div class="picture-wrap">
-      <svg viewBox="0 0 1000 540" role="img" aria-label="Sơ đồ 4 nguồn hội tụ về VA Hub rồi toả ra các màn hình">
+      <svg viewBox="0 0 1000 540" role="img" aria-label="Sơ đồ năm nguồn hội tụ về VA Hub rồi tỏa ra các màn hình">
         <defs>
           <marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="var(--text-faint)"/></marker>
           <linearGradient id="hubg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#132038"/><stop offset="100%" stop-color="#0D1626"/></linearGradient>
@@ -598,6 +598,7 @@
         <!-- flow lines sources -> hub -->
         <path d="M215,95 C300,95 320,235 372,255" fill="none" stroke="var(--crm)" stroke-width="2.2" marker-end="url(#ar)" opacity=".8"/>
         <path d="M215,185 C300,185 320,255 372,268" fill="none" stroke="var(--sis)" stroke-width="2.2" marker-end="url(#ar)" opacity=".8"/>
+        <path d="M215,275 C300,275 320,268 372,272" fill="none" stroke="var(--ecom)" stroke-width="2.2" marker-end="url(#ar)" opacity=".8"/>
         <path d="M215,355 C300,355 320,285 372,282" fill="none" stroke="var(--lms)" stroke-width="2.2" marker-end="url(#ar)" opacity=".8"/>
         <path d="M215,445 C300,445 320,305 372,295" fill="none" stroke="var(--hrm)" stroke-width="2.2" marker-end="url(#ar)" opacity=".8"/>
 
@@ -611,6 +612,7 @@
         <g font-family="Inter" font-size="13" fill="var(--text)">
           <g><rect x="30" y="70" width="185" height="50" rx="10" fill="var(--panel)" stroke="var(--crm)" stroke-width="1.5"/><text x="46" y="92" font-family="JetBrains Mono" font-size="12" font-weight="600" fill="var(--crm)">CRM</text><text x="46" y="109" fill="var(--text-dim)" font-size="11.5">Quản lý phụ huynh</text></g>
           <g><rect x="30" y="160" width="185" height="50" rx="10" fill="var(--panel)" stroke="var(--sis)" stroke-width="1.5"/><text x="46" y="182" font-family="JetBrains Mono" font-size="12" font-weight="600" fill="var(--sis)">SIS</text><text x="46" y="199" fill="var(--text-dim)" font-size="11.5">Thông tin học sinh</text></g>
+          <g><rect x="30" y="250" width="185" height="50" rx="10" fill="var(--panel)" stroke="var(--ecom)" stroke-width="1.5"/><text x="46" y="272" font-family="JetBrains Mono" font-size="12" font-weight="600" fill="var(--ecom)">E‑Commerce</text><text x="46" y="289" fill="var(--text-dim)" font-size="11.5">Đơn hàng online</text></g>
           <g><rect x="30" y="330" width="185" height="50" rx="10" fill="var(--panel)" stroke="var(--lms)" stroke-width="1.5"/><text x="46" y="352" font-family="JetBrains Mono" font-size="12" font-weight="600" fill="var(--lms)">POS</text><text x="46" y="369" fill="var(--text-dim)" font-size="11.5">Bán hàng &amp; kho</text></g>
           <g><rect x="30" y="420" width="185" height="50" rx="10" fill="var(--panel)" stroke="var(--hrm)" stroke-width="1.5"/><text x="46" y="442" font-family="JetBrains Mono" font-size="12" font-weight="600" fill="var(--hrm)">MISA</text><text x="46" y="459" fill="var(--text-dim)" font-size="11.5">Kế toán</text></g>
         </g>
@@ -639,7 +641,7 @@
     <div class="legend">
       <span><i style="background:var(--crm)"></i>CRM — Quản lý phụ huynh (nguồn gốc)</span>
       <span><i style="background:var(--sis)"></i>SIS — Thông tin học sinh</span>
-      <span><i style="background:var(--lms)"></i>POS — Bán hàng &amp; kho (Inventory)</span>
+      <span><i style="background:var(--lms)"></i>POS — Bán hàng &amp; kho</span>
       <span><i style="background:var(--hrm)"></i>MISA — Kế toán</span>
       <span><i style="background:var(--ecom)"></i>E‑Commerce — kênh bán online</span>
     </div>
@@ -652,11 +654,11 @@
   <div class="wrap reveal">
     <div class="eyebrow">So sánh trực quan</div>
     <h2 class="h2">Nguồn dữ liệu đa luồng &amp; cách ETL hoạt động</h2>
-    <p class="lead">Nhà trường không chỉ có <b>một</b> luồng dữ liệu — có <b>nhiều luồng chạy song song</b> (CRM, SIS, E‑Com, POS, MISA). VA Hub không “trộn chung” bừa bãi: mỗi luồng được <b>lấy (Extract)</b>, <b>biến đổi (Transform)</b>, <b>ghi vào đích (Load)</b> theo quy tắc riêng, rồi <b>nối với nhau bằng bảng mapping</b> (cùng một phụ huynh / học sinh / đơn hàng).</p>
+    <p class="lead">Nhà trường không chỉ có một luồng dữ liệu — <b>nhiều luồng chạy song song</b> (CRM, SIS, E‑Com, POS, MISA). Hub không trộn bừa: mỗi luồng <b>lấy</b>, <b>biến đổi</b>, <b>ghi đích</b> (ETL) theo quy tắc riêng, rồi <b>nối với nhau</b> qua bảng ánh xạ — cùng một phụ huynh, học sinh, một đơn hàng.</p>
 
     <div class="compare-tabs" role="tablist">
       <button type="button" class="ctab active" data-panel="cp-streams">So sánh 5 luồng nguồn</button>
-      <button type="button" class="ctab" data-panel="cp-pull">Push / Pull — cách “nghe” dữ liệu</button>
+      <button type="button" class="ctab" data-panel="cp-pull">Push / Pull — hai cách nhận dữ liệu</button>
       <button type="button" class="ctab" data-panel="cp-etl">ETL từng nguồn (E → T → L)</button>
       <button type="button" class="ctab" data-panel="cp-thread">Một gia đình — nhiều luồng khớp nhau</button>
     </div>
@@ -693,15 +695,15 @@
     </div>
 
     <div class="cpanel active" id="cp-streams">
-      <p class="lead" style="font-size:15px;margin-bottom:4px;">Bảng dưới so sánh <b>cách mỗi hệ “đẩy tin”</b>, <b>tần suất</b>, <b>khối lượng minh hoạ</b> và <b>mã gốc</b> để các hệ khác bám theo. Số liệu cột “bản ghi/ngày” là ví dụ thiết kế, không phải số thật hôm nay.</p>
+      <p class="lead" style="font-size:15px;margin-bottom:4px;">Bảng so sánh <b>cách mỗi hệ gửi dữ liệu</b>, <b>tần suất</b>, <b>khối lượng mẫu</b> và <b>mã gốc</b> để các hệ khác bám theo. “Bản ghi/tuần” là <b>tổng 7 ngày minh họa</b> (T2–CN), không phải số vận hành hôm nay.</p>
 
       <div class="lane-viz reveal">
-        <h4>Độ “nặng” tương đối của từng luồng (minh hoạ)</h4>
-        <div class="lane-row"><span class="lab" style="color:var(--crm)">CRM</span><div class="lane-track"><div class="lane-fill" style="--w:18%;background:var(--crm)"></div></div><span class="cnt">~312/ngày</span></div>
-        <div class="lane-row"><span class="lab" style="color:var(--sis)">SIS</span><div class="lane-track"><div class="lane-fill" style="--w:15%;background:var(--sis)"></div></div><span class="cnt">~256/ngày</span></div>
-        <div class="lane-row"><span class="lab" style="color:var(--ecom)">E‑Com</span><div class="lane-track"><div class="lane-fill" style="--w:42%;background:var(--ecom)"></div></div><span class="cnt">~1.180/ngày</span></div>
-        <div class="lane-row"><span class="lab" style="color:var(--lms)">POS</span><div class="lane-track"><div class="lane-fill" style="--w:100%;background:var(--lms)"></div></div><span class="cnt">~6.240/ngày</span></div>
-        <div class="lane-row"><span class="lab" style="color:var(--hrm)">MISA</span><div class="lane-track"><div class="lane-fill" style="--w:22%;background:var(--hrm)"></div></div><span class="cnt">~890/ngày</span></div>
+        <h4>Độ “nặng” tương đối của từng luồng (minh họa)</h4>
+        <div class="lane-row"><span class="lab" style="color:var(--crm)">CRM</span><div class="lane-track"><div class="lane-fill" style="--w:5%;background:var(--crm)"></div></div><span class="cnt">~315/tuần</span></div>
+        <div class="lane-row"><span class="lab" style="color:var(--sis)">SIS</span><div class="lane-track"><div class="lane-fill" style="--w:4%;background:var(--sis)"></div></div><span class="cnt">~256/tuần</span></div>
+        <div class="lane-row"><span class="lab" style="color:var(--ecom)">E‑Com</span><div class="lane-track"><div class="lane-fill" style="--w:19%;background:var(--ecom)"></div></div><span class="cnt">~1.180/tuần</span></div>
+        <div class="lane-row"><span class="lab" style="color:var(--lms)">POS</span><div class="lane-track"><div class="lane-fill" style="--w:100%;background:var(--lms)"></div></div><span class="cnt">~6.240/tuần</span></div>
+        <div class="lane-row"><span class="lab" style="color:var(--hrm)">MISA</span><div class="lane-track"><div class="lane-fill" style="--w:14%;background:var(--hrm)"></div></div><span class="cnt">~890/tuần</span></div>
       </div>
 
       <div class="map-scroll" style="margin-top:16px;">
@@ -730,7 +732,7 @@
               <td>Học sinh, lớp học</td>
               <td>Quét DB: chỉ dòng <code>updated_at</code> mới</td>
               <td>~5 phút / lần</td>
-              <td class="mono">Học sinh Minh đổi lớp 10A1→10A2</td>
+              <td class="mono">Học sinh Nguyễn An đổi lớp 6A2→6A3</td>
               <td class="mono"><span class="code primary-code">StudentID_SIS</span></td>
               <td>Chuẩn ngày sinh → hash CCCD → cập nhật kho sạch</td>
             </tr>
@@ -788,7 +790,7 @@
     </div>
 
     <div class="cpanel" id="cp-pull">
-      <p class="lead" style="font-size:15px;">Không phải hệ nào cũng “gọi Hub” theo cùng một cách. So sánh <b>Push</b> (nguồn chủ động báo ngay) và <b>Pull</b> (Hub đi hỏi định kỳ) giúp hiểu vì sao SIS chậm ~5 phút còn CRM gần như tức thì.</p>
+      <p class="lead" style="font-size:15px;">Không phải hệ nào cũng gọi Hub giống nhau. <b>Push</b> là nguồn chủ động báo ngay; <b>Pull</b> là Hub đi hỏi định kỳ — nên SIS trễ khoảng 5 phút còn CRM gần như tức thì.</p>
       <div class="map-scroll">
         <table class="map-table pull-matrix">
           <thead><tr>
@@ -797,7 +799,7 @@
             <th>Ý nghĩa (dễ hiểu)</th>
             <th>Ưu điểm</th>
             <th>Lưu ý vận hành</th>
-            <th class="mono">Ví dụ minh hoạ</th>
+            <th class="mono">Ví dụ minh họa</th>
           </tr></thead>
           <tbody>
             <tr>
@@ -806,7 +808,7 @@
               <td>CRM <b>gọi Hub</b> ngay khi duyệt khách hàng</td>
               <td>Gần thời gian thực, không cần quét cả DB</td>
               <td>Phải bảo vệ đường webhook; retry nếu Hub bận</td>
-              <td class="mono">Lead → Customer → bắn PA-3391</td>
+              <td class="mono">Lead → Customer → gửi PA-3391</td>
             </tr>
             <tr>
               <td><span class="src-pill" style="--sc:var(--sis)">SIS</span></td>
@@ -814,7 +816,7 @@
               <td>Hub <b>hỏi SIS</b> mỗi ~5 phút: chỉ dòng vừa sửa</td>
               <td>Không sửa phần mềm SIS nhiều; chỉ đọc</td>
               <td>Độ trễ tối đa = chu kỳ quét</td>
-              <td class="mono">updated_at mới → đổi lớp 10A2</td>
+              <td class="mono">updated_at mới → đổi lớp 6A3</td>
             </tr>
             <tr>
               <td><span class="src-pill" style="--sc:var(--ecom)">E‑Com</span></td>
@@ -853,7 +855,7 @@
       <p class="lead" style="font-size:15px;">ETL là cách gọi chung cho <b>3 việc lặp lại</b> với mọi luồng. Dưới đây là bản dịch sang tiếng Việt dễ hiểu — không cần biết Kafka hay SQL vẫn đọc được.</p>
 
       <div class="sub-title" style="margin-top:4px;--acc:var(--cyan);">Chạy thử ETL theo từng nguồn</div>
-      <p class="lead" style="font-size:14.5px;margin-bottom:0;">Chọn một hệ → bấm <b>Chạy 3 bước ETL</b> để thấy lần lượt Extract, Transform, Load sáng lên (minh hoạ).</p>
+      <p class="lead" style="font-size:14.5px;margin-bottom:0;">Chọn một hệ → bấm <b>Chạy 3 bước ETL</b> để thấy lần lượt Extract, Transform, Load sáng lên (minh họa).</p>
       <div class="etl-pick" id="etlPick">
         <button type="button" class="epick active" data-src="crm" style="--epc:var(--crm)">CRM</button>
         <button type="button" class="epick" data-src="sis" style="--epc:var(--sis)">SIS</button>
@@ -890,7 +892,7 @@
         <div class="etl-phase reveal" data-delay="1" style="--ep:var(--cyan)">
           <div class="ep-tag">E · EXTRACT</div>
           <h4>Lấy dữ liệu</h4>
-          <p class="ep-vn">Hub “nghe” hoặc “hỏi” từng hệ: webhook bắn ngay, hoặc quét định kỳ chỉ phần mới thay đổi.</p>
+          <p class="ep-vn">Hub “nghe” hoặc “hỏi” từng hệ: webhook gửi ngay khi có sự kiện, hoặc quét định kỳ chỉ phần vừa đổi.</p>
           <ul>
             <li>CRM/E‑Com: nhận tín hiệu tức thì</li>
             <li>SIS: quét phần vừa sửa</li>
@@ -976,7 +978,7 @@
     </div>
 
     <div class="cpanel" id="cp-thread">
-      <p class="lead" style="font-size:15px;">Cùng một câu chuyện thật (phụ huynh Lan, con Nguyễn An) nhưng <b>5 luồng bắn ở thời điểm khác nhau</b>. Hub giữ “sợi chỉ” để mọi màn hình cùng nói về một gia đình, một đơn hàng, một chứng từ.</p>
+      <p class="lead" style="font-size:15px;">Cùng một câu chuyện (phụ huynh Lan, con Nguyễn An) nhưng <b>5 luồng chạy lệch thời điểm</b>. Hub giữ “sợi chỉ” để mọi màn hình vẫn nói về một gia đình, một đơn, một chứng từ.</p>
       <div class="thread-grid">
         <div class="thread-card" style="--tc:var(--crm)">
           <div class="tc-k">Luồng 1 · CRM</div>
@@ -1021,7 +1023,7 @@
             <circle cx="660" cy="60" r="14" fill="#111A2E" stroke="#56D9A3" stroke-width="2"/><text x="660" y="64" text-anchor="middle" fill="#56D9A3" font-size="9">MISA</text>
           </g>
           <text x="100" y="28" text-anchor="middle" fill="#EEF2FB" font-size="10">PA-3391</text>
-          <text x="240" y="28" text-anchor="middle" fill="#EEF2FB" font-size="10">SIS-1187</text>
+          <text x="240" y="28" text-anchor="middle" fill="#EEF2FB" font-size="9">SIS-2026-1187</text>
           <text x="380" y="28" text-anchor="middle" fill="#EEF2FB" font-size="10">EC-ORD-4471</text>
           <text x="520" y="28" text-anchor="middle" fill="#EEF2FB" font-size="10">POS-8830</text>
           <text x="660" y="28" text-anchor="middle" fill="#EEF2FB" font-size="10">POSTED</text>
@@ -1060,7 +1062,7 @@
         <div class="stage-row">
           <div class="stage" data-log="Bắt: phụ huynh 'Nguyễn Thị Lan' để lại thông tin ở landing tuyển sinh (Lead mới)."><div class="st-ic"><svg><use href="#i-crm"/></svg></div><div class="st-name">CRM nguồn</div><div class="st-sub">Lead phụ huynh mới</div></div>
           <div class="stage-arrow"><svg><use href="#i-arrow"/></svg></div>
-          <div class="stage" data-log="Thu thập: CRM bắn webhook khi Lead được duyệt thành Customer, kèm ParentID_CRM."><div class="st-ic"><svg><use href="#i-dish"/></svg></div><div class="st-name">Thu thập</div><div class="st-sub">Nhận webhook duyệt</div></div>
+          <div class="stage" data-log="Thu thập: CRM gửi webhook khi Lead được duyệt thành Customer, kèm ParentID_CRM."><div class="st-ic"><svg><use href="#i-dish"/></svg></div><div class="st-name">Thu thập</div><div class="st-sub">Nhận webhook duyệt</div></div>
           <div class="stage-arrow"><svg><use href="#i-arrow"/></svg></div>
           <div class="stage" data-log="Băng chuyền: gắn tem thời gian + mã truy vết rồi đưa lên hàng đợi."><div class="st-ic"><svg><use href="#i-truck"/></svg></div><div class="st-name">Băng chuyền</div><div class="st-sub">Gắn tem, xếp hàng</div></div>
           <div class="stage-arrow"><svg><use href="#i-arrow"/></svg></div>
@@ -1100,7 +1102,7 @@
       </div>
       <div class="viz-card">
         <h4>Phễu tuyển sinh tuần này</h4>
-        <p class="cap">Lead → chăm sóc → Customer · ví dụ minh hoạ</p>
+        <p class="cap">Lead → chăm sóc → Customer · ví dụ minh họa</p>
         <div class="donut-wrap">
           <div class="donut" data-segments="46|var(--crm),32|var(--amber),22|var(--hrm)" data-center="22%" data-size="128"></div>
           <div class="donut-legend">
@@ -1117,7 +1119,7 @@
       <div class="demo-step"><div class="n">01</div><h5>Phụ huynh để lại thông tin</h5><p>Từ hội thảo, landing page hay giới thiệu — CRM ghi nhận thành Lead, chưa gọi hệ nào khác.</p></div>
       <div class="demo-step"><div class="n">02</div><h5>Duyệt thành khách hàng</h5><p>Sau khi đóng phí giữ chỗ, Lead được duyệt thành Customer và cấp ParentID_CRM (mã gốc).</p></div>
       <div class="demo-step"><div class="n">03</div><h5>Che thông tin riêng tư</h5><p>SĐT và email phụ huynh được che trước khi đưa sang hệ khác, đúng Nghị định 13/2023.</p></div>
-      <div class="demo-step"><div class="n">04</div><h5>Sẵn sàng lan toả</h5><p>ParentID_CRM trở thành "sợi chỉ" để VA Hub gắn phụ huynh với học sinh, đơn hàng và kế toán.</p></div>
+      <div class="demo-step"><div class="n">04</div><h5>Sẵn sàng lan tỏa</h5><p>ParentID_CRM trở thành "sợi chỉ" để VA Hub gắn phụ huynh với học sinh, đơn hàng và kế toán.</p></div>
     </div>
     <div class="outcome"><span class="oc-ic"><svg><use href="#i-check"/></svg></span><div><b>Kết quả:</b> mỗi phụ huynh chỉ có <b>một mã gốc duy nhất</b>; mọi hệ sau (SIS, E‑Commerce, MISA) đều tham chiếu về đây thay vì nhập lại tay.</div></div>
   </div>
@@ -1131,7 +1133,7 @@
       <div class="sys-badge" style="background:var(--sis-dim);color:var(--sis);"><svg><use href="#i-grad"/></svg></div>
       <div class="sys-meta"><div class="k" style="color:var(--sis)">Hệ thống 2 / 5 · nguồn sự thật học sinh</div><h2>SIS — Thông tin học sinh</h2></div>
     </div>
-    <p class="lead" style="margin-top:16px;">Đây là "sổ hộ khẩu" của trường: hồ sơ học sinh, phụ huynh, lớp học, điểm danh. Khi một học sinh <b>chuyển từ lớp 10A1 sang 10A2</b>, VA Hub cần thấy thay đổi đó và cập nhật mọi màn hình liên quan — mà không ai phải sửa tay ở nhiều nơi.</p>
+    <p class="lead" style="margin-top:16px;">Đây là "sổ hộ khẩu" của trường: hồ sơ học sinh, phụ huynh, lớp học, điểm danh. Khi học sinh <b>Nguyễn An chuyển từ lớp 6A2 sang 6A3</b> (cùng câu chuyện CRM/E‑Com), VA Hub cần thấy thay đổi đó và cập nhật mọi màn hình liên quan — mà không ai phải sửa tay ở nhiều nơi.</p>
     <div class="chips">
       <span class="chip">Nguồn: <b>MySQL</b></span>
       <span class="chip">Cách lấy: <b>quét phần mới mỗi 5 phút</b></span>
@@ -1148,17 +1150,17 @@
       <div class="pipe" id="pipe-sis" data-log="#log-sis">
         <div class="packet"></div>
         <div class="stage-row">
-          <div class="stage" data-log="Bắt: dòng học sinh 'Trần Minh' vừa đổi lớp 10A1 → 10A2 (updated_at mới)."><div class="st-ic"><svg><use href="#i-grad"/></svg></div><div class="st-name">SIS nguồn</div><div class="st-sub">Học sinh vừa đổi lớp</div></div>
+          <div class="stage" data-log="Bắt: dòng học sinh 'Nguyễn An' vừa đổi lớp 6A2 → 6A3 (updated_at mới)."><div class="st-ic"><svg><use href="#i-grad"/></svg></div><div class="st-name">SIS nguồn</div><div class="st-sub">Học sinh vừa đổi lớp</div></div>
           <div class="stage-arrow"><svg><use href="#i-arrow"/></svg></div>
           <div class="stage" data-log="Thu thập: chỉ lấy đúng 1 dòng vừa đổi, không quét lại cả trường."><div class="st-ic"><svg><use href="#i-dish"/></svg></div><div class="st-name">Thu thập</div><div class="st-sub">Chỉ lấy phần mới</div></div>
           <div class="stage-arrow"><svg><use href="#i-arrow"/></svg></div>
           <div class="stage" data-log="Băng chuyền: gắn tem thời gian + mã truy vết rồi đưa lên hàng đợi."><div class="st-ic"><svg><use href="#i-truck"/></svg></div><div class="st-name">Băng chuyền</div><div class="st-sub">Gắn tem, xếp hàng</div></div>
           <div class="stage-arrow"><svg><use href="#i-arrow"/></svg></div>
-          <div class="stage" data-log="Lọc: che CCCD & SĐT phụ huynh, chuẩn hoá ngày sinh, kiểm tra lớp 10A2 có thật."><div class="st-ic"><svg><use href="#i-funnel"/></svg></div><div class="st-name">Lọc &amp; che PII</div><div class="st-sub">Làm sạch, ẩn nhạy cảm</div></div>
+          <div class="stage" data-log="Lọc: che CCCD & SĐT phụ huynh, chuẩn hoá ngày sinh, kiểm tra lớp 6A3 có thật."><div class="st-ic"><svg><use href="#i-funnel"/></svg></div><div class="st-name">Lọc &amp; che PII</div><div class="st-sub">Làm sạch, ẩn nhạy cảm</div></div>
           <div class="stage-arrow"><svg><use href="#i-arrow"/></svg></div>
           <div class="stage" data-log="Ghi đích: cập nhật đúng học sinh (không tạo bản trùng) vào kho sạch."><div class="st-ic"><svg><use href="#i-db"/></svg></div><div class="st-name">Kho đích</div><div class="st-sub">Cập nhật, chống trùng</div></div>
           <div class="stage-arrow"><svg><use href="#i-arrow"/></svg></div>
-          <div class="stage" data-log="Xong: dashboard sĩ số lớp 10A1 −1, 10A2 +1 — tự cập nhật."><div class="st-ic"><svg><use href="#i-chart"/></svg></div><div class="st-name">Màn hình</div><div class="st-sub">Sĩ số tự đổi</div></div>
+          <div class="stage" data-log="Xong: dashboard sĩ số lớp 6A2 −1, 6A3 +1 — tự cập nhật."><div class="st-ic"><svg><use href="#i-chart"/></svg></div><div class="st-name">Màn hình</div><div class="st-sub">Sĩ số tự đổi</div></div>
         </div>
       </div>
     </div>
@@ -1171,18 +1173,18 @@
         <div class="rec-flip">
           <div class="rec-box before">
             <span class="tag">Ở SIS (thô) · sau khi giáo vụ đổi lớp</span>
-            <div><span class="key">ho_ten:</span> <span class="val">"Trần Minh"</span></div>
-            <div><span class="key">lop:</span> <span class="val">"10A2"</span> <span style="color:var(--text-faint)">← vừa đổi từ 10A1</span></div>
-            <div><span class="key">ngay_sinh:</span> <span class="val">"12/3/09"</span></div>
+            <div><span class="key">ho_ten:</span> <span class="val">"Nguyễn An"</span></div>
+            <div><span class="key">lop:</span> <span class="val">"6A3"</span> <span style="color:var(--text-faint)">← vừa đổi từ 6A2</span></div>
+            <div><span class="key">ngay_sinh:</span> <span class="val">"12/3/15"</span></div>
             <div><span class="key">cccd_ph:</span> <span class="val">"079309001234"</span></div>
             <div><span class="key">sdt_ph:</span> <span class="val">"0905123456"</span></div>
           </div>
           <div class="flip-ar"><svg><use href="#i-arrow"/></svg></div>
           <div class="rec-box after">
             <span class="tag">Vào kho sạch</span>
-            <div><span class="key">full_name:</span> <span class="val">"Trần Minh"</span></div>
-            <div><span class="key">class:</span> <span class="val">"10A2"</span> <span style="color:var(--text-faint)">(giữ nguyên)</span></div>
-            <div><span class="key">dob:</span> <span class="val" style="color:var(--hrm)">"2009-03-12"</span> <span style="color:var(--text-faint)">← chuẩn hoá</span></div>
+            <div><span class="key">full_name:</span> <span class="val">"Nguyễn An"</span></div>
+            <div><span class="key">class:</span> <span class="val">"6A3"</span> <span style="color:var(--text-faint)">(giữ nguyên)</span></div>
+            <div><span class="key">dob:</span> <span class="val" style="color:var(--hrm)">"2015-03-12"</span> <span style="color:var(--text-faint)">← chuẩn hoá</span></div>
             <div><span class="key">guardian_id:</span> <span class="mask">"sha256:9f2a…"</span> <span style="color:var(--text-faint)">← hash</span></div>
             <div><span class="key">guardian_tel:</span> <span class="mask">"090•••••56"</span> <span style="color:var(--text-faint)">← che</span></div>
           </div>
@@ -1190,7 +1192,7 @@
       </div>
       <div class="viz-card">
         <h4>Đồng bộ học sinh trong tuần</h4>
-        <p class="cap">Số bản ghi thay đổi được đồng bộ mỗi ngày · ví dụ minh hoạ</p>
+        <p class="cap">Tổng bản ghi thay đổi được đồng bộ trong 7 ngày (T2–CN) · ví dụ minh họa</p>
         <div class="viz-row">
           <div>
             <div class="barchart" data-values="34,52,41,63,48,12,6" data-color="var(--sis)"></div>
@@ -1282,7 +1284,7 @@
       </div>
       <div class="viz-card">
         <h4>Đơn hàng theo loại</h4>
-        <p class="cap">Tỉ trọng đơn tuần này · ví dụ minh hoạ</p>
+        <p class="cap">Tỉ trọng đơn tuần này · ví dụ minh họa</p>
         <div class="donut-wrap">
           <div class="donut" data-segments="58|var(--ecom),30|var(--amber),12|var(--gray)" data-center="Σ" data-size="128"></div>
           <div class="donut-legend">
@@ -1372,7 +1374,7 @@
       </div>
       <div class="viz-card">
         <h4>Xuất kho &amp; cảnh báo tồn</h4>
-        <p class="cap">Số lượt xuất kho theo ngày · ví dụ minh hoạ</p>
+        <p class="cap">Số lượt xuất kho theo ngày · ví dụ minh họa</p>
         <div class="viz-row">
           <div>
             <div class="barchart" data-values="42,55,38,60,48,26,14" data-color="var(--lms)"></div>
@@ -1464,7 +1466,7 @@
       </div>
       <div class="viz-card">
         <h4>Doanh thu đã hạch toán</h4>
-        <p class="cap">Doanh thu ghi sổ theo ngày (triệu ₫) · ví dụ minh hoạ</p>
+        <p class="cap">Doanh thu ghi sổ theo ngày (triệu ₫) · ví dụ minh họa</p>
         <div class="viz-row">
           <div>
             <div class="barchart" data-values="12,18,15,22,19,9,4" data-color="var(--hrm)"></div>
@@ -1506,7 +1508,7 @@
   <div class="wrap reveal">
     <div class="eyebrow">Bức tranh liên kết toàn hệ thống</div>
     <h2 class="h2">Sơ đồ luồng dự án tổng thể</h2>
-    <p class="lead">Sáu phần mềm — <b style="color:var(--crm)">CRM</b>, <b style="color:var(--sis)">SIS</b>, <b style="color:var(--amber)">VA Hub</b>, <b style="color:var(--ecom)">E‑Commerce</b>, <b style="color:var(--lms)">POS</b> (Inventory), <b style="color:var(--hrm)">MISA</b> — không đứng riêng lẻ. Mọi dữ liệu đều đi <b>qua VA Hub (Middleware · Integration Hub)</b>: được kiểm tra, ánh xạ (mapping), xếp hàng đợi rồi giao sang hệ kế tiếp. Bấm <b>Chạy</b> để đi qua trọn vẹn 11 bước — mỗi bước cho bạn thấy <b>đúng mẩu dữ liệu nào đang được xử lý</b>.</p>
+    <p class="lead">Sáu phần mềm — <b style="color:var(--crm)">CRM</b>, <b style="color:var(--sis)">SIS</b>, <b style="color:var(--amber)">VA Hub</b>, <b style="color:var(--ecom)">E‑Commerce</b>, <b style="color:var(--lms)">POS</b>, <b style="color:var(--hrm)">MISA</b> — không đứng riêng. Mọi dữ liệu đi <b>qua VA Hub</b> (trung gian tích hợp): được kiểm tra, ánh xạ mã, xếp hàng đợi rồi giao sang hệ tiếp theo. Bấm <b>Chạy</b> để xem trọn 11 bước — mỗi bước cho thấy <b>mẩu dữ liệu nào đang được xử lý</b>.</p>
 
     <div class="flow-controls">
       <button class="flow-btn" id="flowPrev"><svg><use href="#i-prev"/></svg> Trước</button>
@@ -1556,7 +1558,7 @@
 
         <div class="fnode mid" id="fMid" data-sys="mid" style="left:50%;top:50%;--nc:var(--amber);--nc-dim:var(--amber-dim);">
           <div class="fn-badge">3</div>
-          <div class="fn-head"><div class="fn-ic"><svg><use href="#i-hub"/></svg></div><div><div class="fn-k">VA HUB</div><div class="fn-role">Middleware · Integration Hub</div></div></div>
+          <div class="fn-head"><div class="fn-ic"><svg><use href="#i-hub"/></svg></div><div><div class="fn-k">VA HUB</div><div class="fn-role">Trung gian tích hợp</div></div></div>
           <ul class="fn-list"><li>Kết nối &amp; đồng bộ</li><li>Mapping &amp; chuyển đổi</li><li>Queue · retry · log · audit</li></ul>
           <div class="mid-status" id="midStatus"><span class="spin"></span><span id="midStatusTxt">Sẵn sàng — chờ dữ liệu…</span></div>
         </div>
@@ -1564,7 +1566,7 @@
         <div class="fpacket" id="fPacket"><span class="plabel" id="fPacketLabel"></span><svg><use href="#i-box"/></svg></div>
       </div>
     </div>
-    <p class="flow-hint">Mỗi gói dữ liệu luôn đi xuyên qua Middleware ở giữa · sơ đồ co giãn theo chiều ngang màn hình.</p>
+    <p class="flow-hint">Mỗi gói dữ liệu luôn đi qua VA Hub ở giữa · sơ đồ co giãn theo chiều ngang màn hình.</p>
   </div>
 
   <div class="wrap reveal">
@@ -1572,14 +1574,14 @@
     <div class="flow-step-title"><span class="fst-n" id="stepNum">1</span><h3 id="stepTitle"></h3></div>
     <div class="flow-detail">
       <div class="fd-card from" id="fdFrom"><div class="fd-h"><i></i><span></span></div><div class="fd-rec"></div></div>
-      <div class="fd-card mid"><div class="fd-h"><i style="background:var(--amber)"></i>Middleware xử lý</div><ul class="fd-mid-list" id="fdMid"></ul></div>
+      <div class="fd-card mid"><div class="fd-h"><i style="background:var(--amber)"></i>VA Hub xử lý</div><ul class="fd-mid-list" id="fdMid"></ul></div>
       <div class="fd-card to" id="fdTo"><div class="fd-h"><i></i><span></span></div><div class="fd-rec"></div></div>
     </div>
     <div class="fd-note" id="fdNote"><span class="nn-ic"><svg><use href="#i-info"/></svg></span><span id="fdNoteTxt"></span></div>
 
     <!-- mapping table -->
     <div class="sub-title" style="margin-top:44px;--acc:var(--cyan);">Bảng mapping dữ liệu — cùng một thứ, mỗi hệ gọi một tên</div>
-    <p class="lead" style="font-size:15px;">Cùng một con người / giao dịch nhưng mỗi phần mềm gọi bằng một mã khác nhau. Middleware giữ bảng ánh xạ này để mọi hệ luôn hiểu nhau và có thể đối soát. <b>Mã tô xanh</b> là mã gốc (nguồn sự thật) mà các hệ khác tham chiếu về.</p>
+    <p class="lead" style="font-size:15px;">Cùng một người hoặc một giao dịch, mỗi phần mềm lại gọi bằng mã khác. VA Hub giữ bảng ánh xạ để các hệ hiểu nhau và đối soát được. <b>Mã tô xanh</b> là mã gốc — nơi các hệ khác tham chiếu về.</p>
     <div class="map-legend">
       <span><i class="primary-code" style="border:1px solid var(--sis)"></i>Mã gốc / nguồn sự thật</span>
       <span><i style="background:var(--panel-2);border:1px solid var(--border-soft)"></i>Mã tham chiếu ở mỗi hệ</span>
@@ -1608,7 +1610,7 @@
     <!-- principles + tech -->
     <div class="sub-title" style="margin-top:44px;--acc:var(--cyan);">Nguyên tắc &amp; công nghệ đề xuất</div>
     <div class="prin-grid">
-      <div class="prin reveal" data-delay="1"><div class="pn">01 · Trung gian</div><p>VA Hub (Middleware) là <b>trung gian tích hợp</b>, không lưu trữ nghiệp vụ gốc — chỉ điều phối &amp; ánh xạ.</p></div>
+      <div class="prin reveal" data-delay="1"><div class="pn">01 · Trung gian</div><p>VA Hub là <b>trung gian tích hợp</b>, không lưu nghiệp vụ gốc — chỉ điều phối và ánh xạ mã.</p></div>
       <div class="prin reveal" data-delay="2"><div class="pn">02 · Nguồn sự thật</div><p><b>Source of Truth:</b> CRM (phụ huynh), SIS (học sinh), POS/Kho (Inventory), MISA (kế toán).</p></div>
       <div class="prin reveal" data-delay="3"><div class="pn">03 · API + Queue</div><p>Mọi giao tiếp qua <b>API + Hàng đợi</b>, đảm bảo tin cậy và có thể <b>retry</b> khi lỗi.</p></div>
       <div class="prin reveal" data-delay="4"><div class="pn">04 · Log &amp; đối soát</div><p>Có <b>log, audit và mapping</b> để đối soát dữ liệu giữa các hệ thống bất cứ lúc nào.</p></div>
@@ -1626,9 +1628,9 @@
 <!-- ============ UNIFIED DASHBOARD ============ -->
 <section id="dashboard">
   <div class="wrap reveal">
-    <div class="eyebrow">Khi cả 4 dòng chảy về một chỗ</div>
+    <div class="eyebrow">Khi cả 5 luồng chảy về một chỗ</div>
     <h2 class="h2">Màn hình quản lý hợp nhất sẽ trông như thế nào</h2>
-    <p class="lead">Khi CRM + SIS + E‑Commerce + POS + MISA cùng chảy qua VA Hub, ban giám hiệu mở <b>một màn hình duy nhất</b> và thấy toàn cảnh nhà trường theo thời gian gần-thực. Dưới đây là bản phác thảo màn hình đó — số liệu là ví dụ minh hoạ.</p>
+    <p class="lead">Khi CRM, SIS, E‑Commerce, POS và MISA cùng chảy qua VA Hub, ban giám hiệu mở <b>một màn hình</b> và thấy toàn cảnh nhà trường <b>gần thời gian thực</b>. Dưới đây là bản phác — số liệu chỉ là ví dụ.</p>
 
     <div class="kpi-grid">
       <div class="kpi reveal" data-delay="1" style="--kc:var(--crm)"><div class="lab"><i style="background:var(--crm)"></i>Phụ huynh (CRM)</div><div class="num" style="color:var(--crm)">1.560</div><div class="delta">▲ 22 khách mới tuần này</div></div>
@@ -1640,29 +1642,33 @@
     <div class="dash-grid">
       <div class="dash-card reveal">
         <h4>Dữ liệu đồng bộ theo hệ thống (7 ngày)</h4>
-        <p class="cap">Số bản ghi mỗi hệ thống gửi về Hub mỗi ngày · ví dụ minh hoạ</p>
+        <p class="cap">Tổng bản ghi mỗi hệ gửi về Hub trong tuần (T2–CN) · số bên phải = tổng 7 cột · ví dụ minh họa</p>
         <div style="display:flex;flex-direction:column;gap:16px;margin-top:6px;">
           <div>
-            <div style="display:flex;justify-content:space-between;font-size:12.5px;color:var(--text-dim);margin-bottom:4px;"><span style="color:var(--crm)">CRM</span><span class="mono">312</span></div>
+            <div style="display:flex;justify-content:space-between;font-size:12.5px;color:var(--text-dim);margin-bottom:4px;"><span style="color:var(--crm)">CRM</span><span class="mono">315 <span style="color:var(--text-faint);font-size:11px">/tuần</span></span></div>
             <div class="barchart" data-values="48,60,52,71,58,18,8" data-color="var(--crm)"></div>
           </div>
           <div>
-            <div style="display:flex;justify-content:space-between;font-size:12.5px;color:var(--text-dim);margin-bottom:4px;"><span style="color:var(--sis)">SIS</span><span class="mono">256</span></div>
+            <div style="display:flex;justify-content:space-between;font-size:12.5px;color:var(--text-dim);margin-bottom:4px;"><span style="color:var(--sis)">SIS</span><span class="mono">256 <span style="color:var(--text-faint);font-size:11px">/tuần</span></span></div>
             <div class="barchart" data-values="34,52,41,63,48,12,6" data-color="var(--sis)"></div>
           </div>
           <div>
-            <div style="display:flex;justify-content:space-between;font-size:12.5px;color:var(--text-dim);margin-bottom:4px;"><span style="color:var(--ecom)">E‑Com</span><span class="mono">1.180</span></div>
+            <div style="display:flex;justify-content:space-between;font-size:12.5px;color:var(--text-dim);margin-bottom:4px;"><span style="color:var(--ecom)">E‑Com</span><span class="mono">1.180 <span style="color:var(--text-faint);font-size:11px">/tuần</span></span></div>
             <div class="barchart" data-values="160,210,190,260,240,80,40" data-color="var(--ecom)"></div>
           </div>
           <div>
-            <div style="display:flex;justify-content:space-between;font-size:12.5px;color:var(--text-dim);margin-bottom:4px;"><span style="color:var(--lms)">POS</span><span class="mono">6.240</span></div>
+            <div style="display:flex;justify-content:space-between;font-size:12.5px;color:var(--text-dim);margin-bottom:4px;"><span style="color:var(--lms)">POS</span><span class="mono">6.240 <span style="color:var(--text-faint);font-size:11px">/tuần</span></span></div>
             <div class="barchart" data-values="980,1020,1100,1180,1200,560,200" data-color="var(--lms)"></div>
+          </div>
+          <div>
+            <div style="display:flex;justify-content:space-between;font-size:12.5px;color:var(--text-dim);margin-bottom:4px;"><span style="color:var(--hrm)">MISA</span><span class="mono">890 <span style="color:var(--text-faint);font-size:11px">/tuần</span></span></div>
+            <div class="barchart" data-values="126,142,118,178,156,98,72" data-color="var(--hrm)"></div>
           </div>
         </div>
       </div>
       <div class="dash-card reveal" data-delay="1">
         <h4>Cảnh báo cần chú ý</h4>
-        <p class="cap">Do VA Hub tự phát hiện từ dữ liệu · ví dụ minh hoạ</p>
+        <p class="cap">Do VA Hub tự phát hiện từ dữ liệu · ví dụ minh họa</p>
         <div style="margin-top:6px;">
           <div class="alert-row"><span class="dot" style="background:var(--red)"></span><div><b>2 chứng từ</b> lệch khi đối soát MISA ↔ POS <span style="color:var(--hrm)">· nguồn MISA</span></div></div>
           <div class="alert-row"><span class="dot" style="background:var(--amber)"></span><div><b>3 đơn hàng</b> chờ xuất kho quá 24h <span style="color:var(--lms)">· nguồn POS</span></div></div>
@@ -1714,8 +1720,8 @@
     </div>
     <div class="sf-meta">
       <div class="sig">VA HUB · VÍ DỤ LUỒNG DỮ LIỆU · CRM / SIS / POS / E‑COM / MISA</div>
-      <p>Đây là phần minh hoạ trực quan bổ sung cho báo cáo tổng quan. Các luồng và số liệu mang tính thiết kế để hình dung các giai đoạn 1 → 5; hôm nay hệ thống mới chạy đăng nhập + giám sát sức khoẻ.</p>
-      <p>Trạng thái repo: Giai đoạn 0 đóng (v0.1.0), Giai đoạn 1 đang mở.</p>
+      <p>Đây là phần minh họa bổ sung cho báo cáo tổng quan. Luồng và số liệu giúp hình dung giai đoạn 1 → 5; hiện tại mới chạy đăng nhập và giám sát sức khỏe.</p>
+      <p>Trạng thái repo: Giai đoạn 0 đã hoàn thành (v0.1.0), Giai đoạn 1 đang triển khai.</p>
     </div>
   </div>
 </footer>
@@ -1767,9 +1773,9 @@
     },
     sis: {
       label: 'SIS · Student SIS-2026-1187',
-      e: { h: 'Quét dòng vừa đổi lớp', p: 'Hub hỏi SIS mỗi ~5 phút — chỉ lấy bản ghi có updated_at mới.', m: 'StudentID: <b>SIS-2026-1187</b> · class: <b>10A2</b>' },
-      t: { h: 'Chuẩn ngày & hash người giám hộ', p: 'Đổi ngày sinh sang ISO; hash guardian để đối soát an toàn.', m: '12/3/09 → <b>2009-03-12</b> · guardian_hash' },
-      l: { h: 'Upsert bảng students', p: 'Cập nhật không trùng — cùng StudentID chỉ một bản sạch.', m: 'students · map PA-3391 ↔ SIS-1187' }
+      e: { h: 'Quét dòng vừa đổi lớp', p: 'Hub hỏi SIS mỗi ~5 phút — chỉ lấy bản ghi có updated_at mới.', m: 'StudentID: <b>SIS-2026-1187</b> · class: <b>6A3</b>' },
+      t: { h: 'Chuẩn ngày & hash người giám hộ', p: 'Đổi ngày sinh sang ISO; hash guardian để đối soát an toàn.', m: '12/3/15 → <b>2015-03-12</b> · guardian_hash' },
+      l: { h: 'Upsert bảng students', p: 'Cập nhật không trùng — cùng StudentID chỉ một bản sạch.', m: 'students · map PA-3391 ↔ PS-1187 · SIS-2026-1187' }
     },
     ecom: {
       label: 'E‑Com · EC-ORD-4471',
@@ -1962,7 +1968,7 @@
     {from:'crm',to:'crm',internal:true,tl:'Tiếp nhận Lead',plabel:'Lead phụ huynh',
       title:'CRM tiếp nhận Lead phụ huynh',
       note:'Phụ huynh để lại thông tin (hội thảo, landing page). CRM lưu thành <b>Lead</b> — chưa phải khách chính thức, chưa gọi hệ nào khác.',
-      mid:['Chưa cần Middleware','Lead nằm trong CRM','Chờ được duyệt'],
+      mid:['Chưa qua VA Hub','Lead nằm trong CRM','Chờ được duyệt'],
       fromRec:[['nguồn','"Landing tuyển sinh"'],['parent','"Nguyễn Thị Lan"'],['phone','"0912345678"'],['child','"Nguyễn An"']],
       toRec:[['LeadID','"LEAD-20871"','new'],['stage','"Tiềm năng"','new'],['owner','"tuyensinh01"'],['status','"NEW"']]},
     {from:'crm',to:'crm',internal:true,tl:'Duyệt → Customer',plabel:'ParentID_CRM',
@@ -2091,7 +2097,7 @@
       fdFrom.style.setProperty('--from',f.c);
       fdTo.style.setProperty('--to',t.c);
       fdTo.querySelector('.fd-h').innerHTML='<i style="background:'+t.c+'"></i><span style="color:'+t.c+'">'+toLbl+'</span>';
-      fdTo.querySelector('.fd-rec').innerHTML= showTo ? rec(st.toRec) : '<div style="color:var(--text-faint)">Đang chờ Middleware…</div>';
+      fdTo.querySelector('.fd-rec').innerHTML= showTo ? rec(st.toRec) : '<div style="color:var(--text-faint)">Đang chờ VA Hub…</div>';
       fdMid.innerHTML=st.mid.map(function(m){return '<li>'+m+'</li>';}).join('');
       fdNoteTxt.innerHTML='<b>Ý nghĩa:</b> '+st.note;
     }
